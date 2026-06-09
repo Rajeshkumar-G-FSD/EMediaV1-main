@@ -1,7 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ChevronLeft, ChevronRight, Camera, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
 import { CUSTOMERS_DATA } from '../data.ts';
+import BlurText from './BlurText.tsx';
+import ScrollReveal from './ScrollReveal.tsx';
 
 export default function PortfolioCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -25,25 +27,48 @@ export default function PortfolioCarousel() {
   };
 
   return (
-    <section className="relative -mt-10 md:-mt-16 pb-8 md:pb-12 overflow-hidden" id="portfolio-showcase">
+    <section className="relative -mt-10 md:-mt-16 pb-8 md:pb-12 overflow-hidden" id="portfolio-showcase" data-no-text-reveal>
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <div className="grid lg:grid-cols-[320px_minmax(0,1fr)] gap-8 items-center">
-          <div className="space-y-5">
-            <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.35em] font-bold text-primary bg-white/80 px-4 py-2 rounded-full border border-primary/10 shadow-sm backdrop-blur">
+
+          {/* Left text panel — slides from left */}
+          <ScrollReveal direction="right" delay={0.1} className="space-y-5">
+            <motion.div
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+              className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.35em] font-bold text-primary bg-white/80 px-4 py-2 rounded-full border border-primary/10 shadow-sm backdrop-blur"
+            >
               <Sparkles className="w-3.5 h-3.5" />
               Event Decoration Gallery
-            </div>
+            </motion.div>
+
             <div>
-              <h2 className="text-3xl md:text-4xl uppercase font-elegant text-primary leading-tight">
-                Decoration
-                <br />
-                3D Showcase
-              </h2>
-              <p className="mt-4 text-sm md:text-base text-gray-500 leading-relaxed max-w-md">
-                Browse birthday decoration, wedding decoration, office anniversary decoration, ceremony decor, and corporate event styling in a smooth 3D carousel.
-              </p>
+              <BlurText
+                text="Decoration 3D Showcase"
+                tag="h2"
+                className="text-3xl md:text-4xl uppercase font-elegant text-primary leading-tight"
+                delay={100}
+                direction="bottom"
+                stepDuration={0.38}
+              />
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.55, ease: 'easeOut' }}
+                className="mt-4 text-sm md:text-base text-gray-500 leading-relaxed max-w-md"
+              >
+                Browse birthday decoration, wedding decoration, office anniversary decoration,
+                ceremony decor, and corporate event styling in a smooth 3D carousel.
+              </motion.p>
             </div>
-            <div className="flex items-center gap-3">
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.75, ease: 'easeOut' }}
+              className="flex items-center gap-3"
+            >
               <button
                 type="button"
                 onClick={handlePrev}
@@ -64,9 +89,10 @@ export default function PortfolioCarousel() {
                 <Camera className="w-4 h-4 text-primary" />
                 Auto-rotating gallery
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </ScrollReveal>
 
+          {/* 3D Carousel — unchanged */}
           <div className="relative h-[430px] md:h-[520px]" style={{ perspective: '1600px' }}>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(23,94,94,0.12),transparent_55%)]" />
             {visibleItems.map((item, index) => {
@@ -114,6 +140,7 @@ export default function PortfolioCarousel() {
               );
             })}
           </div>
+
         </div>
       </div>
     </section>

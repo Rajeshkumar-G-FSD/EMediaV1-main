@@ -1,7 +1,9 @@
-import React from 'react';
+import { motion } from 'motion/react';
 import { BLOG_POSTS } from '../data.ts';
 import { BlogPost } from '../types.ts';
-import { BookOpen, Calendar, ArrowRight } from 'lucide-react';
+import { BookOpen, ArrowRight } from 'lucide-react';
+import BlurText from './BlurText.tsx';
+import ScrollReveal from './ScrollReveal.tsx';
 
 interface BlogSectionProps {
   onBlogPostSelect: (post: BlogPost) => void;
@@ -12,25 +14,40 @@ export default function BlogSection({ onBlogPostSelect }: BlogSectionProps) {
   const listPosts = BLOG_POSTS.slice(1, 5);
 
   return (
-    <section className="bg-gray-50/50 p-6 md:p-8 rounded-lg border border-gray-100" id="blog-section">
-      <div className="text-center mb-8 relative">
-        <h2 className="text-3xl uppercase bg-white inline-block px-6 relative z-10 font-elegant text-primary" id="blog-title">
-          Planning Guide
-        </h2>
-        <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -z-0" />
-      </div>
-      <p className="text-center text-sm text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-        Practical tips and real-world lessons gathered from hundreds of weddings to help couples prepare with confidence.
-      </p>
+    <section
+      className="bg-gray-50/50 p-6 md:p-8 rounded-lg border border-gray-100"
+      id="blog-section"
+      data-no-text-reveal
+    >
+      <ScrollReveal direction="up" duration={0.7}>
+        <div className="text-center mb-8 relative">
+          <BlurText
+            text="Planning Guide"
+            tag="h2"
+            className="text-3xl uppercase bg-white inline-block px-6 relative z-10 font-elegant text-primary"
+            delay={120}
+            direction="bottom"
+          />
+          <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -z-0" />
+        </div>
+        <p className="text-center text-sm text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
+          Practical tips and real-world lessons gathered from hundreds of weddings to help couples
+          prepare with confidence.
+        </p>
+      </ScrollReveal>
 
       <div className="flex flex-wrap lg:flex-nowrap gap-8">
-        {/* Featured Post Card */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-between bg-white p-4 rounded border border-gray-100 hover:shadow-lg transition duration-300">
+        {/* Featured Post — slides from left */}
+        <ScrollReveal
+          direction="right"
+          delay={0.1}
+          className="w-full lg:w-1/2 flex flex-col justify-between bg-white p-4 rounded border border-gray-100 hover:shadow-lg transition duration-300"
+        >
           <div>
             <div className="w-full h-64 bg-gray-200 mb-4 rounded overflow-hidden relative group">
               <img
                 alt={featuredPost.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
                 src={featuredPost.image}
               />
               <div className="absolute top-3 left-3 bg-primary text-white text-[10px] uppercase font-bold tracking-wider px-2 py-1 flex items-center gap-1.5">
@@ -57,13 +74,17 @@ export default function BlogSection({ onBlogPostSelect }: BlogSectionProps) {
           >
             Read full article <ArrowRight className="w-3.5 h-3.5" />
           </button>
-        </div>
+        </ScrollReveal>
 
-        {/* Dynamic Sidebar Post Items */}
+        {/* Sidebar posts — slide from right with stagger */}
         <div className="w-full lg:w-1/2 flex flex-col gap-4">
-          {listPosts.map((post) => (
-            <div
+          {listPosts.map((post, i) => (
+            <motion.div
               key={post.id}
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.55, delay: 0.1 + i * 0.1, ease: 'easeOut' }}
               onClick={() => onBlogPostSelect(post)}
               className="flex gap-4 items-center bg-white p-3 rounded shadow-xs hover:shadow-md border border-gray-100/85 hover:border-primary/10 transition duration-300 cursor-pointer"
               id={`blog-item-${post.id}`}
@@ -83,7 +104,7 @@ export default function BlogSection({ onBlogPostSelect }: BlogSectionProps) {
                   {post.summary}...
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

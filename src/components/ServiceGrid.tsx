@@ -1,7 +1,9 @@
-import React from 'react';
+import { motion } from 'motion/react';
 import { SERVICES_DATA } from '../data.ts';
 import { Service } from '../types.ts';
-import { Heart, CheckCircle2 } from 'lucide-react';
+import { Heart } from 'lucide-react';
+import BlurText from './BlurText.tsx';
+import ScrollReveal from './ScrollReveal.tsx';
 
 interface ServiceGridProps {
   onServiceSelect: (service: Service) => void;
@@ -10,21 +12,32 @@ interface ServiceGridProps {
 
 export default function ServiceGrid({ onServiceSelect, onBookNow }: ServiceGridProps) {
   return (
-    <section className="py-8" id="services-section">
-      <div className="text-center mb-8 relative">
-        <h2 className="text-3xl uppercase bg-white inline-block px-6 relative z-10 font-elegant text-primary" id="services-title">
-          Signature Services
-        </h2>
-        <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -z-0" />
-      </div>
-      <p className="text-center text-sm md:text-base text-gray-500 mb-12 max-w-2xl mx-auto leading-relaxed">
-        With a dedicated team of stylists, decorators, and technicians, EMedia delivers polished solutions tailored to every venue and event style.
-      </p>
+    <section className="py-8" id="services-section" data-no-text-reveal>
+      <ScrollReveal direction="up" duration={0.7}>
+        <div className="text-center mb-8 relative">
+          <BlurText
+            text="Signature Services"
+            tag="h2"
+            className="text-3xl uppercase bg-white inline-block px-6 relative z-10 font-elegant text-primary"
+            delay={120}
+            direction="bottom"
+          />
+          <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -z-0" />
+        </div>
+        <p className="text-center text-sm md:text-base text-gray-500 mb-12 max-w-2xl mx-auto leading-relaxed">
+          With a dedicated team of stylists, decorators, and technicians, EMedia delivers polished
+          solutions tailored to every venue and event style.
+        </p>
+      </ScrollReveal>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {SERVICES_DATA.slice(0, 3).map((item) => (
-          <div
+        {SERVICES_DATA.slice(0, 3).map((item, i) => (
+          <motion.div
             key={item.id}
+            initial={{ opacity: 0, y: 60, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.65, delay: i * 0.15, ease: 'easeOut' }}
             className="bg-white border border-gray-100 hover:border-primary/20 hover:shadow-2xl transition duration-300 p-4 rounded flex flex-col justify-between"
             id={`service-card-${item.id}`}
           >
@@ -33,7 +46,7 @@ export default function ServiceGrid({ onServiceSelect, onBookNow }: ServiceGridP
               <div className="w-full h-52 bg-gray-100 mb-5 overflow-hidden rounded border-4 border-white shadow-xs mx-auto relative group">
                 <img
                   alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
                   src={item.image}
                 />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300" />
@@ -74,11 +87,11 @@ export default function ServiceGrid({ onServiceSelect, onBookNow }: ServiceGridP
                 ▶
               </button>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
-      <div className="text-center mt-10">
+      <ScrollReveal direction="up" delay={0.2} className="text-center mt-10">
         <button
           onClick={() => onBookNow('all-inclusive')}
           className="px-8 py-3 bg-primary hover:bg-opacity-90 text-white font-bold uppercase text-xs tracking-wider cursor-pointer"
@@ -86,7 +99,7 @@ export default function ServiceGrid({ onServiceSelect, onBookNow }: ServiceGridP
         >
           Get a full event planning consultation
         </button>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

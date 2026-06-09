@@ -13,6 +13,7 @@ import Footer from './components/Footer.tsx';
 import SocialSidebar from './components/SocialSidebar.tsx';
 import Modal from './components/Modal.tsx';
 import TextRevealObserver from './components/TextRevealObserver.tsx';
+import PageLoader from './components/PageLoader.tsx';
 import { Customer, Service, Product, BlogPost, ConsultationRequest } from './types.ts';
 import { Info, HelpCircle, PhoneCall, MailOpen, Compass, CalendarCheck } from 'lucide-react';
 
@@ -169,6 +170,7 @@ export default function App() {
 
   return (
     <div className="bg-white text-gray-700 font-sans antialiased overflow-x-hidden min-h-screen flex flex-col justify-between" id="app-root">
+      <PageLoader />
       <TextRevealObserver />
       
       {/* 1. Sticky Navigation Header */}
