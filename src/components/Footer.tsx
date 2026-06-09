@@ -1,5 +1,5 @@
-import React from 'react';
-import { Phone, Mail, Globe, MapPin, Printer, Copy, Navigation } from 'lucide-react';
+import React, { useState } from 'react';
+import { Phone, Mail, Globe, MapPin, Copy, Navigation, Clock, Facebook, Youtube } from 'lucide-react';
 
 interface FooterProps {
   onNavClick: (sectionId: string) => void;
@@ -8,9 +8,12 @@ interface FooterProps {
 export default function Footer({ onNavClick }: FooterProps) {
   const address = 'No. 183, Near Parimalam Mahal, 5th Street, 3rd Cross Sakthi Nager, Thindal, Erode-638012, Tamil Nadu';
   const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+  const [copied, setCopied] = useState(false);
 
   const handleCopyAddress = () => {
     navigator.clipboard?.writeText(address);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1800);
   };
 
   return (
@@ -46,100 +49,103 @@ export default function Footer({ onNavClick }: FooterProps) {
         </button>
 
         {/* Info grid lines */}
-        <div className="flex flex-wrap md:flex-nowrap justify-between w-full border-t border-b border-primary/20 py-8 mb-6 gap-8 text-sm text-gray-600">
+        <div className="w-full border-t border-b border-primary/20 py-8 md:py-10 mb-6 text-sm text-gray-600">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.45fr_1fr] gap-8 lg:gap-10 items-stretch">
           
-          {/* Column 1: Hotline */}
-          <div className="w-full md:w-1/3 flex flex-col items-center md:items-start justify-center">
-            <span className="text-xs uppercase tracking-wider text-gray-400 font-bold mb-1">Consultation hotline</span>
-            <div className="flex items-center gap-2">
-              <Phone className="w-5 h-5 text-primary fill-current" />
-              <span className="text-xl md:text-2xl text-primary font-bold">+91 95668 94134</span>
+            {/* Column 1: Hotline */}
+            <div className="flex flex-col items-center lg:items-start justify-center text-center lg:text-left">
+              <span className="text-[11px] uppercase tracking-[0.22em] text-gray-400 font-bold mb-2">Consultation hotline</span>
+              <a href="tel:+919566894134" className="group flex items-center gap-2 text-primary">
+                <span className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition">
+                  <Phone className="w-5 h-5" />
+                </span>
+                <span className="text-2xl md:text-3xl font-bold tracking-wide">+91 95668 94134</span>
+              </a>
+              <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-primary border border-primary/10">
+                <Clock className="w-3.5 h-3.5" />
+                Open 24 Hrs, all days
+              </div>
             </div>
-            <p className="text-[10px] text-gray-400 mt-1">Open 24 Hrs, all days</p>
-          </div>
 
-          {/* Column 2: Exact Address Details */}
-          <div className="w-full md:w-1/3 text-center text-xs space-y-1.5 border-y md:border-y-0 md:border-x border-primary/20 py-4 md:py-0 px-4">
-            <p className="font-bold text-base text-primary uppercase font-elegant tracking-wide">EMedia Event Decoration Services</p>
-            <p className="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Address</p>
-            <p className="flex items-start justify-center gap-1.5 leading-relaxed">
-              <MapPin className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-              <span>{address}</span>
-            </p>
-            <p className="flex items-center justify-center gap-2 pt-1">
-              <a
-                href={directionsUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 text-primary font-bold hover:underline"
-              >
-                <Navigation className="w-3.5 h-3.5" />
-                Get Directions
-              </a>
-              <button
-                type="button"
-                onClick={handleCopyAddress}
-                className="inline-flex items-center gap-1 text-gray-500 hover:text-primary font-bold cursor-pointer"
-              >
-                <Copy className="w-3.5 h-3.5" />
-                Copy
-              </button>
-            </p>
-            <p className="text-[10px] text-primary font-bold uppercase tracking-wider">
-              TUE (Today) Open 24 Hrs · WED Open 24 Hrs · THU Open 24 Hrs
-            </p>
-            <p className="flex items-center justify-center gap-4">
-              <span className="flex items-center gap-1">
-                <Phone className="w-3 h-3 text-primary" />
-                +91 95668 94134
-              </span>
-              <span className="flex items-center gap-1">
-                <Printer className="w-3 h-3 text-primary" />
-                Open 24 Hrs
-              </span>
-            </p>
-            <p className="flex items-center justify-center gap-1.5 text-primary font-semibold font-mono">
-              <Mail className="w-3.5 h-3.5" />
-              emediaerode@gmail.com
-            </p>
-            <p className="flex items-center justify-center gap-1.5 text-primary font-semibold font-mono">
-              <Globe className="w-3.5 h-3.5" />
-              www.emediaevents.com
-            </p>
-          </div>
+            {/* Column 2: Exact Address Details */}
+            <div className="text-center text-xs space-y-3 border-y lg:border-y-0 lg:border-x border-primary/20 py-6 lg:py-0 px-4 lg:px-8 flex flex-col justify-center">
+              <div>
+                <p className="font-bold text-xl md:text-2xl text-primary uppercase font-elegant tracking-wide leading-tight">EMedia Event Decoration Services</p>
+                <p className="mt-2 text-[10px] uppercase tracking-[0.28em] text-gray-400 font-bold">Address</p>
+              </div>
+              <p className="flex items-start justify-center gap-2 leading-relaxed text-sm text-gray-600 max-w-xl mx-auto">
+                <MapPin className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                <span>{address}</span>
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+                <a
+                  href={directionsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-primary text-white px-4 py-2 text-xs font-bold hover:bg-opacity-90 transition"
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  Get Directions
+                </a>
+                <button
+                  type="button"
+                  onClick={handleCopyAddress}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white/80 border border-primary/15 px-4 py-2 text-xs text-primary hover:bg-white font-bold cursor-pointer transition"
+                >
+                  <Copy className="w-3.5 h-3.5" />
+                  {copied ? 'Copied' : 'Copy'}
+                </button>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-[10px] font-bold uppercase tracking-wider text-primary">
+                <span className="rounded-full bg-white/70 px-3 py-1.5 border border-primary/10">Tue: Open 24 Hrs</span>
+                <span className="rounded-full bg-white/70 px-3 py-1.5 border border-primary/10">Wed: Open 24 Hrs</span>
+                <span className="rounded-full bg-white/70 px-3 py-1.5 border border-primary/10">Thu: Open 24 Hrs</span>
+              </div>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-5 pt-1 text-sm">
+                <a href="tel:+919566894134" className="flex items-center gap-1.5 text-gray-600 hover:text-primary font-semibold">
+                  <Phone className="w-4 h-4 text-primary" />
+                  +91 95668 94134
+                </a>
+                <a href="mailto:emediaerode@gmail.com" className="flex items-center gap-1.5 text-primary font-semibold font-mono">
+                  <Mail className="w-4 h-4" />
+                  emediaerode@gmail.com
+                </a>
+              </div>
+              <p className="flex items-center justify-center gap-1.5 text-primary font-semibold font-mono">
+                <Globe className="w-3.5 h-3.5" />
+                www.emediaevents.com
+              </p>
+            </div>
 
-          {/* Column 3: Follow links */}
-          <div className="w-full md:w-1/3 flex flex-col items-center md:items-end justify-center">
-            <span className="text-xs text-gray-500 mb-2">Follow us</span>
-            <div className="flex gap-2">
-              {/* Facebook Icon */}
-              <a
-                href="#"
-                className="w-8 h-8 bg-primary hover:bg-opacity-90 text-white flex items-center justify-center rounded transition"
-                aria-label="Facebook Profile"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
-                </svg>
-              </a>
-              {/* Call Icon */}
-              <a
-                href="tel:+919566894134"
-                className="w-8 h-8 bg-primary hover:bg-opacity-90 text-white flex items-center justify-center rounded transition"
-                aria-label="Call Directly"
-              >
-                <Phone className="w-4 h-4" />
-              </a>
-              {/* YouTube Icon */}
-              <a
-                href="#"
-                className="w-8 h-8 bg-primary hover:bg-opacity-90 text-white flex items-center justify-center rounded transition"
-                aria-label="YouTube Channel"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-                </svg>
-              </a>
+            {/* Column 3: Follow links */}
+            <div className="flex flex-col items-center lg:items-end justify-center text-center lg:text-right">
+              <span className="text-[11px] uppercase tracking-[0.22em] text-gray-400 font-bold mb-3">Follow us</span>
+              <div className="flex gap-3">
+                <a
+                  href="#"
+                  className="w-11 h-11 bg-primary hover:bg-opacity-90 text-white flex items-center justify-center rounded-md transition shadow-sm"
+                  aria-label="Facebook Profile"
+                >
+                  <Facebook className="w-5 h-5" />
+                </a>
+                <a
+                  href="tel:+919566894134"
+                  className="w-11 h-11 bg-primary hover:bg-opacity-90 text-white flex items-center justify-center rounded-md transition shadow-sm"
+                  aria-label="Call Directly"
+                >
+                  <Phone className="w-5 h-5" />
+                </a>
+                <a
+                  href="#"
+                  className="w-11 h-11 bg-primary hover:bg-opacity-90 text-white flex items-center justify-center rounded-md transition shadow-sm"
+                  aria-label="YouTube Channel"
+                >
+                  <Youtube className="w-5 h-5" />
+                </a>
+              </div>
+              <p className="mt-4 max-w-[220px] text-xs text-gray-500 leading-relaxed">
+                Decoration concepts, quick quotes, and event setup support are available anytime.
+              </p>
             </div>
           </div>
         </div>
