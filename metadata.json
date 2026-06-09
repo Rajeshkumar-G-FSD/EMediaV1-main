@@ -1,0 +1,6 @@
+{
+  "name": "Như Ý Wedding Services",
+  "description": "Dịch vụ cưới hỏi và trang trí sự kiện trọn gói Như Ý Wedding Services - Tinh tế, sang trọng và tận tâm.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
