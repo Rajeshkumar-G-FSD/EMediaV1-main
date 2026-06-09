@@ -14,6 +14,7 @@ import SocialSidebar from './components/SocialSidebar.tsx';
 import Modal from './components/Modal.tsx';
 import TextRevealObserver from './components/TextRevealObserver.tsx';
 import PageLoader from './components/PageLoader.tsx';
+import GoogleReviews from './components/GoogleReviews.tsx';
 import { Customer, Service, Product, BlogPost, ConsultationRequest } from './types.ts';
 import { Info, HelpCircle, PhoneCall, MailOpen, Compass, CalendarCheck } from 'lucide-react';
 
@@ -194,6 +195,11 @@ export default function App() {
       {/* 5. Elegant Single-Screen Grid Layout Content */}
       <main className="container mx-auto px-4 max-w-6xl py-12 space-y-20 md:space-y-24 flex-grow">
         
+        {/* Google Reviews strip */}
+        <GoogleReviews />
+
+        <div className="h-px bg-primary/10 w-full" />
+
         {/* Section 1: Welcome Intro */}
         <div ref={introductionRef} className="scroll-mt-24" id="section-introduction">
           <Welcome onLearnMoreClick={() => handleNavClick('appointments')} />

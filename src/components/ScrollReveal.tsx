@@ -18,9 +18,9 @@ export default function ScrollReveal({
   className = '',
   direction = 'up',
   delay = 0,
-  duration = 0.75,
-  distance = 60,
-  threshold = 0.12,
+  duration = 0.7,
+  distance = 45,
+  threshold = 0.05,
   scale = 1,
 }: ScrollRevealProps) {
   const [inView, setInView] = useState(false);
@@ -36,39 +36,25 @@ export default function ScrollReveal({
           observer.disconnect();
         }
       },
-      { threshold, rootMargin: '-40px' }
+      { threshold, rootMargin: '0px' }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, [threshold]);
 
-  const getInitial = () => {
-    const base = { opacity: 0, scale };
-    if (direction === 'up')    return { ...base, y:  distance };
-    if (direction === 'down')  return { ...base, y: -distance };
-    if (direction === 'left')  return { ...base, x:  distance };
-    if (direction === 'right') return { ...base, x: -distance };
-    return base;
-  };
-
-  const getAnimate = () => {
-    const base = { opacity: 1, scale: 1 };
-    if (direction === 'up' || direction === 'down')    return { ...base, y: 0 };
-    if (direction === 'left' || direction === 'right') return { ...base, x: 0 };
-    return base;
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const initial: any = getInitial();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const animate: any = getAnimate();
+  /* Use transform-only for section wrappers so content is never fully invisible.
+     Only the Y/X offset animates; opacity goes from a faint value, not zero. */
+  const yInit = direction === 'up' ? distance : direction === 'down' ? -distance : 0;
+  const xInit = direction === 'left' ? distance : direction === 'right' ? -distance : 0;
 
   return (
     <motion.div
       ref={ref}
       className={className}
-      initial={initial}
-      animate={inView ? animate : initial}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      initial={{ opacity: 0.08, y: yInit, x: xInit, scale } as any}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      animate={inView ? ({ opacity: 1, y: 0, x: 0, scale: 1 } as any) : ({ opacity: 0.08, y: yInit, x: xInit, scale } as any)}
       transition={{
         duration,
         delay,
