@@ -13,12 +13,12 @@ export default function ServiceGrid({ onServiceSelect, onBookNow }: ServiceGridP
     <section className="py-8" id="services-section">
       <div className="text-center mb-8 relative">
         <h2 className="text-3xl uppercase bg-white inline-block px-6 relative z-10 font-elegant text-primary" id="services-title">
-          Dịch vụ cưới thế mạnh
+          Signature Services
         </h2>
         <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -z-0" />
       </div>
       <p className="text-center text-sm md:text-base text-gray-500 mb-12 max-w-2xl mx-auto leading-relaxed">
-        Với đội ngũ nghệ nhân và kỹ thuật viên nhiệt tâm giàu trải nghiệm, Như Ý hân hạnh đem đến chuỗi giải pháp dịch vụ được thiết kế bài bản, thích ứng đa dạng với mọi địa thế tổ chức.
+        With a dedicated team of stylists, decorators, and technicians, EMedia delivers polished solutions tailored to every venue and event style.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -43,7 +43,7 @@ export default function ServiceGrid({ onServiceSelect, onBookNow }: ServiceGridP
                   className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-xs text-primary font-bold text-[10px] uppercase font-sans hover:bg-primary hover:text-white px-2.5 py-1.5 transition rounded-sm shadow-xs cursor-pointer flex items-center gap-1 opacity-0 group-hover:opacity-100"
                 >
                   <Heart className="w-3 h-3 fill-current" />
-                  Yêu cầu báo giá
+                  Request a quote
                 </button>
               </div>
 
@@ -63,7 +63,7 @@ export default function ServiceGrid({ onServiceSelect, onBookNow }: ServiceGridP
                 className="text-xs font-bold text-gray-400 hover:text-primary uppercase transition cursor-pointer"
                 id={`service-detail-btn-${item.id}`}
               >
-                Xem chi tiết dịch vụ
+                View service details
               </button>
               <button
                 type="button"
@@ -84,7 +84,7 @@ export default function ServiceGrid({ onServiceSelect, onBookNow }: ServiceGridP
           className="px-8 py-3 bg-primary hover:bg-opacity-90 text-white font-bold uppercase text-xs tracking-wider cursor-pointer"
           id="services-all-btn"
         >
-          Nhận trọn gói Combo tư vấn thiết kế tiệc
+          Get a full event planning consultation
         </button>
       </div>
     </section>

@@ -11,22 +11,22 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
   const [tableCount, setTableCount] = useState(15);
   const [menuType, setMenuType] = useState('premium'); // standard, premium, luxury
   const [selectedProductIds, setSelectedProductIds] = useState<string[]>(['p1', 'p2']);
-  const [withPhoto, setWithPhoto] = useState(true);
+  const [withLighting, setWithLighting] = useState(true);
   const [submittedQuote, setSubmittedQuote] = useState(false);
 
   // Menus price mapping
   const menuPrices = {
-    standard: { price: 2800000, desc: 'Set menu 5 món truyền thống + bia Tiger' },
-    premium: { price: 3800000, desc: 'Set menu 6 món cao cấp + Heineken & vang đỏ' },
-    luxury: { price: 5200000, desc: 'Set menu 7 món sơn hào hải vị thượng hạng' },
+    standard: { price: 2800000, desc: '5-course traditional menu + beer' },
+    premium: { price: 3800000, desc: '6-course premium menu + beer & red wine' },
+    luxury: { price: 5200000, desc: '7-course luxury menu' },
   };
 
   // Base service prices (approximate custom calculation)
   const serviceBasePrices: Record<string, number> = {
-    s1: 12000000, // Trang trí lễ gia tiên
-    s2: 25000000, // Trang trí tiệc cưới
-    s3: 35000000, // Tổ chức tiệc ngoài trời
-    s4: 8000000,  // Chụp ảnh ngày cưới
+    s1: 12000000,
+    s2: 25000000,
+    s3: 35000000,
+    s4: 8000000,
   };
 
   const getProductPrice = (id: string): number => {
@@ -46,8 +46,8 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
     return sum + getProductPrice(id);
   }, 0);
 
-  const photoCost = withPhoto ? 7500000 : 0;
-  const grandTotal = baseServiceCost + totalMenuCost + totalProductsCost + photoCost;
+  const lightingCost = withLighting ? 7500000 : 0;
+  const grandTotal = baseServiceCost + totalMenuCost + totalProductsCost + lightingCost;
 
   const handleToggleProduct = (id: string) => {
     if (selectedProductIds.includes(id)) {
@@ -62,13 +62,13 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
   };
 
   const handleContactQuote = () => {
-    const serviceName = SERVICES_DATA.find(s => s.id === selectedServiceId)?.title || 'Dịch vụ';
+    const serviceName = SERVICES_DATA.find(s => s.id === selectedServiceId)?.title || 'Service';
     const productNamesStr = selectedProductIds
       .map(id => PRODUCTS_DATA.find(p => p.id === id)?.name)
       .filter(Boolean)
       .join(', ');
 
-    const quoteDetails = `Ước tính ngân sách: Tổng giá trị ${formatCurrency(grandTotal)}. Dịch vụ chính: ${serviceName}. Số lượng bàn tiệc: ${tableCount} bàn (${menuPrices[menuType as keyof typeof menuPrices].desc}). Các sản phẩm đi kèm: ${productNamesStr || 'Không chọn'}. Dịch vụ chụp hình ngày cưới: ${withPhoto ? 'Có' : 'Không'}.`;
+    const quoteDetails = `Budget estimate: total ${formatCurrency(grandTotal)}. Main service: ${serviceName}. Event tables: ${tableCount} tables (${menuPrices[menuType as keyof typeof menuPrices].desc}). Add-on products: ${productNamesStr || 'None selected'}. Lighting and stage support included: ${withLighting ? 'Yes' : 'No'}.`;
     
     onQuoteSubmit(quoteDetails, selectedServiceId);
     setSubmittedQuote(true);
@@ -82,16 +82,16 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
       <div className="bg-primary p-4 text-white flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Calculator className="w-5 h-5" />
-          <h3 className="font-elegant text-xl font-bold">Dự toán chi phí cưới trực tuyến</h3>
+          <h3 className="font-elegant text-xl font-bold">Online event budget estimate</h3>
         </div>
-        <span className="bg-white/10 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded">Như Ý Smart Budget</span>
+        <span className="bg-white/10 text-white text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded">EMedia Smart Budget</span>
       </div>
 
       <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Parameters input */}
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-gray-600 uppercase mb-2">1. Chọn dịch vụ chính</label>
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-2">1. Choose a main service</label>
             <div className="grid grid-cols-2 gap-2">
               {SERVICES_DATA.slice(0, 3).map((item) => (
                 <button
@@ -106,7 +106,7 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
                   id={`estimator-service-${item.id}`}
                 >
                   <span>{item.title}</span>
-                  <span className="text-[10px] text-gray-400 mt-1">Từ {item.priceRange.split(' - ')[0]}</span>
+                  <span className="text-[10px] text-gray-400 mt-1">From {item.priceRange.split(' - ')[0]}</span>
                 </button>
               ))}
             </div>
@@ -114,8 +114,8 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
 
           <div className="border-t border-gray-100 pt-4">
             <div className="flex justify-between items-center mb-2">
-              <label className="block text-xs font-bold text-gray-600 uppercase">2. Tiệc ăn hỏi / Chiêu đãi</label>
-              <span className="text-xs text-primary font-bold">{tableCount} bàn tiệc</span>
+              <label className="block text-xs font-bold text-gray-600 uppercase">2. Ceremony / reception menu</label>
+              <span className="text-xs text-primary font-bold">{tableCount} tables</span>
             </div>
             <input
               type="range"
@@ -140,7 +140,7 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
                   }`}
                   id={`estimator-menu-${key}`}
                 >
-                  <span className="block font-bold">{key === 'standard' ? 'Cơ bản' : key === 'premium' ? 'Cao cấp' : 'Thượng hạng'}</span>
+                  <span className="block font-bold">{key === 'standard' ? 'Standard' : key === 'premium' ? 'Premium' : 'Luxury'}</span>
                   <span className="text-[9px] text-gray-400 font-mono block mt-0.5">{formatCurrency(menuPrices[key].price).split(',')[0]} / bàn</span>
                 </button>
               ))}
@@ -148,7 +148,7 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
           </div>
 
           <div className="border-t border-gray-100 pt-4">
-            <label className="block text-xs font-bold text-gray-600 uppercase mb-2">3. Thuê kèm sản phẩm nổi bật</label>
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-2">3. Add featured products</label>
             <div className="space-y-2">
               {PRODUCTS_DATA.map((prod) => (
                 <label
@@ -173,20 +173,20 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
 
           <div className="border-t border-gray-100 pt-4 flex items-center justify-between">
             <div>
-              <span className="block text-xs font-bold text-gray-600 uppercase">4. Chụp hình trọn gói ngày cưới</span>
-              <span className="text-[10px] text-gray-400">Hỗ trợ nhiếp ảnh gia suốt tiệc</span>
+              <span className="block text-xs font-bold text-gray-600 uppercase">4. Lighting and stage support</span>
+              <span className="text-[10px] text-gray-400">Ambient lighting and backdrop support throughout the event</span>
             </div>
             <button
               type="button"
-              onClick={() => setWithPhoto(!withPhoto)}
+              onClick={() => setWithLighting(!withLighting)}
               className={`w-12 h-6 rounded-full p-0.5 transition-colors cursor-pointer ${
-                withPhoto ? 'bg-primary' : 'bg-gray-200'
+                withLighting ? 'bg-primary' : 'bg-gray-200'
               }`}
               id="estimator-photo-toggle"
             >
               <div
                 className={`w-5 h-5 rounded-full bg-white transition-transform ${
-                  withPhoto ? 'translate-x-6' : 'translate-x-0'
+                  withLighting ? 'translate-x-6' : 'translate-x-0'
                 }`}
               />
             </button>
@@ -198,45 +198,45 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
           <div>
             <div className="flex items-center gap-1 text-primary font-bold mb-4 text-sm uppercase tracking-wide border-b border-gray-200 pb-2">
               <ClipboardList className="w-4 h-4" />
-              <span>Bảng dự tính dự kiến</span>
+              <span>Estimated breakdown</span>
             </div>
 
             <div className="space-y-3 text-xs text-gray-600">
               <div className="flex justify-between">
-                <span>Dịch vụ trang trí chủ đạo:</span>
+                <span>Main styling service:</span>
                 <span className="font-semibold text-gray-800">{formatCurrency(baseServiceCost)}</span>
               </div>
 
               <div className="flex justify-between">
                 <span>
-                  Tiệc cưới ({tableCount} bàn x {formatCurrency(menuPrices[menuType as keyof typeof menuPrices].price).split(',')[0]}):
+                  Event catering ({tableCount} tables x {formatCurrency(menuPrices[menuType as keyof typeof menuPrices].price).split(',')[0]}):
                 </span>
                 <span className="font-semibold text-gray-800">{formatCurrency(totalMenuCost)}</span>
               </div>
 
               {selectedProductIds.length > 0 && (
                 <div className="flex justify-between">
-                  <span>Sản phẩm thuê thêm x{selectedProductIds.length}:</span>
+                  <span>Additional items x{selectedProductIds.length}:</span>
                   <span className="font-semibold text-gray-800">{formatCurrency(totalProductsCost)}</span>
                 </div>
               )}
 
-              {withPhoto && (
+              {withLighting && (
                 <div className="flex justify-between">
-                  <span>Dịch vụ chụp hình:</span>
-                  <span className="font-semibold text-gray-800">{formatCurrency(photoCost)}</span>
+                  <span>Lighting and stage support:</span>
+                  <span className="font-semibold text-gray-800">{formatCurrency(lightingCost)}</span>
                 </div>
               )}
 
               <div className="border-t border-dashed border-gray-300 pt-3 flex justify-between items-baseline">
-                <span className="text-sm font-bold text-gray-700">TỔNG ƯỚC TÍNH:</span>
+                <span className="text-sm font-bold text-gray-700">TOTAL ESTIMATE:</span>
                 <span className="text-xl font-bold text-primary font-serif">{formatCurrency(grandTotal)}</span>
               </div>
             </div>
 
             <div className="mt-4 text-[10px] text-gray-400 leading-relaxed bg-white p-3 rounded border border-gray-100">
-              <span className="font-bold block text-gray-500 mb-0.5">Lưu ý quan trọng:</span>
-              Chi phí trên mang tính ước lượng tham khảo dựa trên giá gốc tiêu chuẩn. Dịch vụ cưới Như Ý luôn có các chính sách chiết khấu tốt hơn tùy theo mùa cưới thực tế.
+              <span className="font-bold block text-gray-500 mb-0.5">Important note:</span>
+              These figures are estimates based on standard pricing. Final pricing may vary by season, venue, and event scope.
             </div>
           </div>
 
@@ -253,18 +253,18 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
               {submittedQuote ? (
                 <>
                   <Check className="w-4 h-4" />
-                  Đã lưu cấu hình tư vấn!
+                  Quote saved!
                 </>
               ) : (
                 <>
-                  <span>Gửi bảng dự toán này cho Như Ý</span>
+                  <span>Send this estimate to EMedia</span>
                   <ChevronRight className="w-4 h-4" />
                 </>
               )}
             </button>
             {submittedQuote && (
               <p className="text-[10px] text-center text-primary font-medium mt-1">
-                Như Ý đã lưu cấu hình dự toán của bạn vào ô Đặt lịch tư vấn bên dưới!
+                Your estimate has been saved into the consultation form below.
               </p>
             )}
           </div>

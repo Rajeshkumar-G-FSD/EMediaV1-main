@@ -19,12 +19,12 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
   const [errorMsg, setErrorMsg] = useState('');
 
   const serviceOptions = [
-    { value: 'all-inclusive', label: 'Dịch vụ trọn gói Như Ý' },
-    { value: 's1', label: 'Trang trí lễ gia tiên' },
-    { value: 's2', label: 'Trang trí tiệc cưới' },
-    { value: 's3', label: 'Tổ chức tiệc ngoài trời' },
-    { value: 's4', label: 'Chụp ảnh ngày cưới' },
-    { value: 'other', label: 'Yêu cầu sản phẩm / Dịch vụ khác' },
+    { value: 'all-inclusive', label: 'EMedia full-service decoration package' },
+    { value: 's1', label: 'Ceremony decor' },
+    { value: 's2', label: 'Wedding reception styling' },
+    { value: 's3', label: 'Outdoor event setup' },
+    { value: 's4', label: 'Birthday party decoration' },
+    { value: 'other', label: 'Other product or service request' },
   ];
 
   // React to preselected changes
@@ -39,16 +39,16 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
     setErrorMsg('');
 
     if (!fullName.trim()) {
-      setErrorMsg('Vui lòng nhập họ và tên.');
+      setErrorMsg('Please enter your full name.');
       return;
     }
     if (!phone.trim()) {
-      setErrorMsg('Vui lòng nhập số điện thoại liên hệ.');
+      setErrorMsg('Please enter a contact phone number.');
       return;
     }
     const phoneRegex = /^[0-9+.\s-]{9,15}$/;
     if (!phoneRegex.test(phone.trim())) {
-      setErrorMsg('Số điện thoại không hợp lệ.');
+      setErrorMsg('The phone number is invalid.');
       return;
     }
 
@@ -56,8 +56,8 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
       id: 'req-' + Math.random().toString(36).substr(2, 9),
       fullName,
       phone,
-      email: email || 'Không cung cấp',
-      weddingDate: weddingDate || 'Chưa xác định',
+      email: email || 'Not provided',
+      weddingDate: weddingDate || 'Not set',
       serviceType: serviceOptions.find(o => o.value === serviceType)?.label || serviceType,
       notes,
       status: 'pending',
@@ -100,23 +100,23 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
           <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="w-10 h-10" />
           </div>
-          <h3 className="font-elegant text-2xl font-bold text-primary mb-2">Gửi yêu cầu thành công!</h3>
+          <h3 className="font-elegant text-2xl font-bold text-primary mb-2">Inquiry sent successfully!</h3>
           <p className="text-gray-600 text-sm max-w-sm mx-auto mb-6">
-            Cảm ơn bạn đã tin tưởng dịch vụ cưới Như Ý. Tư vấn viên của chúng tôi sẽ liên hệ lại qua số điện thoại sớm nhất trong vòng 24 giờ.
+            Thank you for trusting EMedia. Our team will get back to you by phone within 24 hours.
           </p>
           <button
             onClick={() => setIsSubmitted(false)}
             className="text-xs uppercase font-bold text-primary hover:underline"
             id="inquiry-reset-btn"
           >
-            Gửi yêu cầu tư vấn mới
+            Send another inquiry
           </button>
         </motion.div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="text-center mb-4">
-            <h3 className="font-elegant text-2xl text-primary font-bold">Đặt lịch tư vấn miễn phí</h3>
-            <p className="text-xs text-gray-500">Như Ý sẽ liên hệ thiết kế bảng báo giá chi tiết phù hợp với ngân sách của bạn</p>
+            <h3 className="font-elegant text-2xl text-primary font-bold">Book a free consultation</h3>
+            <p className="text-xs text-gray-500">We will prepare a detailed quote aligned with your budget and event vision</p>
           </div>
 
           {errorMsg && (
@@ -126,14 +126,14 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
           )}
 
           <div>
-            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Họ và tên *</label>
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Full name *</label>
             <div className="relative">
               <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
                 <User className="h-4 w-4" />
               </span>
               <input
                 type="text"
-                placeholder="Nhập họ và tên của bạn..."
+                placeholder="Enter your full name..."
                 className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded text-sm focus:border-primary focus:outline-none"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
@@ -145,14 +145,14 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Số điện thoại *</label>
+              <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Phone number *</label>
               <div className="relative">
                 <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
                   <Phone className="h-4 w-4" />
                 </span>
                 <input
                   type="tel"
-                  placeholder="Nhập số điện thoại..."
+                  placeholder="Enter your phone number..."
                   className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded text-sm focus:border-primary focus:outline-none"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
@@ -163,7 +163,7 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Thư điện tử (Email)</label>
+              <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Email</label>
               <div className="relative">
                 <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
                   <Mail className="h-4 w-4" />
@@ -182,7 +182,7 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Ngày cưới dự kiến</label>
+              <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Expected event date</label>
               <div className="relative">
                 <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
                   <Calendar className="h-4 w-4" />
@@ -198,7 +198,7 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Dịch vụ quan tâm</label>
+              <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Service of interest</label>
               <select
                 className="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:border-primary focus:outline-none bg-white"
                 value={serviceType}
@@ -215,10 +215,10 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Yêu cầu bổ sung hoặc câu hỏi</label>
+              <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Additional requests or questions</label>
             <textarea
               rows={3}
-              placeholder="Chia sẻ ý kiến hoặc yêu cầu chi tiết về màu sắc, ngân sách dự kiến..."
+              placeholder="Share notes about style, color palette, or budget goals..."
               className="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:border-primary focus:outline-none"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
@@ -232,7 +232,7 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
             id="inquiry-submit-btn"
           >
             <Send className="w-4 h-4" />
-            Nhận tư vấn báo giá ngay
+            Get a quote now
           </button>
         </form>
       )}

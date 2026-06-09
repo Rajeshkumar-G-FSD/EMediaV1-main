@@ -13,7 +13,7 @@ export default function ProductSlider({ onProductSelect, onBookProduct }: Produc
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [startIndex, setStartIndex] = useState(0);
 
-  const categories = ['all', 'Khung rạp', 'Cổng hoa', 'Mâm quả'];
+  const categories = ['all', 'Canopies', 'Floral arches', 'Ceremonial trays'];
 
   const filteredProducts = selectedCategory === 'all'
     ? PRODUCTS_DATA
@@ -44,14 +44,14 @@ export default function ProductSlider({ onProductSelect, onBookProduct }: Produc
         {/* Right Sidebar Info (in HTML it is text-right & flex-row-reverse, we will implement this exact visual direction) */}
         <div className="w-full md:w-1/4 md:order-2 text-left md:text-right flex flex-col justify-between">
           <div>
-            <span className="text-xs uppercase font-bold text-primary tracking-widest block mb-1">Mẫu mã phong phú</span>
+            <span className="text-xs uppercase font-bold text-primary tracking-widest block mb-1">Creative options</span>
             <h2 className="text-3xl md:text-3xl uppercase mb-6 font-elegant text-primary" id="products-title">
-              Sản phẩm
+              Event
               <br />
-              công phu
+              details
             </h2>
             <p className="text-sm text-gray-500 mb-6 leading-relaxed">
-              Như Ý sở hữu xưởng cơ khí thi công gia phả và mâm lộc thủ công tự chế riêng biệt. Chúng tôi liên tục cập nhật và làm mới kho thiết bị phụ kiện đa dạng dòng phối màu.
+              Our studio offers a curated collection of decor details, ceremonial pieces, and stage accents for weddings and all special events.
             </p>
 
             {/* Category Filter Pills */}
@@ -68,7 +68,7 @@ export default function ProductSlider({ onProductSelect, onBookProduct }: Produc
                   }`}
                   id={`prod-cat-${cat}`}
                 >
-                  {cat === 'all' ? 'Tất cả' : cat}
+                  {cat === 'all' ? 'All' : cat}
                 </button>
               ))}
             </div>
@@ -100,7 +100,7 @@ export default function ProductSlider({ onProductSelect, onBookProduct }: Produc
               className="px-5 py-2 whitespace-nowrap bg-primary hover:bg-opacity-95 font-bold uppercase text-xs tracking-wider text-white transition cursor-pointer"
               id="products-request-catalog-btn"
             >
-              Xem báo giá sỉ
+              View wholesale pricing
             </button>
           </div>
         </div>
@@ -146,7 +146,7 @@ export default function ProductSlider({ onProductSelect, onBookProduct }: Produc
                       className="text-xs font-bold text-gray-400 hover:text-primary uppercase cursor-pointer"
                       id={`product-detail-btn-${prod.id}`}
                     >
-                      Chi tiết sản phẩm
+                      Product details
                     </button>
                     <button
                       type="button"

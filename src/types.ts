@@ -1,6 +1,7 @@
 export interface Customer {
   id: string;
   title: string;
+  category: string;
   date: string;
   description: string;
   image: string;

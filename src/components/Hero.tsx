@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 
 interface HeroProps {
@@ -7,18 +7,39 @@ interface HeroProps {
 }
 
 export default function Hero({ onActionClick }: HeroProps) {
+  const heroImages = [
+    'https://i.postimg.cc/6qcWczF1/decoraation2.avif',
+    'https://i.postimg.cc/J0xrxKSY/decoration.webp',
+  ];
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveImageIndex((current) => (current + 1) % heroImages.length);
+    }, 3000);
+
+    return () => window.clearInterval(timer);
+  }, [heroImages.length]);
+
   return (
     <section
       className="relative w-full h-[500px] md:h-[600px] bg-gray-200 overflow-hidden"
       id="hero-section"
     >
-      {/* Background Image with hotlink */}
-      <img
-        alt="Như Ý Wedding Event Setup"
-        className="absolute inset-0 w-full h-full object-cover"
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPfJbKLh73Bo5xD8ZY6urA1t6oiUvH5-fr4geZK_FI2VgLpofiSjIqdG8484t42mrBAJ_hgeZMq-sE9GLOUxB5_RfX3RWGZQth_IG08fefXp6S1g_CEnaMyJmk_ytv15dF74qm4k8YAlFniRLa2fRYFGuhFMDRc_-HlDaLcGAPpo9CJC_KghspnrZ9RguJyfUCzyAWsV5-Mw1fltVklbzC-MoxwwD0-GIms_UJDzklI4kGORQIRfkxNuNfsi168troXb_NouF0PC8"
-        id="hero-background"
-      />
+      {/* Animated background image rotation */}
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={heroImages[activeImageIndex]}
+          alt="EMedia event decoration setup"
+          className="absolute inset-0 w-full h-full object-cover"
+          src={heroImages[activeImageIndex]}
+          id="hero-background"
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.02 }}
+          transition={{ duration: 0.85, ease: 'easeInOut' }}
+        />
+      </AnimatePresence>
 
       {/* Dark overlay from left */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
@@ -33,9 +54,9 @@ export default function Hero({ onActionClick }: HeroProps) {
             className="text-4xl md:text-5xl uppercase text-shadow mb-4 leading-tight font-elegant text-white"
             id="hero-title"
           >
-            Cho Hạnh Phúc
+            Event Decor
             <br />
-            Thật Đong Đầy
+            Beautifully
           </motion.h1>
 
           <motion.h2
@@ -45,7 +66,7 @@ export default function Hero({ onActionClick }: HeroProps) {
             className="text-lg md:text-xl font-light tracking-wide text-[#EAF1F1] mb-4 text-shadow font-sans uppercase"
             id="hero-subtitle"
           >
-            Dịch vụ cưới chuyên nghiệp trọn gói
+            Birthday, wedding, ceremony, and office anniversary decoration
           </motion.h2>
 
           <motion.p
@@ -55,7 +76,7 @@ export default function Hero({ onActionClick }: HeroProps) {
             className="mb-8 text-xs md:text-sm text-gray-200 opacity-90 max-w-md leading-relaxed"
             id="hero-description"
           >
-            Sứ mệnh của cưới hỏi Như Ý là vẽ nên bức tranh hạnh phúc chân thực và đong đầy ý nghĩa nhất cho ngày chung đôi của quý khách. Cẩn thận, chi tiết và tràn đầy tận tâm.
+            EMedia designs photo-ready spaces with floral styling, balloon decor, lighting, stage backdrops, and complete event setup support.
           </motion.p>
 
           <motion.div
@@ -68,7 +89,7 @@ export default function Hero({ onActionClick }: HeroProps) {
               className="px-6 py-3 cursor-pointer bg-primary hover:bg-opacity-90 font-bold uppercase text-xs tracking-wider text-white transition flex items-center gap-2"
               id="hero-action-btn"
             >
-              <span>Xem các dịch vụ cưới</span>
+              <span>Explore services</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>

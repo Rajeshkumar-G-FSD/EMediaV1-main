@@ -17,9 +17,9 @@ export default function BookingList({ inquiries, onDeleteInquiry, onClearAll }: 
         <div>
           <h3 className="font-elegant text-xl font-bold text-primary flex items-center gap-2">
             <ClipboardCheck className="w-5 h-5" />
-            Lịch Hẹn & Yêu Cầu Đã Đăng Ký
+            Saved Inquiries & Appointments
           </h3>
-          <p className="text-xs text-gray-500 mt-1">Danh sách lưu trữ các biểu mẫu tư vấn bạn đã gửi cho ban điều phối tiệc cưới Như Ý.</p>
+          <p className="text-xs text-gray-500 mt-1">A running list of consultation forms you submitted to the EMedia planning team.</p>
         </div>
         {inquiries.length > 0 && (
           <button
@@ -27,7 +27,7 @@ export default function BookingList({ inquiries, onDeleteInquiry, onClearAll }: 
             className="text-xs text-red-500 hover:text-red-700 hover:underline uppercase font-bold text-left sm:text-right cursor-pointer"
             id="clear-all-inquiries-btn"
           >
-            Xóa lịch sử đăng ký
+            Clear history
           </button>
         )}
       </div>
@@ -38,8 +38,8 @@ export default function BookingList({ inquiries, onDeleteInquiry, onClearAll }: 
             <div className="w-12 h-12 bg-gray-50 text-gray-300 rounded-full flex items-center justify-center mx-auto mb-3">
               <ClipboardCheck className="w-6 h-6" />
             </div>
-            <p className="text-sm">Hiện tại bạn chưa có lịch hẹn gửi tư vấn nào.</p>
-            <p className="text-xs text-gray-400 mt-1">Sử dụng biểu mẫu tư vấn bên dưới hoặc bảng Dự toán thông minh để tạo!</p>
+            <p className="text-sm">You currently have no saved inquiries.</p>
+            <p className="text-xs text-gray-400 mt-1">Use the consultation form below or the smart budget tool to create one.</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -67,7 +67,7 @@ export default function BookingList({ inquiries, onDeleteInquiry, onClearAll }: 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-1 gap-x-4 text-xs text-gray-500">
                       <div className="flex items-center gap-1.5">
                         <Phone className="w-3.5 h-3.5 text-gray-400" />
-                        <span>SĐT: <span className="font-semibold text-gray-700">{inq.phone}</span></span>
+                        <span>Phone: <span className="font-semibold text-gray-700">{inq.phone}</span></span>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <Mail className="w-3.5 h-3.5 text-gray-400" />
@@ -75,13 +75,13 @@ export default function BookingList({ inquiries, onDeleteInquiry, onClearAll }: 
                       </div>
                       <div className="flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5 text-gray-400" />
-                        <span>Gia kỳ dự kiến: <span className="font-semibold text-gray-700">{inq.weddingDate}</span></span>
+                        <span>Event date: <span className="font-semibold text-gray-700">{inq.weddingDate}</span></span>
                       </div>
                     </div>
 
                     {inq.notes && (
                       <div className="text-xs italic text-gray-500 bg-white p-2 border border-gray-100 rounded mt-1 max-w-2xl leading-relaxed">
-                        <span className="font-bold not-italic text-gray-400 mr-1.5">Nội dung yêu cầu:</span>
+                        <span className="font-bold not-italic text-gray-400 mr-1.5">Request notes:</span>
                         {inq.notes}
                       </div>
                     )}
@@ -90,21 +90,21 @@ export default function BookingList({ inquiries, onDeleteInquiry, onClearAll }: 
                   {/* Status & Cancel Control */}
                   <div className="flex items-center justify-between md:justify-end gap-4 w-full md:w-auto border-t md:border-t-0 border-gray-200/50 pt-3 md:pt-0">
                     <div className="flex flex-col text-left md:text-right">
-                      <span className="text-[10px] text-gray-400 uppercase font-mono">Đăng ký vào</span>
+                      <span className="text-[10px] text-gray-400 uppercase font-mono">Submitted</span>
                       <span className="text-xs font-semibold text-gray-600 font-mono">{inq.createdAt}</span>
                     </div>
 
                     {/* Badge Status */}
                     <span className="flex items-center gap-1 bg-white/70 border border-emerald-100 text-emerald-700 px-2.5 py-1 text-xs rounded font-medium">
                       <ShieldCheck className="w-3.5 h-3.5" />
-                      <span>Đang chờ duyệt</span>
+                      <span>Pending review</span>
                     </span>
 
                     {/* Delete entry trigger */}
                     <button
                       onClick={() => onDeleteInquiry(inq.id)}
                       className="p-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded transition cursor-pointer"
-                      title="Xóa yêu cầu tư vấn này"
+                      title="Delete this inquiry"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>

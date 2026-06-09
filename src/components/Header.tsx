@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, Calendar, Calculator } from 'lucide-react';
+import { Menu, X, Calendar } from 'lucide-react';
 
 interface HeaderProps {
   onNavClick: (sectionId: string) => void;
@@ -11,16 +11,16 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
   const [isOpen, setIsOpen] = useState(false);
 
   const leftNavItems = [
-    { id: 'introduction', label: 'Giới thiệu' },
-    { id: 'services', label: 'Dịch vụ cưới' },
-    { id: 'products', label: 'Sản phẩm cưới' },
+    { id: 'introduction', label: 'Wedding Decor' },
+    { id: 'services', label: 'Event Styling' },
+    { id: 'products', label: 'Decor Items' },
   ];
 
   const rightNavItems = [
-    { id: 'customers', label: 'Khách hàng' },
-    { id: 'blog', label: 'Cẩm nang' },
-    { id: 'calculator', label: 'Dự toán báo giá' },
-    { id: 'appointments', label: 'Lịch hẹn tư vấn' },
+    { id: 'customers', label: 'Gallery' },
+    { id: 'blog', label: 'Planning Tips' },
+    { id: 'calculator', label: 'Decor Quote' },
+    { id: 'appointments', label: 'Book Event' },
   ];
 
   const handleItemClick = (id: string) => {
@@ -66,10 +66,15 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
           <div className="flex-shrink-0 mx-auto md:mx-0 relative md:absolute md:left-1/2 md:transform md:-translate-x-1/2 z-10">
             <button
               onClick={() => handleItemClick('hero')}
-              className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-primary flex items-center justify-center bg-white shadow-md relative hover:scale-105 transition cursor-pointer"
+              className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-primary overflow-hidden flex items-center justify-center bg-white shadow-md relative hover:scale-105 transition cursor-pointer"
               id="logo-button"
+              aria-label="Go to EMedia home"
             >
-              <span className="font-elegant text-xl md:text-2xl italic font-bold text-primary">Như Ý</span>
+              <img
+                src="/images/emedia_round.png"
+                alt="EMedia"
+                className="h-full w-full object-cover"
+              />
             </button>
           </div>
 
@@ -132,7 +137,7 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
                   <span className="flex items-center justify-between">
                     {item.label}
                     {item.id === 'appointments' && hasInquiries && (
-                      <span className="bg-primary text-white text-[10px] px-2 py-0.5 rounded-full">Có lịch hẹn</span>
+                      <span className="bg-primary text-white text-[10px] px-2 py-0.5 rounded-full">New</span>
                     )}
                   </span>
                 </button>

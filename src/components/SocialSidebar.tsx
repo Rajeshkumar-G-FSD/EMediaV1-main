@@ -26,7 +26,7 @@ export default function SocialSidebar({ onQuickActionClick }: SidebarProps) {
       <a
         href="#"
         className="p-3 hover:bg-white/10 border-b border-white/20 transition flex items-center justify-center"
-        title="Theo dõi qua Facebook"
+        title="Follow on Facebook"
         aria-label="Facebook link"
       >
         <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -38,7 +38,7 @@ export default function SocialSidebar({ onQuickActionClick }: SidebarProps) {
       <button
         onClick={() => onQuickActionClick('phone')}
         className="p-3 hover:bg-white/10 border-b border-white/20 transition flex items-center justify-center cursor-pointer"
-        title="Gọi điện hotline hỗ trợ: 090.8.765432"
+        title="Call support hotline: +91 95668 94134"
         id="sidebar-call-btn"
         aria-label="Hotline Call"
       >
@@ -49,7 +49,7 @@ export default function SocialSidebar({ onQuickActionClick }: SidebarProps) {
       <button
         onClick={() => onQuickActionClick('email')}
         className="p-3 hover:bg-white/10 border-b border-white/20 transition flex items-center justify-center cursor-pointer"
-        title="Gửi email liên hệ"
+        title="Send a contact email"
         id="sidebar-email-btn"
         aria-label="Email Enquiry"
       >
@@ -60,7 +60,7 @@ export default function SocialSidebar({ onQuickActionClick }: SidebarProps) {
       <button
         onClick={() => onQuickActionClick('form')}
         className="p-3 hover:bg-white/10 border-b border-white/20 transition flex items-center justify-center cursor-pointer animate-pulse-slow"
-        title="Đặt lịch tư vấn dịch vụ dẫu"
+        title="Open the consultation form"
         id="sidebar-form-btn"
         aria-label="Direct Form"
       >
@@ -72,7 +72,7 @@ export default function SocialSidebar({ onQuickActionClick }: SidebarProps) {
         <button
           onClick={handleScrollTop}
           className="p-3 hover:bg-white/10 transition flex items-center justify-center cursor-pointer animate-fade-in"
-          title="Về đầu trang"
+          title="Back to top"
           id="sidebar-scroll-top-btn"
           aria-label="Scroll to top"
         >

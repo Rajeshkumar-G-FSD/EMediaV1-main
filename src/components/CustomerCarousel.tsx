@@ -34,15 +34,15 @@ export default function CustomerCarousel({ onCustomerSelect }: CustomerCarouselP
         {/* Sidebar Title & Intro */}
         <div className="w-full md:w-1/4 flex flex-col justify-between">
           <div>
-            <span className="text-xs uppercase font-bold text-primary tracking-widest block mb-2">Lời khen chân thực</span>
+            <span className="text-xs uppercase font-bold text-primary tracking-widest block mb-2">Event decoration work</span>
             <h2 className="text-3xl md:text-3xl uppercase mb-6 font-elegant text-primary" id="customers-title">
-              Khách hàng <br /> tin chọn
+              Client <br /> showcases
             </h2>
             <p className="text-sm text-gray-500 mb-6 leading-relaxed">
-              Sự hài lòng tuyệt đối và niềm hân hoan rạng ngời của quan viên hai họ chính là phần thưởng vô giá nhất gửi đến toàn thể đội ngũ thực hiện của Dịch vụ cưới Như Ý.
+              EMedia creates polished decoration concepts for birthdays, weddings, office anniversaries, ceremonies, and private celebrations.
             </p>
             <p className="text-sm text-gray-500 mb-8 leading-relaxed">
-              Dưới đây là một số hình ảnh thực tế ghi dấu ngày trọng đại viên mãn từ các lễ gia tiên và tiệc cưới do Như Ý trang trí trọn gói.
+              Explore a few event decoration looks styled with floral details, stage backdrops, balloon accents, and guest-ready layouts.
             </p>
           </div>
 
@@ -108,7 +108,7 @@ export default function CustomerCarousel({ onCustomerSelect }: CustomerCarouselP
                       className="text-xs font-bold text-gray-700 uppercase group-hover:text-primary transition cursor-pointer flex items-center gap-1"
                       id={`customer-detail-trigger-${cust.id}`}
                     >
-                      Báo cáo chi tiết <ArrowRight className="w-3 h-3 text-primary opacity-0 group-hover:opacity-100 transition-all" />
+                      View details <ArrowRight className="w-3 h-3 text-primary opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                     <button
                       type="button"

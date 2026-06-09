@@ -15,12 +15,12 @@ export default function BlogSection({ onBlogPostSelect }: BlogSectionProps) {
     <section className="bg-gray-50/50 p-6 md:p-8 rounded-lg border border-gray-100" id="blog-section">
       <div className="text-center mb-8 relative">
         <h2 className="text-3xl uppercase bg-white inline-block px-6 relative z-10 font-elegant text-primary" id="blog-title">
-          Cẩm nang kinh nghiệm
+          Planning Guide
         </h2>
         <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -z-0" />
       </div>
       <p className="text-center text-sm text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-        Những lời khuyên, kinh nghiệm xương máu được tổng hợp chân thực qua hàng trăm đám cưới thực tế, giúp các cặp đôi vững vàng chuẩn bị vẹn sắc nhất.
+        Practical tips and real-world lessons gathered from hundreds of weddings to help couples prepare with confidence.
       </p>
 
       <div className="flex flex-wrap lg:flex-nowrap gap-8">
@@ -35,7 +35,7 @@ export default function BlogSection({ onBlogPostSelect }: BlogSectionProps) {
               />
               <div className="absolute top-3 left-3 bg-primary text-white text-[10px] uppercase font-bold tracking-wider px-2 py-1 flex items-center gap-1.5">
                 <BookOpen className="w-3 h-3" />
-                Bài viết nổi bật
+                Featured story
               </div>
             </div>
             <h3
@@ -55,7 +55,7 @@ export default function BlogSection({ onBlogPostSelect }: BlogSectionProps) {
             className="text-xs font-bold text-primary hover:underline uppercase tracking-wide flex items-center gap-1 cursor-pointer"
             id={`blog-featured-btn-${featuredPost.id}`}
           >
-            Đọc bài viết chi tiết <ArrowRight className="w-3.5 h-3.5" />
+            Read full article <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
 

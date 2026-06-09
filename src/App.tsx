@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from './components/Header.tsx';
 import Hero from './components/Hero.tsx';
+import PortfolioCarousel from './components/PortfolioCarousel.tsx';
 import Welcome from './components/Welcome.tsx';
-import CustomerCarousel from './components/CustomerCarousel.tsx';
 import ServiceGrid from './components/ServiceGrid.tsx';
 import ProductSlider from './components/ProductSlider.tsx';
 import BudgetEstimator from './components/BudgetEstimator.tsx';
@@ -72,7 +72,7 @@ export default function App() {
   };
 
   const handleDeleteInquiry = (id: string) => {
-    if (confirm('Bạn có chắc chắn muốn xóa yêu cầu tư vấn này khỏi trình duyệt?')) {
+    if (confirm('Are you sure you want to delete this consultation request from this browser?')) {
       const updated = inquiries.filter(x => x.id !== id);
       setInquiries(updated);
       localStorage.setItem('nhuy_consultations', JSON.stringify(updated));
@@ -80,7 +80,7 @@ export default function App() {
   };
 
   const handleClearAllInquiries = () => {
-    if (confirm('Bạn có chắc chắn muốn xóa toàn bộ lịch sử đăng ký tư vấn trên máy tính này?')) {
+    if (confirm('Are you sure you want to clear all consultation history on this computer?')) {
       localStorage.removeItem('nhuy_consultations');
       setInquiries([]);
     }
@@ -182,7 +182,12 @@ export default function App() {
       {/* 3. Immersive Hero Presentation */}
       <Hero onActionClick={() => handleNavClick('services')} />
 
-      {/* 4. Elegant Single-Screen Grid Layout Content */}
+      {/* 4. 3D Portfolio Carousel */}
+      <div ref={customersRef} className="scroll-mt-24" id="section-customers">
+        <PortfolioCarousel />
+      </div>
+
+      {/* 5. Elegant Single-Screen Grid Layout Content */}
       <main className="container mx-auto px-4 max-w-6xl py-12 space-y-20 md:space-y-24 flex-grow">
         
         {/* Section 1: Welcome Intro */}
@@ -192,14 +197,7 @@ export default function App() {
 
         <div className="h-px bg-primary/10 w-full" />
 
-        {/* Section 2: Wedding Customer Stories */}
-        <div ref={customersRef} className="scroll-mt-24" id="section-customers">
-          <CustomerCarousel onCustomerSelect={setSelectedCustomer} />
-        </div>
-
-        <div className="h-px bg-primary/10 w-full" />
-
-        {/* Section 3: Professional Services Column */}
+        {/* Section 2: Professional Services Column */}
         <div ref={servicesRef} className="scroll-mt-24" id="section-services">
           <ServiceGrid
             onServiceSelect={setSelectedService}
@@ -212,7 +210,7 @@ export default function App() {
 
         <div className="h-px bg-primary/10 w-full" />
 
-        {/* Section 4: Highly Categorized Custom Products Catalog */}
+        {/* Section 3: Highly Categorized Custom Products Catalog */}
         <div ref={productsRef} className="scroll-mt-24" id="section-products">
           <ProductSlider
             onProductSelect={setSelectedProduct}
@@ -220,7 +218,7 @@ export default function App() {
               setPreselectedServiceId('other');
               const textNotes = document.getElementById('field-notes') as HTMLTextAreaElement | null;
               if (textNotes) {
-                textNotes.value = `Tôi muốn đăng ký tư vấn và báo giá chi tiết cho: ${pName}`;
+                textNotes.value = `I would like a detailed consultation and quote for: ${pName}`;
               }
               document.getElementById('inquiry-form-container')?.scrollIntoView({ behavior: 'smooth' });
             }}
@@ -233,26 +231,26 @@ export default function App() {
         <div ref={calculatorRef} className="scroll-mt-24" id="section-calculator">
           <div className="text-center mb-8 relative">
             <h2 className="text-3xl uppercase bg-white inline-block px-6 relative z-10 font-elegant text-primary">
-              Công cụ báo giá nhanh
+              Quick Quote Tool
             </h2>
             <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -z-0" />
           </div>
           <p className="text-center text-sm text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Công cụ đặc biệt giúp bạn tự do xây dựng thiết kế, lượng chọn sảnh tiệc, sản phẩm mâm quả và xem ước tính kinh phí trực quan thời gian thực.
+            Build your event concept, choose venue styling and ceremonial items, and preview an instant live cost estimate.
           </p>
           <BudgetEstimator onQuoteSubmit={handleQuoteSubmit} />
         </div>
 
         <div className="h-px bg-primary/10 w-full" />
 
-        {/* Section 6: Guides & Blog Tips List */}
+        {/* Section 4: Guides & Blog Tips List */}
         <div ref={blogRef} className="scroll-mt-24" id="section-blog">
           <BlogSection onBlogPostSelect={setSelectedPost} />
         </div>
 
         <div className="h-px bg-primary/10 w-full" />
 
-        {/* Section 7: Consultation Booking & Persistent Appointment Tracking CRM */}
+        {/* Section 5: Consultation Booking & Persistent Appointment Tracking CRM */}
         <div ref={appointmentsRef} className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-8" id="section-appointments">
           {/* Inquiry form - col span 5 */}
           <div className="lg:col-span-5">
@@ -293,13 +291,13 @@ export default function App() {
               src={selectedCustomer.image}
             />
             <div className="flex items-center justify-between text-xs text-gray-400 font-mono border-b border-gray-100 pb-2">
-              <span className="bg-primary/10 text-primary px-2 py-0.5 rounded uppercase font-bold tracking-wider">Báo cáo tiệc cưới thành viên</span>
-              <span>Gia lễ thành: {selectedCustomer.date}</span>
+              <span className="bg-primary/10 text-primary px-2 py-0.5 rounded uppercase font-bold tracking-wider">Event feature story</span>
+              <span>Event date: {selectedCustomer.date}</span>
             </div>
             <div className="space-y-3 leading-relaxed text-gray-600">
-              <p className="font-semibold text-primary">Như Ý xin chân thành gửi lời tri ân sâu sắc đến gia đình hai họ!</p>
+              <p className="font-semibold text-primary">We sincerely thank our clients for trusting EMedia with these special moments.</p>
               <p>{selectedCustomer.description}</p>
-              <p>Mỗi chi tiết thiết kế cổng rạp lụa, mâm lễ vật dâng hương đều được đôi bên trưởng bối ngợi ca trang trọng và tinh sảo. Như Ý mến chúc quý đôi lứa trăm năm hạnh phúc, long phụng sum vầy, sớm sinh quý tử.</p>
+              <p>Every detail, from the ceremony backdrop to the ceremonial trays, is crafted to be elegant, memorable, and camera-ready. We wish every couple a lifetime of happiness and togetherness.</p>
             </div>
             <div className="pt-4 flex justify-end gap-3">
               <button
@@ -307,7 +305,7 @@ export default function App() {
                 className="px-4 py-2 border border-gray-200 rounded text-xs uppercase font-bold hover:bg-gray-50 cursor-pointer"
                 id="customer-modal-close"
               >
-                Đóng lại
+                Close
               </button>
               <button
                 onClick={() => {
@@ -315,14 +313,14 @@ export default function App() {
                   setPreselectedServiceId('other');
                   const descField = document.getElementById('field-notes') as HTMLTextAreaElement | null;
                   if (descField) {
-                    descField.value = `Tôi muốn tư vấn một concept đám cưới hoàn mỹ tương tự như: ${selectedCustomer.title}`;
+                    descField.value = `I would like to discuss a custom concept similar to: ${selectedCustomer.title}`;
                   }
                   document.getElementById('inquiry-form-container')?.scrollIntoView({ behavior: 'smooth' });
                 }}
                 className="px-4 py-2 bg-primary text-white text-xs uppercase font-bold hover:bg-opacity-90 transition rounded cursor-pointer"
                 id="customer-modal-book-concept"
               >
-                Đăng ký Concept này
+                Book this concept
               </button>
             </div>
           </div>
@@ -345,14 +343,14 @@ export default function App() {
             <div className="flex items-center justify-between text-xs text-gray-400 border-b border-gray-100 pb-2">
               <span className="font-bold text-primary flex items-center gap-1">
                 <Compass className="w-4 h-4" />
-                Mức giá tham khảo:
+                Starting price:
               </span>
               <span className="font-mono font-bold text-gray-700 bg-gray-100 px-3 py-1 rounded text-sm">{selectedService.priceRange}</span>
             </div>
             <div className="space-y-3 leading-relaxed text-gray-600">
-              <p className="font-bold text-sm text-gray-800 uppercase tracking-wider">Thông tin chi tiết dịch vụ:</p>
+              <p className="font-bold text-sm text-gray-800 uppercase tracking-wider">Service details:</p>
               <p>{selectedService.detailedDescription}</p>
-              <p>Mỗi khâu thi công lắp đặt đều được giám sát khắt khe bởi quản lý dự án lâu năm, bảo đảm tiến trình bàn giao trước ngày cử hành lễ tối thiểu 12 giờ.</p>
+              <p>Every stage is monitored by an experienced project team to ensure a smooth handover well before the event day.</p>
             </div>
             <div className="pt-4 flex justify-end gap-3">
               <button
@@ -360,7 +358,7 @@ export default function App() {
                 className="px-4 py-1.5 border border-gray-200 rounded text-xs uppercase font-bold hover:bg-gray-50 cursor-pointer"
                 id="service-modal-close"
               >
-                Trở lại
+                Back
               </button>
               <button
                 onClick={() => {
@@ -371,7 +369,7 @@ export default function App() {
                 className="px-4 py-1.5 bg-primary text-white text-xs uppercase font-bold hover:bg-opacity-90 transition rounded cursor-pointer"
                 id="service-modal-book-now"
               >
-                Đặt dịch vụ ngay
+                Book now
               </button>
             </div>
           </div>
@@ -393,12 +391,12 @@ export default function App() {
             />
             <div className="flex items-center justify-between text-xs text-gray-400 border-b border-gray-100 pb-2">
               <span className="bg-primary/10 text-primary px-3 py-1 font-bold text-[11px] rounded uppercase tracking-wider">{selectedProduct.category}</span>
-              <span>Đơn giá thiết kế: <span className="font-mono text-sm font-bold text-primary">{selectedProduct.price}</span></span>
+              <span>Design price: <span className="font-mono text-sm font-bold text-primary">{selectedProduct.price}</span></span>
             </div>
             <div className="space-y-3 leading-relaxed text-gray-600">
-              <p className="font-semibold text-gray-800">Mô tả sản phẩm:</p>
+              <p className="font-semibold text-gray-800">Product details:</p>
               <p>{selectedProduct.detailedDescription}</p>
-              <p>Quý khách vui lòng đặt hàng trước tối thiểu 7 ngày để được lựa chọn kích thước cổng rạp rộng rãi và phối màu ruy băng hoa vải hoàn mỹ nhất.</p>
+              <p>Please place orders at least 7 days in advance so we can prepare the ideal size, palette, and decorative finish.</p>
             </div>
             <div className="pt-4 flex justify-end gap-3">
               <button
@@ -406,7 +404,7 @@ export default function App() {
                 className="px-4 py-1.5 border border-gray-200 rounded text-xs uppercase font-bold hover:bg-gray-50 cursor-pointer"
                 id="product-modal-close"
               >
-                Đóng
+                Close
               </button>
               <button
                 onClick={() => {
@@ -414,14 +412,14 @@ export default function App() {
                   setPreselectedServiceId('other');
                   const noteArea = document.getElementById('field-notes') as HTMLTextAreaElement | null;
                   if (noteArea) {
-                    noteArea.value = `Tôi muốn được tư vấn cụ thể và thuê bộ sản phẩm: ${selectedProduct.name} (${selectedProduct.price})`;
+                    noteArea.value = `I would like a detailed consultation and rental quote for: ${selectedProduct.name} (${selectedProduct.price})`;
                   }
                   document.getElementById('inquiry-form-container')?.scrollIntoView({ behavior: 'smooth' });
                 }}
                 className="px-4 py-1.5 bg-primary text-white text-xs uppercase font-bold hover:bg-opacity-90 transition rounded cursor-pointer"
                 id="product-modal-checkout"
               >
-                Thêm vào yêu cầu tư vấn
+                Add to inquiry
               </button>
             </div>
           </div>
@@ -442,10 +440,10 @@ export default function App() {
               src={selectedPost.image}
             />
             <div className="flex items-center justify-between text-xs text-gray-400 border-b border-gray-100 pb-2">
-              <span className="font-semibold text-primary">Cẩm nang chuẩn bị ngày cưới quý báu</span>
+              <span className="font-semibold text-primary">Wedding planning guide</span>
               <span className="flex items-center gap-1.5">
                 <CalendarCheck className="w-3.5 h-3.5 text-gray-400" />
-                Đăng tải: Tháng 6, 2026
+                Published: June 2026
               </span>
             </div>
             <div className="space-y-4 text-gray-700 leading-relaxed text-sm md:text-base whitespace-pre-line bg-gray-50 p-4 rounded border border-gray-100">
@@ -457,7 +455,7 @@ export default function App() {
                 className="px-5 py-2 bg-primary text-white text-xs uppercase font-bold hover:bg-opacity-90 transition rounded cursor-pointer"
                 id="blog-modal-close"
               >
-                Hoàn tất đọc
+                Done reading
               </button>
             </div>
           </div>
@@ -468,24 +466,24 @@ export default function App() {
       <Modal
         isOpen={activeQuickSupport !== null}
         onClose={() => setActiveQuickSupport(null)}
-        title={activeQuickSupport === 'phone' ? 'Liên hệ Hotline hỗ trợ cấp tốc' : 'Kênh liên kết thư điện tử'}
+        title={activeQuickSupport === 'phone' ? 'Call our support hotline' : 'Email support channel'}
       >
         {activeQuickSupport === 'phone' ? (
           <div className="text-center py-6 space-y-4" id="support-modal-phone">
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
               <PhoneCall className="w-8 h-8" />
             </div>
-            <h4 className="font-elegant text-2xl font-bold text-primary">090.8.765432</h4>
+            <h4 className="font-elegant text-2xl font-bold text-primary">+91 95668 94134</h4>
             <div className="space-y-2 text-sm text-gray-500 max-w-sm mx-auto leading-relaxed">
-              <p>Quý khách vui lòng gọi trực tiếp hotline ở trên để được hỗ trợ báo giá và tư vấn concept nhanh trong vòng 10 phút.</p>
-              <p className="text-xs text-gray-400">Bạn cũng có thể kết nối Zalo qua số hotline này để trao đổi ảnh tư trang trực tuyến dễ dàng.</p>
+              <p>Please call the hotline above for quick pricing support and concept guidance within 10 minutes.</p>
+              <p className="text-xs text-gray-400">You can also reach us through the same number for fast photo and planning coordination.</p>
             </div>
             <div className="pt-4 flex justify-center">
               <a
-                href="tel:0908765432"
+                href="tel:+919566894134"
                 className="px-6 py-2 bg-primary hover:bg-opacity-95 text-white font-bold uppercase text-xs tracking-wider"
               >
-                Gọi Ngay Gọi Điện thoại
+                Call now
               </a>
             </div>
           </div>
@@ -494,17 +492,17 @@ export default function App() {
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
               <MailOpen className="w-8 h-8" />
             </div>
-            <h4 className="font-mono text-lg font-bold text-primary">sales@tieccuoinhuy.com</h4>
+            <h4 className="font-mono text-lg font-bold text-primary">emediaerode@gmail.com</h4>
             <div className="space-y-2 text-sm text-gray-500 max-w-sm mx-auto leading-relaxed">
-              <p>Mọi thắc mắc về hợp đồng, báo giá số lượng lớn hoặc gửi bản vẽ 3D thiết kế xin vui lòng chuyển thư điện tử đến địa chỉ phòng kinh doanh trên.</p>
-              <p className="text-xs text-gray-400">Hộp thư được quản trị viên xử lý và phản hồi kèm tệp đính kèm trong tối đa 12 giờ làm việc.</p>
+              <p>For contract questions, bulk pricing, or 3D design files, please email the sales address above.</p>
+              <p className="text-xs text-gray-400">Messages are reviewed and replied to with attachments within 12 business hours.</p>
             </div>
             <div className="pt-4 flex justify-center">
               <a
-                href="mailto:sales@tieccuoinhuy.com"
+                href="mailto:emediaerode@gmail.com"
                 className="px-6 py-2 bg-primary hover:bg-opacity-95 text-white font-bold uppercase text-xs tracking-wider"
               >
-                Gửi mail trực tiếp
+                Send email
               </a>
             </div>
           </div>
