@@ -13,6 +13,11 @@ export const EVENT_IMAGES = {
   tableDecor: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1200&q=80',
   lightingDecor: 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=1200&q=80',
   planningDecor: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
+  preWeddingShoot: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=1200&q=80',
+  shopOpening: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80',
+  balloonDecor: 'https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=1200&q=80',
+  familyGather: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80',
+  flexBanner: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=1200&q=80',
 };
 
 export const CUSTOMERS_DATA: Customer[] = [
@@ -137,41 +142,185 @@ export const BLOG_POSTS: BlogPost[] = [
     id: 'b1',
     title: 'How to get a beautiful wedding album on a smart budget',
     summary: 'A practical guide for estimating costs, choosing the right photo package, and avoiding unnecessary extras.',
-    content: `Creating a beautiful wedding album without breaking the budget is always a challenge for couples. Như Ý recommends focusing on three key points:
+    content: `Creating a beautiful wedding album without breaking the budget is always a challenge for couples. EMedia recommends focusing on three key points:
 
 1. CHOOSE THE RIGHT PACKAGE: Do not get distracted by packages with too many impractical gifts. Focus on edited photo quality and the album size you really want to display at home.
 
 2. PREPARE THE LOOK AND CONCEPT IN ADVANCE: Discuss your story with the creative team so the concept fits your personalities. Self-prepared outfits can often feel more natural than heavily styled rentals.
 
 3. BOOKING TIMING: Reserve at least 2-3 months in advance to secure early offers and avoid peak wedding-season overload that can affect quality.`,
-    image: EVENT_IMAGES.planningDecor
+    image: EVENT_IMAGES.planningDecor,
+    category: 'Wedding',
+    subcategory: 'Photography',
   },
   {
     id: 'b2',
     title: 'How to simplify wedding planning and save money',
     summary: 'Tips for streamlining your to-do list and focusing the budget on what matters most.',
-    content: 'Simplifying a wedding does not mean doing less carelessly. It means cutting unnecessary steps and investing in the essentials such as food, ceremony decor, and guest hospitality. Như Ý helps handle the planning burden so your family can enjoy the day comfortably.',
-    image: EVENT_IMAGES.weddingDecor
+    content: 'Simplifying a wedding does not mean doing less carelessly. It means cutting unnecessary steps and investing in the essentials such as food, ceremony decor, and guest hospitality. EMedia helps handle the planning burden so your family can enjoy the day comfortably.',
+    image: EVENT_IMAGES.weddingDecor,
+    category: 'Wedding',
+    subcategory: 'Decorations',
   },
   {
     id: 'b3',
     title: 'How rural and city weddings differ in preparation',
     summary: 'A closer look at guest count, tent setup, and traditional service flow compared with urban banquet halls.',
-    content: 'Weddings in rural areas usually involve larger family networks and bigger guest counts, requiring broad tented spaces and traditional food service. City weddings, by contrast, often focus on polished, compact experiences in professional banquet halls. Như Ý offers flexible decor packages that work beautifully across both cultures.',
-    image: EVENT_IMAGES.banquetDecor
+    content: 'Weddings in rural areas usually involve larger family networks and bigger guest counts, requiring broad tented spaces and traditional food service. City weddings, by contrast, often focus on polished, compact experiences in professional banquet halls. EMedia offers flexible decor packages that work beautifully across both cultures.',
+    image: EVENT_IMAGES.banquetDecor,
+    category: 'Wedding',
+    subcategory: 'Decorations',
   },
   {
     id: 'b4',
     title: '3 tips for building a smart wedding guest list',
     summary: 'A practical method for balancing table counts and preparing for no-shows.',
     content: 'Guests are the people who bring warmth to your wedding day. Golden rules for building the list: \n1. Prioritize close family and friends you have stayed in touch with over the past year.\n2. Reserve seating clearly for both parents and for the two of you.\n3. Always plan for about 10% of guests not attending so table arrangements stay balanced.',
-    image: EVENT_IMAGES.birthdayDecor
+    image: EVENT_IMAGES.birthdayDecor,
+    category: 'Wedding',
   },
   {
     id: 'b5',
     title: 'Useful tips when booking a wedding venue',
     summary: 'Key things to check during a venue tour, including hidden fees and add-on perks.',
     content: 'When touring and choosing a wedding venue, couples should review the contract carefully for service fees, drink policies, outside decor access, and extras such as smoke effects, glass towers, or an MC.',
-    image: EVENT_IMAGES.lightingDecor
-  }
+    image: EVENT_IMAGES.lightingDecor,
+    category: 'Wedding',
+  },
+  {
+    id: 'b6',
+    title: 'Pre-wedding shoot: how to make every frame count',
+    summary: 'Locations, outfits, and timing tips for a memorable pre-wedding photography session.',
+    content: `A pre-wedding shoot is your chance to capture the chemistry and story before the big day. Here's how to make it unforgettable:
+
+1. PICK THE RIGHT LOCATION: Choose a spot that means something to both of you — the place you first met, a scenic garden, or a rustic heritage site. Natural light before sunset gives the warmest tones.
+
+2. WARDROBE PLANNING: Carry two outfit changes — one traditional and one casual. Coordinate colors with each other and the backdrop without matching too exactly.
+
+3. RELAX AND HAVE FUN: The best pre-wedding shots come from genuine smiles. Talk, laugh, and let the photographer capture candid moments between the posed ones.
+
+EMedia works closely with trusted photographers to plan pre-wedding sessions that complement your decoration theme perfectly.`,
+    image: EVENT_IMAGES.preWeddingShoot,
+    category: 'Wedding',
+    subcategory: 'Pre Wedding Shoot',
+  },
+  {
+    id: 'b7',
+    title: 'Grand shop opening decoration: make a lasting first impression',
+    summary: 'How to create a festive, brand-aligned decoration setup for your shop or showroom launch.',
+    content: `A shop opening is a once-in-a-business milestone. The decoration sets the tone for your brand identity from day one.
+
+Key elements EMedia covers for shop openings:
+• Entrance arch with balloons, flowers, or branded flex banners
+• Red ribbon ceremony setup with a professional backdrop
+• Interior ambiance lighting and product highlight displays
+• Welcome signage and branded photo zones for social media coverage
+
+A well-decorated shop opening draws attention from passersby, creates shareable moments, and gives your new venture the visibility it deserves. Contact EMedia for a customized package.`,
+    image: EVENT_IMAGES.shopOpening,
+    category: 'Promotions',
+    subcategory: 'Shop Opening',
+  },
+  {
+    id: 'b8',
+    title: 'Birthday balloon decoration ideas that wow every age',
+    summary: 'Creative balloon arrangements for kids, teens, and adult birthdays that transform any space.',
+    content: `Balloons are the heartbeat of a birthday celebration. From simple clusters to elaborate sculpted arches, the right balloon setup turns any venue into a party.
+
+EMedia's birthday balloon packages include:
+• Balloon bouquets and centerpieces matching the party theme
+• Balloon arches and entrance frames for dramatic first impressions
+• Ceiling clusters with fairy lights for an ambient nighttime look
+• Custom balloon columns with personalized number balloons for milestones
+
+Whether it is a first birthday or a 50th, EMedia designs setups that feel personal, vibrant, and camera-ready.`,
+    image: EVENT_IMAGES.birthdayDecor,
+    category: 'Balloon Decorations',
+    subcategory: 'Birthday',
+  },
+  {
+    id: 'b9',
+    title: 'Balloon decoration for shop opening ceremonies',
+    summary: 'Balloon arches, entrance clusters, and brand-themed setups that attract crowds on your opening day.',
+    content: `Balloons at a shop opening do more than decorate — they signal excitement and draw foot traffic. A colorful balloon arch at the entrance immediately communicates celebration.
+
+EMedia specializes in:
+• Grand entrance arches in brand colors
+• Ribbon-cutting ceremony balloon backdrops
+• Floating balloon clusters for interior and storefront
+• Outdoor balloon columns that stay sturdy through the event
+
+We coordinate timing so balloons are fresh and full of air when your guests arrive, and we handle clean-up so you can focus entirely on your launch.`,
+    image: EVENT_IMAGES.balloonDecor,
+    category: 'Balloon Decorations',
+    subcategory: 'Shop Opening Ceremony',
+  },
+  {
+    id: 'b10',
+    title: 'Balloon decorations for every other occasion',
+    summary: 'Anniversaries, baby showers, engagements, and more — balloons work for any celebration.',
+    content: `Beyond birthdays and shop openings, balloons add warmth and festivity to almost any event. EMedia creates custom balloon setups for:
+
+• Baby showers with pastel organic balloon garlands
+• Engagement parties with heart and ring-shaped balloon clusters
+• Anniversary celebrations with gold and white themed arches
+• Farewell parties with personalized balloon backdrops
+• School and college events with vibrant multi-color arrangements
+
+Every occasion is unique, and EMedia tailors the design, color palette, and size of the setup to match the mood of your event perfectly.`,
+    image: EVENT_IMAGES.ceremonyDecor,
+    category: 'Balloon Decorations',
+    subcategory: 'Others',
+  },
+  {
+    id: 'b11',
+    title: 'Corporate event decoration that impresses clients and employees',
+    summary: 'Professional, brand-aligned decor for product launches, award nights, and company celebrations.',
+    content: `Corporate events demand a balance of professionalism and celebration. The decoration should reinforce your brand identity while creating an engaging atmosphere.
+
+EMedia's corporate event services include:
+• Stage and podium backdrops with company branding
+• Table centerpieces in corporate color palettes
+• Award ceremony and gala dinner styling
+• Product launch display setups with lighting accents
+• Conference and seminar entrance decoration
+
+Every detail is planned to reflect your company's values and leave a strong impression on attendees. EMedia handles the full setup and breakdown so your team stays focused on the event itself.`,
+    image: EVENT_IMAGES.corporateDecor,
+    category: 'Corporate Events',
+  },
+  {
+    id: 'b12',
+    title: 'Family get-together decoration: creating warmth and togetherness',
+    summary: 'Cozy, welcoming decoration ideas for reunions, festivals, and family milestone celebrations.',
+    content: `Family gatherings deserve a setting that feels warm, inclusive, and full of life. Whether it is a holiday reunion or a milestone anniversary, the right decoration makes the atmosphere feel special.
+
+EMedia creates family event setups that include:
+• Welcome entrance arches with floral or balloon styling
+• Warm string light canopies for outdoor evening gatherings
+• Themed table arrangements for festival and cultural events
+• Personalized photo display walls to celebrate memories
+• Kids' corner decoration for multi-generational events
+
+The goal is to create a space where every generation feels comfortable, celebrated, and present in the moment.`,
+    image: EVENT_IMAGES.familyGather,
+    category: 'Family Get-together',
+  },
+  {
+    id: 'b13',
+    title: 'Flex banner design tips for maximum visibility and impact',
+    summary: 'How to design, print, and install flex banners that stand out for your event or business.',
+    content: `A well-designed flex banner is one of the most cost-effective ways to promote an event, shop, or brand. But poorly designed banners get ignored.
+
+EMedia's tips for high-impact flex banners:
+1. KEEP TEXT MINIMAL: Use no more than 3-5 lines. Your audience reads while walking — keep it scannable.
+2. HIGH CONTRAST COLORS: Dark text on light backgrounds (or vice versa) is always more readable from a distance.
+3. INCLUDE A CLEAR CALL TO ACTION: Phone number, website, or QR code should always be visible.
+4. CHOOSE THE RIGHT SIZE: Entrance banners need to be at least 4×6 feet to be seen from the road.
+5. QUALITY PRINTING MATTERS: EMedia uses UV-resistant inks and heavy-duty PVC material for banners that stay vibrant through rain and sun.
+
+Contact EMedia for full-service flex banner design, printing, and installation.`,
+    image: EVENT_IMAGES.flexBanner,
+    category: 'Flex Banner',
+  },
 ];

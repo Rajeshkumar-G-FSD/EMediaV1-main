@@ -93,6 +93,28 @@
   transform: scale(1.06);
 }
 
+/* ─── DataZync branded link hover shimmer ─── */
+
+@keyframes datazync-wave {
+  to { background-position: 200% center; }
+}
+
+.datazync-link {
+  font-weight: 700;
+  color: #175E5E;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.datazync-link:hover {
+  background: linear-gradient(90deg, #175e5e 0%, #0d9488 35%, #2dd4bf 65%, #175e5e 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: datazync-wave 1.5s linear infinite;
+}
+
 /* ─── Reduced-motion override ─── */
 
 @media (prefers-reduced-motion: reduce) {

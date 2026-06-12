@@ -16,7 +16,7 @@ import TextRevealObserver from './components/TextRevealObserver.tsx';
 import PageLoader from './components/PageLoader.tsx';
 import GoogleReviews from './components/GoogleReviews.tsx';
 import { Customer, Service, Product, BlogPost, ConsultationRequest } from './types.ts';
-import { Info, HelpCircle, PhoneCall, MailOpen, Compass, CalendarCheck } from 'lucide-react';
+import { PhoneCall, MailOpen, Compass, CalendarCheck } from 'lucide-react';
 
 export default function App() {
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
@@ -193,22 +193,22 @@ export default function App() {
       </div>
 
       {/* 5. Elegant Single-Screen Grid Layout Content */}
-      <main className="container mx-auto px-4 max-w-6xl py-12 space-y-20 md:space-y-24 flex-grow">
-        
+      <main className="container mx-auto px-4 max-w-6xl py-8 flex-grow flex flex-col gap-0">
+
         {/* Google Reviews strip */}
         <GoogleReviews />
 
-        <div className="h-px bg-primary/10 w-full" />
+        <div className="h-px bg-primary/10 w-full my-2" />
 
         {/* Section 1: Welcome Intro */}
-        <div ref={introductionRef} className="scroll-mt-24" id="section-introduction">
+        <div ref={introductionRef} className="scroll-mt-20" id="section-introduction">
           <Welcome onLearnMoreClick={() => handleNavClick('appointments')} />
         </div>
 
-        <div className="h-px bg-primary/10 w-full" />
+        <div className="h-px bg-primary/10 w-full my-2" />
 
         {/* Section 2: Professional Services Column */}
-        <div ref={servicesRef} className="scroll-mt-24" id="section-services">
+        <div ref={servicesRef} className="scroll-mt-20" id="section-services">
           <ServiceGrid
             onServiceSelect={setSelectedService}
             onBookNow={(sId) => {
@@ -218,10 +218,10 @@ export default function App() {
           />
         </div>
 
-        <div className="h-px bg-primary/10 w-full" />
+        <div className="h-px bg-primary/10 w-full my-2" />
 
         {/* Section 3: Highly Categorized Custom Products Catalog */}
-        <div ref={productsRef} className="scroll-mt-24" id="section-products">
+        <div ref={productsRef} className="scroll-mt-20" id="section-products">
           <ProductSlider
             onProductSelect={setSelectedProduct}
             onBookProduct={(pName) => {
@@ -235,33 +235,33 @@ export default function App() {
           />
         </div>
 
-        <div className="h-px bg-primary/10 w-full" />
+        <div className="h-px bg-primary/10 w-full my-2" />
 
-        {/* Section 5: Real-time Budget Calculator Tool */}
-        <div ref={calculatorRef} className="scroll-mt-24" id="section-calculator">
-          <div className="text-center mb-8 relative">
+        {/* Section 4: Real-time Budget Calculator Tool */}
+        <div ref={calculatorRef} className="scroll-mt-20" id="section-calculator" data-no-text-reveal>
+          <div className="text-center mb-6 relative">
             <h2 className="text-3xl uppercase bg-white inline-block px-6 relative z-10 font-elegant text-primary">
               Quick Quote Tool
             </h2>
             <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -z-0" />
           </div>
-          <p className="text-center text-sm text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-center text-sm text-gray-500 mb-8 max-w-2xl mx-auto leading-relaxed">
             Build your event concept, choose venue styling and ceremonial items, and preview an instant live cost estimate.
           </p>
           <BudgetEstimator onQuoteSubmit={handleQuoteSubmit} />
         </div>
 
-        <div className="h-px bg-primary/10 w-full" />
+        <div className="h-px bg-primary/10 w-full my-2" />
 
-        {/* Section 4: Guides & Blog Tips List */}
-        <div ref={blogRef} className="scroll-mt-24" id="section-blog">
+        {/* Section 5: Guides & Blog Tips List */}
+        <div ref={blogRef} className="scroll-mt-20" id="section-blog">
           <BlogSection onBlogPostSelect={setSelectedPost} />
         </div>
 
-        <div className="h-px bg-primary/10 w-full" />
+        <div className="h-px bg-primary/10 w-full my-2" />
 
-        {/* Section 5: Consultation Booking & Persistent Appointment Tracking CRM */}
-        <div ref={appointmentsRef} className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-8" id="section-appointments">
+        {/* Section 6: Consultation Booking & Persistent Appointment Tracking CRM */}
+        <div ref={appointmentsRef} className="scroll-mt-20 grid grid-cols-1 lg:grid-cols-12 gap-8 pb-8" id="section-appointments" data-no-text-reveal>
           {/* Inquiry form - col span 5 */}
           <div className="lg:col-span-5">
             <InquiryForm

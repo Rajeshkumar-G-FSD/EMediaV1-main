@@ -39,7 +39,7 @@ export default function ProductSlider({ onProductSelect, onBookProduct }: Produc
   }
 
   return (
-    <section className="py-8" id="products-section">
+    <section className="py-8" id="products-section" data-no-text-reveal>
       <div className="flex flex-col md:flex-row gap-8">
         {/* Right Sidebar Info (in HTML it is text-right & flex-row-reverse, we will implement this exact visual direction) */}
         <div className="w-full md:w-1/4 md:order-2 text-left md:text-right flex flex-col justify-between">

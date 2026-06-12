@@ -11,7 +11,7 @@ interface BookingListProps {
 
 export default function BookingList({ inquiries, onDeleteInquiry, onClearAll }: BookingListProps) {
   return (
-    <div className="bg-white rounded-lg border border-primary/20 overflow-hidden shadow-md" id="booking-list-panel">
+    <div className="bg-white rounded-lg border border-primary/20 overflow-hidden shadow-md" id="booking-list-panel" data-no-text-reveal>
       {/* Panel Banner */}
       <div className="bg-primary/5 border-b border-primary/10 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>

@@ -32,6 +32,8 @@ export interface BlogPost {
   summary: string;
   content: string;
   image: string;
+  category: string;
+  subcategory?: string;
 }
 
 export interface ConsultationRequest {

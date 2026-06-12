@@ -78,7 +78,7 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-primary/20 overflow-hidden shadow-lg" id="estimator-panel">
+    <div className="bg-white rounded-lg border border-primary/20 overflow-hidden shadow-lg" id="estimator-panel" data-no-text-reveal>
       <div className="bg-primary p-4 text-white flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Calculator className="w-5 h-5" />

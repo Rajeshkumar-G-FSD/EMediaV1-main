@@ -175,7 +175,12 @@ export default function Footer({ onNavClick }: FooterProps) {
         >
           <span>EMedia Event Decoration Services © 2020–{new Date().getFullYear()}</span>
           <span className="hidden sm:inline text-primary/30">|</span>
-          <span>Designed by Zenners. Powered by CircleWeb</span>
+          <span>
+            Designed &amp; Powered by{' '}
+            <a href="https://www.datazync.com" target="_blank" rel="noreferrer" className="datazync-link">
+              DataZync
+            </a>
+          </span>
         </motion.div>
 
       </div>

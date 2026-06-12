@@ -89,7 +89,7 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg border border-primary/10 shadow-sm" id="inquiry-form-container">
+    <div className="bg-white p-6 rounded-lg border border-primary/10 shadow-sm" id="inquiry-form-container" data-no-text-reveal>
       {isSubmitted ? (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
