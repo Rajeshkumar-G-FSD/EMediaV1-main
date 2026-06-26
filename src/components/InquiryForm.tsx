@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Calendar, Phone, Mail, User, Info, CheckCircle, Send } from 'lucide-react';
+import { Calendar, Phone, Mail, User, CheckCircle, Send } from 'lucide-react';
 import { ConsultationRequest } from '../types.ts';
 
 interface InquiryFormProps {
@@ -115,8 +115,8 @@ export default function InquiryForm({ preselectedService = '', onSuccess }: Inqu
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="text-center mb-4">
-            <h3 className="font-elegant text-2xl text-primary font-bold">Book a free consultation</h3>
-            <p className="text-xs text-gray-500">We will prepare a detailed quote aligned with your budget and event vision</p>
+            <h3 className="font-elegant text-2xl text-primary font-bold">Book a Free Event Consultation in Erode</h3>
+            <p className="text-xs text-gray-500">EMediaEvent will prepare a detailed decoration quote aligned with your budget and event vision</p>
           </div>
 
           {errorMsg && (

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Phone, Mail, MessageSquare, ArrowUp, HelpCircle } from 'lucide-react';
+import React from 'react';
+import { Phone, Mail, MessageSquare, ArrowUp } from 'lucide-react';
 
 interface SidebarProps {
   onQuickActionClick: (actionId: string) => void;
@@ -21,7 +21,7 @@ export default function SocialSidebar({ onQuickActionClick }: SidebarProps) {
   };
 
   return (
-    <div className="fixed right-0 top-1/3 z-100 flex flex-col bg-primary text-white shadow-lg rounded-l-md overflow-hidden" id="floating-sidebar">
+    <div className="hidden sm:flex fixed right-0 top-1/3 z-40 flex-col bg-primary text-white shadow-lg rounded-l-md overflow-hidden" id="floating-sidebar">
       {/* Facebook Link */}
       <a
         href="#"

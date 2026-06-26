@@ -16,7 +16,7 @@ export default function ServiceGrid({ onServiceSelect, onBookNow }: ServiceGridP
       <ScrollReveal direction="up" duration={0.7}>
         <div className="text-center mb-8 relative">
           <BlurText
-            text="Signature Services"
+            text="Event Decoration Services in Erode"
             tag="h2"
             className="text-3xl uppercase bg-white inline-block px-6 relative z-10 font-elegant text-primary"
             delay={120}
@@ -25,8 +25,7 @@ export default function ServiceGrid({ onServiceSelect, onBookNow }: ServiceGridP
           <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -z-0" />
         </div>
         <p className="text-center text-sm md:text-base text-gray-500 mb-12 max-w-2xl mx-auto leading-relaxed">
-          With a dedicated team of stylists, decorators, and technicians, EMedia delivers polished
-          solutions tailored to every venue and event style.
+          EMediaEvent's dedicated team of stylists, decorators, and technicians in Erode delivers polished wedding decor, birthday setups, and ceremony styling tailored to every venue.
         </p>
       </ScrollReveal>
 

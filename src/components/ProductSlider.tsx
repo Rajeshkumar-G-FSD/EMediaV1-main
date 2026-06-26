@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { PRODUCTS_DATA } from '../data.ts';
 import { Product } from '../types.ts';
 import { ChevronLeft, ChevronRight, Tag } from 'lucide-react';
@@ -40,18 +40,18 @@ export default function ProductSlider({ onProductSelect, onBookProduct }: Produc
 
   return (
     <section className="py-8" id="products-section" data-no-text-reveal>
-      <div className="flex flex-col md:flex-row gap-8">
-        {/* Right Sidebar Info (in HTML it is text-right & flex-row-reverse, we will implement this exact visual direction) */}
+      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+        {/* Right Sidebar Info */}
         <div className="w-full md:w-1/4 md:order-2 text-left md:text-right flex flex-col justify-between">
           <div>
-            <span className="text-xs uppercase font-bold text-primary tracking-widest block mb-1">Creative options</span>
+            <span className="text-xs uppercase font-bold text-primary tracking-widest block mb-1">Erode Decoration Items</span>
             <h2 className="text-3xl md:text-3xl uppercase mb-6 font-elegant text-primary" id="products-title">
-              Event
+              Decor
               <br />
-              details
+              Catalogue
             </h2>
             <p className="text-sm text-gray-500 mb-6 leading-relaxed">
-              Our studio offers a curated collection of decor details, ceremonial pieces, and stage accents for weddings and all special events.
+              Our Erode studio offers a curated collection of floral arches, canopies, ceremonial trays, and stage accents for weddings and all special events.
             </p>
 
             {/* Category Filter Pills */}
@@ -107,7 +107,7 @@ export default function ProductSlider({ onProductSelect, onBookProduct }: Produc
 
         {/* Product Cards Center Grid */}
         <div className="w-full md:w-3/4 md:order-1">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
             <AnimatePresence mode="popLayout">
               {displayedProducts.map((prod, i) => (
                 <motion.div

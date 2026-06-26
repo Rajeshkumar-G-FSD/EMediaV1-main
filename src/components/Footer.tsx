@@ -86,7 +86,7 @@ export default function Footer({ onNavClick }: FooterProps) {
             <ScrollReveal direction="up" delay={0.2} className="flex flex-col items-center text-center space-y-4">
               <div>
                 <p className="font-bold text-xl md:text-2xl text-primary uppercase font-elegant tracking-wide leading-tight">
-                  EMedia Event Decoration Services
+                  EMediaEvent – Erode Media Event &amp; Decorations
                 </p>
                 <p className="mt-1 text-[10px] uppercase tracking-[0.28em] text-gray-400 font-bold">Address</p>
               </div>
