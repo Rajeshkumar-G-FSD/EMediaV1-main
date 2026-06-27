@@ -1,25 +1,31 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
+import SplitText from './SplitText';
 
 interface HeroProps {
   onActionClick: () => void;
 }
 
+const slides = [
+  { src: '/images/Emediaevnt_cooking_decoration.png', label: 'Cooking Ceremony Decor' },
+  { src: '/images/Emediaevnt_stag_decoration.png',    label: 'Stag Party Decoration'  },
+  { src: '/images/Emediaevnt_stage_ring_decoration.png',      label: 'Ring Ceremony Stage'    },
+  { src: '/images/Emediaevnt_stage_wedding_decoration.png',   label: 'Wedding Stage Decor'    },
+  { src: '/images/Emediaevnt_stage_wedding_decorations.png',  label: 'Wedding Stage Setup'    },
+  { src: '/images/Emediaevnt_wedding_decoration.png', label: 'Wedding Decoration'     },
+];
+
 export default function Hero({ onActionClick }: HeroProps) {
-  const heroImages = [
-    'https://i.postimg.cc/6qcWczF1/decoraation2.avif',
-    'https://i.postimg.cc/J0xrxKSY/decoration.webp',
-  ];
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      setActiveImageIndex((current) => (current + 1) % heroImages.length);
+      setActiveImageIndex((current) => (current + 1) % slides.length);
     }, 3000);
 
     return () => window.clearInterval(timer);
-  }, [heroImages.length]);
+  }, []);
 
   return (
     <section
@@ -30,10 +36,10 @@ export default function Hero({ onActionClick }: HeroProps) {
       {/* Animated background image rotation */}
       <AnimatePresence mode="wait">
         <motion.img
-          key={heroImages[activeImageIndex]}
+          key={slides[activeImageIndex].src}
           alt="EMediaEvent event decoration setup in Erode - wedding and birthday decor"
           className="absolute inset-0 w-full h-full object-cover"
-          src={heroImages[activeImageIndex]}
+          src={slides[activeImageIndex].src}
           id="hero-background"
           initial={{ opacity: 0, scale: 1.04 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -48,6 +54,23 @@ export default function Hero({ onActionClick }: HeroProps) {
       {/* Content Container */}
       <div className="relative container mx-auto px-4 sm:px-6 max-w-6xl h-full flex items-center">
         <div className="w-full sm:w-4/5 md:w-1/2 text-white">
+          {/* Decoration label — re-mounts on each slide to re-trigger animation */}
+          <div key={activeImageIndex} className="mb-3">
+            <SplitText
+              text={slides[activeImageIndex].label}
+              tag="span"
+              className="text-xs sm:text-sm uppercase tracking-[0.25em] text-secondary font-semibold border border-secondary/60 px-3 py-1"
+              splitType="chars"
+              delay={35}
+              duration={0.5}
+              from={{ opacity: 0, y: 18 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0}
+              rootMargin="0px"
+              textAlign="left"
+            />
+          </div>
+
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
