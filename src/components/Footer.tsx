@@ -1,11 +1,36 @@
 import { useState } from 'react';
-import { Phone, Mail, Globe, MapPin, Copy, Navigation, Clock, Facebook, Youtube } from 'lucide-react';
+import { Phone, Mail, MapPin, Copy, Navigation, Facebook, Youtube, Instagram, ArrowRight, Heart } from 'lucide-react';
 import { motion } from 'motion/react';
-import ScrollReveal from './ScrollReveal.tsx';
 
 interface FooterProps {
   onNavClick: (sectionId: string) => void;
 }
+
+const QUICK_LINKS = [
+  { id: 'introduction', label: 'Wedding Decor' },
+  { id: 'services',     label: 'Event Styling' },
+  { id: 'products',     label: 'Decor Items' },
+  { id: 'customers',   label: 'Gallery' },
+  { id: 'blog',        label: 'Planning Tips' },
+  { id: 'calculator',  label: 'Get a Quote' },
+  { id: 'appointments',label: 'Book Event' },
+];
+
+const SERVICES = [
+  'Birthday Decoration',
+  'Wedding Decoration',
+  'Office Decoration',
+  'Ceremony Setup',
+  'Stage Decoration',
+  'Balloon Decoration',
+];
+
+const SOCIAL = [
+  { icon: Facebook,  label: 'Facebook',  href: '#' },
+  { icon: Instagram, label: 'Instagram', href: '#' },
+  { icon: Youtube,   label: 'YouTube',   href: '#' },
+  { icon: Phone,     label: 'Call Us',   href: 'tel:+919566894134' },
+];
 
 export default function Footer({ onNavClick }: FooterProps) {
   const address = 'No. 183, Near Parimalam Mahal, 5th Street, 3rd Cross Sakthi Nager, Thindal, Erode-638012, Tamil Nadu';
@@ -19,168 +44,213 @@ export default function Footer({ onNavClick }: FooterProps) {
   };
 
   return (
-    <footer className="bg-[#EAF1F1] pt-20 pb-8 relative overflow-hidden" id="site-footer" data-no-text-reveal>
+    <footer id="site-footer" data-no-text-reveal className="relative bg-[#0b2e2e]">
 
-      {/* Curved Top Border */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
+      {/* Wave transition: white section above curves into the dark footer */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
         <svg
-          className="relative block w-[calc(100%+1.3px)] h-[40px]"
+          className="relative block w-[calc(100%+1px)] h-[64px]"
           preserveAspectRatio="none"
-          viewBox="0 0 1200 120"
+          viewBox="0 0 1200 64"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path className="fill-white" d="M1200 120L0 16.48V120h1200z" />
+          <path d="M0,0 C300,64 900,64 1200,0 L1200,0 L0,0 Z" fill="white" />
         </svg>
       </div>
 
-      <div className="container mx-auto px-4 max-w-6xl relative z-10 flex flex-col items-center">
+      <div className="container mx-auto px-6 max-w-6xl">
 
-        {/* Logo */}
-        <ScrollReveal direction="up" duration={0.6}>
-          <button
-            onClick={() => onNavClick('hero')}
-            className="w-20 h-20 rounded-full border-2 border-primary overflow-hidden flex items-center justify-center bg-[#EAF1F1] mb-8 hover:scale-105 transition cursor-pointer"
-            id="footer-logo-btn"
-            aria-label="Go to EMedia home"
+        {/* ── Main grid ─────────────────────────────────────── */}
+        <div className="pt-24 pb-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 border-b border-white/10">
+
+          {/* Brand column */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55 }}
+            className="sm:col-span-2 lg:col-span-1 flex flex-col"
           >
-            <img src="/images/emedia_round.png" alt="EMedia" className="h-full w-full object-cover" />
-          </button>
-        </ScrollReveal>
-
-        {/* Main info grid */}
-        <div className="w-full border-t border-b border-primary/20 py-10 mb-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-8 items-start">
-
-            {/* Column 1: Hotline */}
-            <ScrollReveal direction="right" delay={0.1} className="flex flex-col items-center text-center space-y-3">
-              <span className="text-[11px] uppercase tracking-[0.22em] text-gray-400 font-bold">
-                Consultation hotline
-              </span>
-              <a href="tel:+919566894134" className="group flex items-center gap-3 text-primary">
-                <span className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition flex-shrink-0">
-                  <Phone className="w-5 h-5" />
-                </span>
-                <span className="text-2xl md:text-3xl font-bold tracking-wide">+91 95668 94134</span>
-              </a>
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-primary border border-primary/10">
-                <Clock className="w-3.5 h-3.5" />
-                Open 24 Hrs, all days
+            <button
+              onClick={() => onNavClick('hero')}
+              className="flex items-center gap-3 mb-5 group cursor-pointer w-fit"
+              aria-label="Go to EMedia home"
+            >
+              <div className="w-12 h-12 rounded-full border-2 border-white/20 overflow-hidden flex-shrink-0 group-hover:border-white/50 transition-colors duration-300">
+                <img src="/images/emedia_round.png" alt="EMedia" className="h-full w-full object-cover" />
               </div>
-              <div className="flex flex-col items-center gap-1.5 pt-1 text-sm">
-                <a href="tel:+919566894134" className="flex items-center gap-1.5 text-gray-600 hover:text-primary font-semibold transition">
-                  <Phone className="w-3.5 h-3.5 text-primary" />
-                  +91 95668 94134
-                </a>
-                <a href="mailto:emediaerode@gmail.com" className="flex items-center gap-1.5 text-primary font-semibold font-mono hover:underline transition">
-                  <Mail className="w-3.5 h-3.5" />
-                  emediaerode@gmail.com
-                </a>
-                <p className="flex items-center gap-1.5 text-primary font-semibold font-mono">
-                  <Globe className="w-3.5 h-3.5" />
-                  www.emediaevents.com
-                </p>
+              <div className="text-left">
+                <p className="font-elegant text-lg font-bold text-white leading-tight">EMedia Events</p>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-white/35 mt-0.5">Erode · Est. 2020</p>
               </div>
-            </ScrollReveal>
+            </button>
 
-            {/* Column 2: Address */}
-            <ScrollReveal direction="up" delay={0.2} className="flex flex-col items-center text-center space-y-4">
-              <div>
-                <p className="font-bold text-xl md:text-2xl text-primary uppercase font-elegant tracking-wide leading-tight">
-                  EMediaEvent – Erode Media Event &amp; Decorations
-                </p>
-                <p className="mt-1 text-[10px] uppercase tracking-[0.28em] text-gray-400 font-bold">Address</p>
-              </div>
-              <p className="flex items-start justify-center gap-2 leading-relaxed text-sm text-gray-600 max-w-xs">
-                <MapPin className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                <span>{address}</span>
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-2">
-                <a
-                  href={directionsUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-primary text-white px-4 py-2 text-xs font-bold hover:bg-opacity-90 transition"
+            <p className="text-sm text-white/50 leading-relaxed mb-6 max-w-[230px]">
+              Premium event decoration services in Erode. Birthdays, weddings, corporate events — crafted with elegance.
+            </p>
+
+            <div className="flex gap-2.5 mt-auto">
+              {SOCIAL.map(({ icon: Icon, label, href }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  whileHover={{ y: -2 }}
+                  className="w-9 h-9 rounded-lg bg-white/8 border border-white/10 hover:bg-white/15 hover:border-white/20 flex items-center justify-center transition-all duration-200"
+                  aria-label={label}
                 >
-                  <Navigation className="w-3.5 h-3.5" />
-                  Get Directions
-                </a>
-                <button
-                  type="button"
-                  onClick={handleCopyAddress}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-white/80 border border-primary/15 px-4 py-2 text-xs text-primary hover:bg-white font-bold cursor-pointer transition"
-                >
-                  <Copy className="w-3.5 h-3.5" />
-                  {copied ? 'Copied!' : 'Copy address'}
-                </button>
-              </div>
-              <div className="flex flex-wrap items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-wider text-primary">
-                {['Mon–Sun: Open 24 Hrs', 'All Holidays: Open', 'Emergency: Available'].map(label => (
-                  <span key={label} className="rounded-full bg-white/70 px-3 py-1.5 border border-primary/10 whitespace-nowrap">
+                  <Icon className="w-4 h-4 text-white/55" />
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Navigate column */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.08 }}
+          >
+            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/30 mb-5">Navigate</p>
+            <ul className="space-y-2.5">
+              {QUICK_LINKS.map(({ id, label }) => (
+                <li key={id}>
+                  <button
+                    onClick={() => onNavClick(id)}
+                    className="group flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors duration-200 cursor-pointer"
+                  >
+                    <ArrowRight className="w-3 h-3 text-white/20 group-hover:text-white/50 group-hover:translate-x-0.5 transition-all duration-200 flex-shrink-0" />
                     {label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Services column */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.14 }}
+          >
+            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/30 mb-5">Services</p>
+            <ul className="space-y-2.5">
+              {SERVICES.map((service) => (
+                <li key={service}>
+                  <button
+                    onClick={() => onNavClick('services')}
+                    className="group flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors duration-200 cursor-pointer"
+                  >
+                    <ArrowRight className="w-3 h-3 text-white/20 group-hover:text-white/50 group-hover:translate-x-0.5 transition-all duration-200 flex-shrink-0" />
+                    {service}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Contact column */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.2 }}
+          >
+            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/30 mb-5">Get in Touch</p>
+            <ul className="space-y-4">
+
+              <li>
+                <a href="tel:+919566894134" className="group flex items-start gap-3">
+                  <span className="w-8 h-8 rounded-lg bg-white/8 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/15 transition-colors">
+                    <Phone className="w-3.5 h-3.5 text-white/50" />
                   </span>
-                ))}
-              </div>
-            </ScrollReveal>
+                  <div>
+                    <p className="text-[10px] text-white/25 uppercase tracking-wider font-bold mb-0.5">Hotline</p>
+                    <p className="text-sm text-white/70 group-hover:text-white transition-colors font-semibold">+91 95668 94134</p>
+                    <p className="text-[10px] text-white/30 mt-0.5">Open 24 hrs, all days</p>
+                  </div>
+                </a>
+              </li>
 
-            {/* Column 3: Social + tagline */}
-            <ScrollReveal direction="left" delay={0.1} className="flex flex-col items-center text-center space-y-4">
-              <span className="text-[11px] uppercase tracking-[0.22em] text-gray-400 font-bold">
-                Follow us
-              </span>
-              <div className="flex gap-3">
-                <motion.a
-                  whileHover={{ scale: 1.1 }}
-                  href="#"
-                  className="w-11 h-11 bg-primary hover:bg-opacity-90 text-white flex items-center justify-center rounded-lg transition shadow-sm"
-                  aria-label="Facebook Profile"
-                >
-                  <Facebook className="w-5 h-5" />
-                </motion.a>
-                <motion.a
-                  whileHover={{ scale: 1.1 }}
-                  href="tel:+919566894134"
-                  className="w-11 h-11 bg-primary hover:bg-opacity-90 text-white flex items-center justify-center rounded-lg transition shadow-sm"
-                  aria-label="Call Directly"
-                >
-                  <Phone className="w-5 h-5" />
-                </motion.a>
-                <motion.a
-                  whileHover={{ scale: 1.1 }}
-                  href="#"
-                  className="w-11 h-11 bg-primary hover:bg-opacity-90 text-white flex items-center justify-center rounded-lg transition shadow-sm"
-                  aria-label="YouTube Channel"
-                >
-                  <Youtube className="w-5 h-5" />
-                </motion.a>
-              </div>
-              <p className="text-xs text-gray-500 leading-relaxed max-w-[200px]">
-                Decoration concepts, quick quotes, and event setup support are available anytime.
-              </p>
-              <div className="mt-2 space-y-1 text-[11px] text-gray-400 text-center">
-                <p className="font-bold uppercase tracking-widest text-primary/60">Serving since 2020</p>
-                <p>Birthdays · Weddings · Offices · Ceremonies</p>
-              </div>
-            </ScrollReveal>
+              <li>
+                <a href="mailto:emediaerode@gmail.com" className="group flex items-start gap-3">
+                  <span className="w-8 h-8 rounded-lg bg-white/8 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/15 transition-colors">
+                    <Mail className="w-3.5 h-3.5 text-white/50" />
+                  </span>
+                  <div>
+                    <p className="text-[10px] text-white/25 uppercase tracking-wider font-bold mb-0.5">Email</p>
+                    <p className="text-sm text-white/70 group-hover:text-white transition-colors font-semibold break-all">emediaerode@gmail.com</p>
+                  </div>
+                </a>
+              </li>
 
-          </div>
+              <li>
+                <div className="flex items-start gap-3">
+                  <span className="w-8 h-8 rounded-lg bg-white/8 border border-white/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-3.5 h-3.5 text-white/50" />
+                  </span>
+                  <div>
+                    <p className="text-[10px] text-white/25 uppercase tracking-wider font-bold mb-0.5">Address</p>
+                    <p className="text-xs text-white/50 leading-relaxed">
+                      No. 183, 5th Street, 3rd Cross<br />
+                      Sakthi Nager, Thindal<br />
+                      Erode – 638012, Tamil Nadu
+                    </p>
+                    <div className="flex items-center gap-3 mt-2">
+                      <a
+                        href={directionsUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 text-[10px] font-bold text-white/40 hover:text-white/80 transition-colors uppercase tracking-wide"
+                      >
+                        <Navigation className="w-3 h-3" />
+                        Directions
+                      </a>
+                      <span className="text-white/15">·</span>
+                      <button
+                        onClick={handleCopyAddress}
+                        className="inline-flex items-center gap-1 text-[10px] font-bold text-white/40 hover:text-white/80 transition-colors uppercase tracking-wide cursor-pointer"
+                      >
+                        <Copy className="w-3 h-3" />
+                        {copied ? 'Copied!' : 'Copy'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+          </motion.div>
+
         </div>
 
-        {/* Copyright */}
+        {/* ── Bottom bar ────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-[11px] text-gray-400 text-center w-full flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-4"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-white/25"
         >
-          <span>EMedia Event Decoration Services © 2020–{new Date().getFullYear()}</span>
-          <span className="hidden sm:inline text-primary/30">|</span>
-          <span>
-            Designed &amp; Powered by{' '}
-            <a href="https://www.datazync.com" target="_blank" rel="noreferrer" className="datazync-link">
+          <div className="flex items-center gap-1.5">
+            <span>© 2020–{new Date().getFullYear()} EMedia Event Decoration Services</span>
+            <span className="text-white/15 hidden sm:inline">·</span>
+            <span className="hidden sm:inline flex items-center gap-1">
+              Made with <Heart className="w-2.5 h-2.5 text-red-400/60 inline mx-0.5" /> in Erode
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span>Designed &amp; Powered by</span>
+            <a
+              href="https://www.datazync.com"
+              target="_blank"
+              rel="noreferrer"
+              className="datazync-link"
+            >
               DataZync
             </a>
-          </span>
+          </div>
         </motion.div>
 
       </div>
