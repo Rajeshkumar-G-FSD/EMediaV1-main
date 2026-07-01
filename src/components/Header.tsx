@@ -102,13 +102,11 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
                 aria-label="Go to EMedia home"
               >
                 <div className="relative">
-                  {/* spinning decorative ring */}
-                  <div className="absolute -inset-1.5 rounded-full border-2 border-dashed border-primary/25 animate-spin-slow pointer-events-none" />
-                  <div className="w-14 h-14 rounded-full border-[3px] border-primary overflow-hidden bg-white shadow-lg group-hover:scale-105 transition-transform duration-300">
+<div className="w-20 h-20 rounded-full border-[3px] border-primary overflow-hidden bg-white shadow-lg group-hover:scale-105 transition-transform duration-300">
                     <img
-                      src="/images/emedia_round.png"
+                      src="/images/emediaevents_logo.png"
                       alt="EMedia"
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-contain"
                     />
                   </div>
                 </div>
@@ -168,8 +166,8 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
               className="flex items-center gap-2 cursor-pointer"
               aria-label="Home"
             >
-              <div className="w-10 h-10 rounded-full border-2 border-primary overflow-hidden shadow-sm">
-                <img src="/images/emedia_round.png" alt="EMedia" className="h-full w-full object-cover" />
+              <div className="w-14 h-14 rounded-full border-2 border-primary overflow-hidden shadow-sm">
+                <img src="/images/emediaevents_logo.png" alt="EMedia" className="h-full w-full object-contain" />
               </div>
               <div className="flex flex-col leading-none">
                 <span className="font-elegant text-base font-bold text-primary">EMedia</span>

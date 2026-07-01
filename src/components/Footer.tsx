@@ -76,8 +76,8 @@ export default function Footer({ onNavClick }: FooterProps) {
               className="flex items-center gap-3 mb-5 group cursor-pointer w-fit"
               aria-label="Go to EMedia home"
             >
-              <div className="w-12 h-12 rounded-full border-2 border-white/20 overflow-hidden flex-shrink-0 group-hover:border-white/50 transition-colors duration-300">
-                <img src="/images/emedia_round.png" alt="EMedia" className="h-full w-full object-cover" />
+              <div className="w-18 h-18 rounded-full border-2 border-white/20 overflow-hidden flex-shrink-0 group-hover:border-white/50 transition-colors duration-300">
+                <img src="/images/emediaevents_footre-logo.png" alt="EMedia" className="h-full w-full object-contain" />
               </div>
               <div className="text-left">
                 <p className="font-elegant text-lg font-bold text-white leading-tight">EMedia Events</p>

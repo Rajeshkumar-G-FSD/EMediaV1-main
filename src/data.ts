@@ -27,7 +27,7 @@ export const CUSTOMERS_DATA: Customer[] = [
     category: 'Birthday decor',
     date: '24/05/2026',
     description: 'A bright birthday setup with balloon clusters, dessert-table styling, and a photo-ready backdrop for family celebrations.',
-    image: EVENT_IMAGES.birthdayDecor
+    image: '/images/birtthday_decorations.png'
   },
   {
     id: 'c2',
@@ -51,7 +51,7 @@ export const CUSTOMERS_DATA: Customer[] = [
     category: 'Ceremony decor',
     date: '08/11/2026',
     description: 'A graceful ceremony design with decorative tables, floral accents, and a welcoming layout for formal family moments.',
-    image: EVENT_IMAGES.ceremonyDecor
+    image: '/images/baby_ceremony_decorations.png'
   },
   {
     id: 'c5',
@@ -59,7 +59,7 @@ export const CUSTOMERS_DATA: Customer[] = [
     category: 'Event decor',
     date: '12/12/2026',
     description: 'A high-energy event environment with lighting, stage presence, and guest-flow details for launches and company celebrations.',
-    image: EVENT_IMAGES.corporateDecor
+    image: '/images/cooking_event_decoration.png'
   }
 ];
 
