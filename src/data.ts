@@ -30,22 +30,6 @@ export const CUSTOMERS_DATA: Customer[] = [
     image: '/images/birtthday_decorations.png'
   },
   {
-    id: 'c2',
-    title: 'Wedding stage decoration',
-    category: 'Wedding decor',
-    date: '30/04/2026',
-    description: 'A romantic wedding stage with layered florals, soft aisle styling, and warm lighting built for a polished reception atmosphere.',
-    image: EVENT_IMAGES.weddingDecor
-  },
-  {
-    id: 'c3',
-    title: 'Office anniversary decoration',
-    category: 'Office event',
-    date: '15/01/2026',
-    description: 'A clean corporate anniversary setup with brand-friendly table styling, ambient lighting, and a central celebration stage.',
-    image: EVENT_IMAGES.officeAnniversaryDecor
-  },
-  {
     id: 'c4',
     title: 'Traditional ceremony decoration',
     category: 'Ceremony decor',
@@ -60,6 +44,22 @@ export const CUSTOMERS_DATA: Customer[] = [
     date: '12/12/2026',
     description: 'A high-energy event environment with lighting, stage presence, and guest-flow details for launches and company celebrations.',
     image: '/images/cooking_event_decoration.png'
+  },
+  {
+    id: 'c6',
+    title: 'Corporate anniversary decoration',
+    category: 'Corporate event',
+    date: '18/03/2026',
+    description: 'A professionally styled corporate anniversary stage with brand-aligned backdrops, ambient lighting, and a polished celebration setup.',
+    image: '/images/cooking_event_stage_decor.png'
+  },
+  {
+    id: 'c7',
+    title: 'Wedding decoration',
+    category: 'Wedding decor',
+    date: '22/06/2026',
+    description: 'An elegant wedding decoration with layered florals, a grand stage backdrop, and warm lighting crafted for a timeless celebration.',
+    image: '/images/wedding_decoration.png'
   }
 ];
 
