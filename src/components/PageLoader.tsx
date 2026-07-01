@@ -44,9 +44,9 @@ export default function PageLoader() {
               initial={{ scale: 0.6 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
-              className="w-24 h-24 rounded-full overflow-hidden border-[3px] border-white/30 shadow-[0_0_50px_rgba(255,255,255,0.15)]"
+              className="w-52 h-52 rounded-full overflow-hidden border-[3px] border-white/30 shadow-[0_0_50px_rgba(255,255,255,0.15)]"
             >
-              <img src="/images/emedia_round.png" alt="EMedia" className="w-full h-full object-cover" />
+              <img src="/images/emediaevents_footre-logo.png" alt="EMedia" className="w-full h-full object-contain" />
             </motion.div>
 
             {/* Brand text — visible immediately */}
