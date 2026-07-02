@@ -6,7 +6,6 @@ import Welcome from './components/Welcome.tsx';
 import ServiceGrid from './components/ServiceGrid.tsx';
 import ProductSlider from './components/ProductSlider.tsx';
 import BudgetEstimator from './components/BudgetEstimator.tsx';
-import BlogSection from './components/BlogSection.tsx';
 import InquiryForm from './components/InquiryForm.tsx';
 import BookingList from './components/BookingList.tsx';
 import Footer from './components/Footer.tsx';
@@ -16,8 +15,8 @@ import TextRevealObserver from './components/TextRevealObserver.tsx';
 import PageLoader from './components/PageLoader.tsx';
 import GoogleReviews from './components/GoogleReviews.tsx';
 import AdminApp from './components/admin/AdminApp.tsx';
-import { Customer, Service, Product, BlogPost, ConsultationRequest } from './types.ts';
-import { PhoneCall, MailOpen, Compass, CalendarCheck } from 'lucide-react';
+import { Customer, Service, Product, ConsultationRequest } from './types.ts';
+import { PhoneCall, MailOpen, Compass } from 'lucide-react';
 
 export default function App() {
   const [isAdminRoute, setIsAdminRoute] = useState(() => window.location.hash === '#admin');
@@ -31,7 +30,6 @@ export default function App() {
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   
   // Active section tracking state
   const [activeSection, setActiveSection] = useState('hero');
@@ -48,7 +46,6 @@ export default function App() {
   const servicesRef = useRef<HTMLDivElement>(null);
   const productsRef = useRef<HTMLDivElement>(null);
   const customersRef = useRef<HTMLDivElement>(null);
-  const blogRef = useRef<HTMLDivElement>(null);
   const calculatorRef = useRef<HTMLDivElement>(null);
   const appointmentsRef = useRef<HTMLDivElement>(null);
 
@@ -141,7 +138,6 @@ export default function App() {
     if (sectionId === 'services') targetRef = servicesRef;
     if (sectionId === 'products') targetRef = productsRef;
     if (sectionId === 'customers') targetRef = customersRef;
-    if (sectionId === 'blog') targetRef = blogRef;
     if (sectionId === 'calculator') targetRef = calculatorRef;
     if (sectionId === 'appointments') targetRef = appointmentsRef;
 
@@ -160,7 +156,6 @@ export default function App() {
         { id: 'services', ref: servicesRef },
         { id: 'products', ref: productsRef },
         { id: 'customers', ref: customersRef },
-        { id: 'blog', ref: blogRef },
         { id: 'calculator', ref: calculatorRef },
         { id: 'appointments', ref: appointmentsRef },
       ];
@@ -262,13 +257,6 @@ export default function App() {
             Build your event concept, choose venue styling and ceremonial items, and preview an instant live cost estimate.
           </p>
           <BudgetEstimator onQuoteSubmit={handleQuoteSubmit} />
-        </div>
-
-        <div className="h-px bg-primary/10 w-full my-2" />
-
-        {/* Section 5: Guides & Blog Tips List */}
-        <div ref={blogRef} className="scroll-mt-20" id="section-blog">
-          <BlogSection onBlogPostSelect={setSelectedPost} />
         </div>
 
         <div className="h-px bg-primary/10 w-full my-2" />
@@ -443,42 +431,6 @@ export default function App() {
                 id="product-modal-checkout"
               >
                 Add to inquiry
-              </button>
-            </div>
-          </div>
-        )}
-      </Modal>
-
-      {/* BlogPost Read Panel */}
-      <Modal
-        isOpen={selectedPost !== null}
-        onClose={() => setSelectedPost(null)}
-        title={selectedPost?.title || ''}
-      >
-        {selectedPost && (
-          <div className="space-y-4" id="blog-modal-view">
-            <img
-              alt={selectedPost.title}
-              className="w-full h-64 md:h-72 object-cover rounded shadow"
-              src={selectedPost.image}
-            />
-            <div className="flex items-center justify-between text-xs text-gray-400 border-b border-gray-100 pb-2">
-              <span className="font-semibold text-primary">Wedding planning guide</span>
-              <span className="flex items-center gap-1.5">
-                <CalendarCheck className="w-3.5 h-3.5 text-gray-400" />
-                Published: June 2026
-              </span>
-            </div>
-            <div className="space-y-4 text-gray-700 leading-relaxed text-sm md:text-base whitespace-pre-line bg-gray-50 p-4 rounded border border-gray-100">
-              {selectedPost.content}
-            </div>
-            <div className="pt-4 flex justify-end">
-              <button
-                onClick={() => setSelectedPost(null)}
-                className="px-5 py-2 bg-primary text-white text-xs uppercase font-bold hover:bg-opacity-90 transition rounded cursor-pointer"
-                id="blog-modal-close"
-              >
-                Done reading
               </button>
             </div>
           </div>

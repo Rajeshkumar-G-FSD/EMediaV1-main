@@ -11,7 +11,6 @@ const QUICK_LINKS = [
   { id: 'services',     label: 'Event Styling' },
   { id: 'products',     label: 'Decor Items' },
   { id: 'customers',   label: 'Gallery' },
-  { id: 'blog',        label: 'Planning Tips' },
   { id: 'calculator',  label: 'Get a Quote' },
   { id: 'appointments',label: 'Book Event' },
 ];

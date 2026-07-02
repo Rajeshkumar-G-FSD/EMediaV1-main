@@ -9,6 +9,7 @@ import {
 import { auth, db } from '../../lib/firebase.ts';
 import { EVENT_TYPES } from '../../data.ts';
 import { BookingRecord } from '../../types.ts';
+import ReceiptModal from './ReceiptModal.tsx';
 
 const formatCurrency = (num: number) =>
   new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(num);
@@ -17,12 +18,6 @@ const computePaymentStatus = (amountPaid: number, finalTotal: number): BookingRe
   if (amountPaid <= 0) return 'unpaid';
   if (amountPaid >= finalTotal) return 'paid';
   return 'partial';
-};
-
-const toWhatsAppNumber = (phone: string) => {
-  const digits = phone.replace(/\D/g, '');
-  if (digits.length === 10) return `91${digits}`;
-  return digits;
 };
 
 const STATUS_STYLES: Record<BookingRecord['paymentStatus'], string> = {
@@ -38,6 +33,7 @@ interface BookingCardProps {
 function BookingCard({ booking }: BookingCardProps) {
   const [finalTotal, setFinalTotal] = useState(booking.finalTotal);
   const [amountPaid, setAmountPaid] = useState(booking.amountPaid);
+  const [showReceipt, setShowReceipt] = useState(false);
 
   useEffect(() => {
     setFinalTotal(booking.finalTotal);
@@ -58,27 +54,6 @@ function BookingCard({ booking }: BookingCardProps) {
       amountPaid,
       paymentStatus: computePaymentStatus(amountPaid, finalTotal),
     });
-  };
-
-  const handleSendReceipt = () => {
-    const status = computePaymentStatus(amountPaid, finalTotal);
-    const message = `EMediaEvent - Payment Receipt
-
-Customer: ${booking.customerName}
-Event: ${booking.eventTypeLabel}
-Total Amount: ${formatCurrency(finalTotal)}
-Amount Paid: ${formatCurrency(amountPaid)}
-Remaining Balance: ${formatCurrency(remaining)}
-Payment Status: ${status.toUpperCase()}
-Date: ${new Date().toLocaleDateString('en-IN')}
-
-Thank you for choosing EMediaEvent!`;
-
-    window.open(
-      `https://wa.me/${toWhatsAppNumber(booking.customerPhone)}?text=${encodeURIComponent(message)}`,
-      '_blank',
-      'noopener,noreferrer'
-    );
   };
 
   return (
@@ -177,7 +152,7 @@ Thank you for choosing EMediaEvent!`;
 
       <div className="flex justify-end">
         <button
-          onClick={handleSendReceipt}
+          onClick={() => setShowReceipt(true)}
           disabled={amountPaid <= 0}
           className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary text-white rounded text-[10px] font-bold uppercase cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           id={`admin-send-receipt-${booking.id}`}
@@ -186,6 +161,14 @@ Thank you for choosing EMediaEvent!`;
           Send Receipt via WhatsApp
         </button>
       </div>
+
+      <ReceiptModal
+        isOpen={showReceipt}
+        onClose={() => setShowReceipt(false)}
+        booking={booking}
+        finalTotal={finalTotal}
+        amountPaid={amountPaid}
+      />
     </motion.div>
   );
 }

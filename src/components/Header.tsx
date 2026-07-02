@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, Calendar, Star, Heart, Sparkles, Tag, Camera, BookOpen, Calculator, Phone } from 'lucide-react';
+import { Menu, X, Calendar, Star, Heart, Sparkles, Tag, Camera, Calculator, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface HeaderProps {
@@ -16,7 +16,6 @@ const LEFT_NAV = [
 
 const RIGHT_NAV = [
   { id: 'customers',  label: 'Gallery',       icon: Camera },
-  { id: 'blog',       label: 'Planning Tips', icon: BookOpen },
   { id: 'calculator', label: 'Decor Quote',   icon: Calculator },
 ];
 
@@ -141,9 +140,9 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
               {/* Book Event CTA */}
               <li className="ml-2">
                 <button
-                  onClick={() => handleItemClick('appointments')}
+                  onClick={() => handleItemClick('calculator')}
                   className="relative flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-[10.5px] font-bold uppercase tracking-wide rounded-lg hover:bg-primary/90 active:scale-95 transition-all duration-200 cursor-pointer whitespace-nowrap shadow-sm"
-                  id="nav-item-appointments"
+                  id="nav-item-book-event"
                 >
                   {hasInquiries && (
                     <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
@@ -229,7 +228,7 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
               ))}
 
               <button
-                onClick={() => handleItemClick('appointments')}
+                onClick={() => handleItemClick('calculator')}
                 className="flex items-center gap-3 w-full text-left py-3 px-4 rounded-xl cursor-pointer text-sm font-bold uppercase tracking-wide bg-primary text-white mt-1"
               >
                 <Calendar className="w-4 h-4 flex-shrink-0" />
