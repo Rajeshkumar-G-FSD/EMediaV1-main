@@ -1,80 +1,92 @@
-import React, { useState } from 'react';
-import { SERVICES_DATA, PRODUCTS_DATA } from '../data.ts';
-import { Calculator, Sparkles, Check, ChevronRight, Share2, ClipboardList } from 'lucide-react';
+import { useState } from 'react';
+import { Calculator, Check, ChevronRight, ClipboardList, User, Phone, MessageCircle } from 'lucide-react';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../lib/firebase.ts';
+import { EVENT_TYPES, ADDONS } from '../data.ts';
 
 interface EstimatorProps {
   onQuoteSubmit: (notes: string, selectedServiceName: string) => void;
 }
 
+const WHATSAPP_NUMBER = '919566894134';
+const PHONE_REGEX = /^[0-9+.\s-]{9,15}$/;
+
 export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
-  const [selectedServiceId, setSelectedServiceId] = useState('s1');
-  const [tableCount, setTableCount] = useState(15);
-  const [menuType, setMenuType] = useState('premium'); // standard, premium, luxury
-  const [selectedProductIds, setSelectedProductIds] = useState<string[]>(['p1', 'p2']);
-  const [withLighting, setWithLighting] = useState(true);
+  const [selectedEventType, setSelectedEventType] = useState(EVENT_TYPES[0].id);
+  const [selectedAddonIds, setSelectedAddonIds] = useState<string[]>([]);
+  const [budget, setBudget] = useState(50000);
+  const [contactName, setContactName] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
   const [submittedQuote, setSubmittedQuote] = useState(false);
 
-  // Menus price mapping
-  const menuPrices = {
-    standard: { price: 2800000, desc: '5-course traditional menu + beer' },
-    premium: { price: 3800000, desc: '6-course premium menu + beer & red wine' },
-    luxury: { price: 5200000, desc: '7-course luxury menu' },
-  };
-
-  // Base service prices (approximate custom calculation)
-  const serviceBasePrices: Record<string, number> = {
-    s1: 12000000,
-    s2: 25000000,
-    s3: 35000000,
-    s4: 8000000,
-  };
-
-  const getProductPrice = (id: string): number => {
-    if (id === 'p1') return 4500000;
-    if (id === 'p2') return 3200000;
-    if (id === 'p3') return 6000000;
-    if (id === 'p4') return 4800000;
-    return 0;
-  };
-
-  // Calculator
-  const baseServiceCost = serviceBasePrices[selectedServiceId] || 0;
-  const menuCostPerTable = menuPrices[menuType as keyof typeof menuPrices]?.price || 0;
-  const totalMenuCost = tableCount * menuCostPerTable;
-  
-  const totalProductsCost = selectedProductIds.reduce((sum, id) => {
-    return sum + getProductPrice(id);
-  }, 0);
-
-  const lightingCost = withLighting ? 7500000 : 0;
-  const grandTotal = baseServiceCost + totalMenuCost + totalProductsCost + lightingCost;
-
-  const handleToggleProduct = (id: string) => {
-    if (selectedProductIds.includes(id)) {
-      setSelectedProductIds(selectedProductIds.filter(x => x !== id));
-    } else {
-      setSelectedProductIds([...selectedProductIds, id]);
-    }
-  };
-
   const formatCurrency = (num: number) => {
-    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(num);
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(num);
   };
 
-  const handleContactQuote = () => {
-    const serviceName = SERVICES_DATA.find(s => s.id === selectedServiceId)?.title || 'Service';
-    const productNamesStr = selectedProductIds
-      .map(id => PRODUCTS_DATA.find(p => p.id === id)?.name)
-      .filter(Boolean)
-      .join(', ');
+  const selectedEvent = EVENT_TYPES.find((e) => e.id === selectedEventType);
+  const baseCost = selectedEvent?.price || 0;
+  const selectedAddons = ADDONS.filter((a) => selectedAddonIds.includes(a.id));
+  const addonsCost = selectedAddons.reduce((sum, a) => sum + a.price, 0);
+  const grandTotal = baseCost + addonsCost;
 
-    const quoteDetails = `Budget estimate: total ${formatCurrency(grandTotal)}. Main service: ${serviceName}. Event tables: ${tableCount} tables (${menuPrices[menuType as keyof typeof menuPrices].desc}). Add-on products: ${productNamesStr || 'None selected'}. Lighting and stage support included: ${withLighting ? 'Yes' : 'No'}.`;
-    
-    onQuoteSubmit(quoteDetails, selectedServiceId);
+  const handleToggleAddon = (id: string) => {
+    setSelectedAddonIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
+  };
+
+  const handleSendQuote = async () => {
+    setErrorMsg('');
+
+    if (!contactName.trim()) {
+      setErrorMsg('Please enter your full name.');
+      return;
+    }
+    if (!contactPhone.trim() || !PHONE_REGEX.test(contactPhone.trim())) {
+      setErrorMsg('Please enter a valid contact phone number.');
+      return;
+    }
+
+    const addonLines = selectedAddons.length
+      ? selectedAddons.map((a) => `- ${a.label}: ${formatCurrency(a.price)}`).join('\n')
+      : '- None selected';
+
+    const message = `New Quick Quote Request - EMediaEvent
+
+Event Type: ${selectedEvent?.label}
+Add-ons:
+${addonLines}
+
+Approximate Budget: ${formatCurrency(budget)}
+Estimated Total: ${formatCurrency(grandTotal)}
+
+Name: ${contactName.trim()}
+Phone: ${contactPhone.trim()}`;
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+
+    try {
+      await addDoc(collection(db, 'bookings'), {
+        eventTypeId: selectedEventType,
+        eventTypeLabel: selectedEvent?.label || '',
+        addons: selectedAddons,
+        budget,
+        estimateTotal: grandTotal,
+        finalTotal: grandTotal,
+        amountPaid: 0,
+        paymentStatus: 'unpaid',
+        customerName: contactName.trim(),
+        customerPhone: contactPhone.trim(),
+        createdAt: Date.now(),
+      });
+    } catch (err) {
+      console.error('Failed to save booking to Firestore', err);
+    }
+
+    onQuoteSubmit(message, 'other');
     setSubmittedQuote(true);
-    setTimeout(() => {
-      setSubmittedQuote(false);
-    }, 5000);
+    setTimeout(() => setSubmittedQuote(false), 5000);
   };
 
   return (
@@ -91,22 +103,22 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
         {/* Parameters input */}
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-gray-600 uppercase mb-2">1. Choose a main service</label>
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-2">1. Choose your event type</label>
             <div className="grid grid-cols-2 gap-2">
-              {SERVICES_DATA.slice(0, 3).map((item) => (
+              {EVENT_TYPES.map((item) => (
                 <button
                   type="button"
                   key={item.id}
-                  onClick={() => setSelectedServiceId(item.id)}
+                  onClick={() => setSelectedEventType(item.id)}
                   className={`p-3 text-left rounded border text-xs transition cursor-pointer flex flex-col justify-between ${
-                    selectedServiceId === item.id
+                    selectedEventType === item.id
                       ? 'border-primary bg-primary/5 text-primary font-bold'
                       : 'border-gray-200 text-gray-600 hover:bg-gray-50'
                   }`}
-                  id={`estimator-service-${item.id}`}
+                  id={`estimator-event-${item.id}`}
                 >
-                  <span>{item.title}</span>
-                  <span className="text-[10px] text-gray-400 mt-1">From {item.priceRange.split(' - ')[0]}</span>
+                  <span>{item.label}</span>
+                  <span className="text-[10px] text-gray-400 mt-1">From {formatCurrency(item.price)}</span>
                 </button>
               ))}
             </div>
@@ -114,82 +126,79 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
 
           <div className="border-t border-gray-100 pt-4">
             <div className="flex justify-between items-center mb-2">
-              <label className="block text-xs font-bold text-gray-600 uppercase">2. Ceremony / reception menu</label>
-              <span className="text-xs text-primary font-bold">{tableCount} tables</span>
+              <label className="block text-xs font-bold text-gray-600 uppercase">2. Your approximate budget</label>
+              <span className="text-xs text-primary font-bold">{formatCurrency(budget)}</span>
             </div>
             <input
               type="range"
-              min={5}
-              max={100}
-              step={5}
-              value={tableCount}
-              onChange={(e) => setTableCount(Number(e.target.value))}
+              min={10000}
+              max={300000}
+              step={5000}
+              value={budget}
+              onChange={(e) => setBudget(Number(e.target.value))}
               className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
-              id="estimator-range-tables"
+              id="estimator-range-budget"
             />
-            <div className="grid grid-cols-3 gap-2 mt-3">
-              {(Object.keys(menuPrices) as Array<keyof typeof menuPrices>).map((key) => (
-                <button
-                  type="button"
-                  key={key}
-                  onClick={() => setMenuType(key)}
-                  className={`p-2 rounded text-center border text-[11px] transition cursor-pointer ${
-                    menuType === key
-                      ? 'border-primary bg-primary/5 text-primary font-semibold'
-                      : 'border-gray-200 text-gray-500 hover:bg-gray-50'
-                  }`}
-                  id={`estimator-menu-${key}`}
-                >
-                  <span className="block font-bold">{key === 'standard' ? 'Standard' : key === 'premium' ? 'Premium' : 'Luxury'}</span>
-                  <span className="text-[9px] text-gray-400 font-mono block mt-0.5">{formatCurrency(menuPrices[key].price).split(',')[0]} / bàn</span>
-                </button>
-              ))}
+            <div className="flex justify-between text-[10px] text-gray-400 mt-1">
+              <span>{formatCurrency(10000)}</span>
+              <span>{formatCurrency(300000)}</span>
             </div>
           </div>
 
           <div className="border-t border-gray-100 pt-4">
-            <label className="block text-xs font-bold text-gray-600 uppercase mb-2">3. Add featured products</label>
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-2">3. Add extra services</label>
             <div className="space-y-2">
-              {PRODUCTS_DATA.map((prod) => (
+              {ADDONS.map((addon) => (
                 <label
-                  key={prod.id}
+                  key={addon.id}
                   className="flex items-center justify-between p-2 rounded border border-gray-100 text-xs hover:bg-gray-50 transition cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
-                      checked={selectedProductIds.includes(prod.id)}
-                      onChange={() => handleToggleProduct(prod.id)}
+                      checked={selectedAddonIds.includes(addon.id)}
+                      onChange={() => handleToggleAddon(addon.id)}
                       className="rounded border-gray-300 text-primary focus:ring-primary w-4 h-4 cursor-pointer"
-                      id={`estimator-product-${prod.id}`}
+                      id={`estimator-addon-${addon.id}`}
                     />
-                    <span className="text-gray-700">{prod.name}</span>
+                    <span className="text-gray-700">{addon.label}</span>
                   </div>
-                  <span className="font-mono text-gray-500">{prod.price.split(' VNĐ /')[0]}K</span>
+                  <span className="font-mono text-gray-500">{formatCurrency(addon.price)}</span>
                 </label>
               ))}
             </div>
           </div>
 
-          <div className="border-t border-gray-100 pt-4 flex items-center justify-between">
-            <div>
-              <span className="block text-xs font-bold text-gray-600 uppercase">4. Lighting and stage support</span>
-              <span className="text-[10px] text-gray-400">Ambient lighting and backdrop support throughout the event</span>
+          <div className="border-t border-gray-100 pt-4">
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-2">4. Your contact details</label>
+            <div className="space-y-2">
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                  <User className="h-4 w-4" />
+                </span>
+                <input
+                  type="text"
+                  placeholder="Your full name..."
+                  className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded text-sm focus:border-primary focus:outline-none"
+                  value={contactName}
+                  onChange={(e) => setContactName(e.target.value)}
+                  id="estimator-contact-name"
+                />
+              </div>
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                  <Phone className="h-4 w-4" />
+                </span>
+                <input
+                  type="tel"
+                  placeholder="Your phone number..."
+                  className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded text-sm focus:border-primary focus:outline-none"
+                  value={contactPhone}
+                  onChange={(e) => setContactPhone(e.target.value)}
+                  id="estimator-contact-phone"
+                />
+              </div>
             </div>
-            <button
-              type="button"
-              onClick={() => setWithLighting(!withLighting)}
-              className={`w-12 h-6 rounded-full p-0.5 transition-colors cursor-pointer ${
-                withLighting ? 'bg-primary' : 'bg-gray-200'
-              }`}
-              id="estimator-photo-toggle"
-            >
-              <div
-                className={`w-5 h-5 rounded-full bg-white transition-transform ${
-                  withLighting ? 'translate-x-6' : 'translate-x-0'
-                }`}
-              />
-            </button>
           </div>
         </div>
 
@@ -203,30 +212,21 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
 
             <div className="space-y-3 text-xs text-gray-600">
               <div className="flex justify-between">
-                <span>Main styling service:</span>
-                <span className="font-semibold text-gray-800">{formatCurrency(baseServiceCost)}</span>
+                <span>{selectedEvent?.label}:</span>
+                <span className="font-semibold text-gray-800">{formatCurrency(baseCost)}</span>
               </div>
 
-              <div className="flex justify-between">
-                <span>
-                  Event catering ({tableCount} tables x {formatCurrency(menuPrices[menuType as keyof typeof menuPrices].price).split(',')[0]}):
-                </span>
-                <span className="font-semibold text-gray-800">{formatCurrency(totalMenuCost)}</span>
+              {selectedAddons.map((addon) => (
+                <div className="flex justify-between" key={addon.id}>
+                  <span>{addon.label}:</span>
+                  <span className="font-semibold text-gray-800">{formatCurrency(addon.price)}</span>
+                </div>
+              ))}
+
+              <div className="flex justify-between text-gray-500">
+                <span>Your stated budget:</span>
+                <span className="font-semibold">{formatCurrency(budget)}</span>
               </div>
-
-              {selectedProductIds.length > 0 && (
-                <div className="flex justify-between">
-                  <span>Additional items x{selectedProductIds.length}:</span>
-                  <span className="font-semibold text-gray-800">{formatCurrency(totalProductsCost)}</span>
-                </div>
-              )}
-
-              {withLighting && (
-                <div className="flex justify-between">
-                  <span>Lighting and stage support:</span>
-                  <span className="font-semibold text-gray-800">{formatCurrency(lightingCost)}</span>
-                </div>
-              )}
 
               <div className="border-t border-dashed border-gray-300 pt-3 flex justify-between items-baseline">
                 <span className="text-sm font-bold text-gray-700">TOTAL ESTIMATE:</span>
@@ -241,8 +241,13 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
           </div>
 
           <div className="mt-6 pt-4">
+            {errorMsg && (
+              <div className="bg-red-50 border-l-4 border-red-500 p-2 text-xs text-red-700 mb-3" id="estimator-form-error">
+                {errorMsg}
+              </div>
+            )}
             <button
-              onClick={handleContactQuote}
+              onClick={handleSendQuote}
               className={`w-full text-center py-2.5 px-4 font-bold uppercase text-xs tracking-wider transition flex items-center justify-center gap-2 cursor-pointer ${
                 submittedQuote
                   ? 'bg-secondary text-white'
@@ -253,18 +258,19 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
               {submittedQuote ? (
                 <>
                   <Check className="w-4 h-4" />
-                  Quote saved!
+                  Sent to WhatsApp!
                 </>
               ) : (
                 <>
-                  <span>Send this estimate to EMedia</span>
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Send this quote via WhatsApp</span>
                   <ChevronRight className="w-4 h-4" />
                 </>
               )}
             </button>
             {submittedQuote && (
               <p className="text-[10px] text-center text-primary font-medium mt-1">
-                Your estimate has been saved into the consultation form below.
+                Your estimate has been shared with EMediaEvent on WhatsApp.
               </p>
             )}
           </div>

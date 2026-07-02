@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MessageSquare, ArrowUp } from 'lucide-react';
+import { Phone, Mail, MessageSquare, ArrowUp, KeyRound } from 'lucide-react';
 
 interface SidebarProps {
   onQuickActionClick: (actionId: string) => void;
@@ -22,6 +22,17 @@ export default function SocialSidebar({ onQuickActionClick }: SidebarProps) {
 
   return (
     <div className="hidden sm:flex fixed right-0 top-1/3 z-40 flex-col bg-primary text-white shadow-lg rounded-l-md overflow-hidden" id="floating-sidebar">
+      {/* Admin login */}
+      <button
+        onClick={() => { window.location.hash = 'admin'; }}
+        className="p-3 hover:bg-white/10 border-b border-white/20 transition flex items-center justify-center cursor-pointer"
+        title="Admin login"
+        id="sidebar-admin-btn"
+        aria-label="Admin login"
+      >
+        <KeyRound className="w-5 h-5" />
+      </button>
+
       {/* Facebook Link */}
       <a
         href="#"

@@ -47,3 +47,24 @@ export interface ConsultationRequest {
   status: 'pending' | 'confirmed' | 'canceled';
   createdAt: string;
 }
+
+export interface QuoteAddon {
+  id: string;
+  label: string;
+  price: number;
+}
+
+export interface BookingRecord {
+  id: string;
+  eventTypeId: string;
+  eventTypeLabel: string;
+  addons: QuoteAddon[];
+  budget: number;
+  estimateTotal: number;
+  finalTotal: number;
+  amountPaid: number;
+  paymentStatus: 'unpaid' | 'partial' | 'paid';
+  customerName: string;
+  customerPhone: string;
+  createdAt: number;
+}

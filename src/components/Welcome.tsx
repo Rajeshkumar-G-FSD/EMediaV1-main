@@ -59,8 +59,6 @@ export default function Welcome({ onLearnMoreClick }: WelcomeProps) {
             id="welcome-bouquet-image"
           />
         </div>
-        {/* Decorative dotted ring */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full border border-dashed border-primary/30 -z-0 animate-spin-slow" />
       </ScrollReveal>
     </section>
   );

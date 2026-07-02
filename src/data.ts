@@ -324,3 +324,26 @@ Contact EMedia for full-service flex banner design, printing, and installation.`
     category: 'Flex Banner',
   },
 ];
+
+// Shared between the Quick Quote Tool and the admin dashboard so both read from one source of truth.
+export const EVENT_TYPES = [
+  { id: 'birthday', label: 'Birthday Events', price: 15000 },
+  { id: 'balloon-decoration', label: 'Balloon Decoration', price: 6000 },
+  { id: 'wedding-decoration', label: 'Wedding Decoration', price: 45000 },
+  { id: 'corporate', label: 'Corporate Events', price: 35000 },
+  { id: 'wedding-shoot', label: 'Wedding Shoot', price: 20000 },
+  { id: 'kids-photography', label: 'Kids Photography', price: 8000 },
+  { id: 'traditional-ceremony', label: 'Traditional Ceremony Events', price: 18000 },
+];
+
+export const ADDONS = [
+  { id: 'photography', label: 'Photography', price: 8000 },
+  { id: 'decoration', label: 'Decoration', price: 15000 },
+  { id: 'balloon-decoration', label: 'Balloon Decoration', price: 5000 },
+  { id: 'catering', label: 'Catering', price: 20000 },
+  { id: 'stage-decoration', label: 'Stage Decoration', price: 12000 },
+  { id: 'pre-wedding-shoot', label: 'Pre Wedding Shoot', price: 10000 },
+  { id: 'baby-ceremony', label: 'Baby Ceremony', price: 8000 },
+  { id: 'kids-photography', label: 'Kids Photography', price: 6000 },
+  { id: 'couple-photography', label: 'Couple Photography', price: 7000 },
+];

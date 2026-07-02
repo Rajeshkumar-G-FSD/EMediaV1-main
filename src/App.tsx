@@ -15,10 +15,19 @@ import Modal from './components/Modal.tsx';
 import TextRevealObserver from './components/TextRevealObserver.tsx';
 import PageLoader from './components/PageLoader.tsx';
 import GoogleReviews from './components/GoogleReviews.tsx';
+import AdminApp from './components/admin/AdminApp.tsx';
 import { Customer, Service, Product, BlogPost, ConsultationRequest } from './types.ts';
 import { PhoneCall, MailOpen, Compass, CalendarCheck } from 'lucide-react';
 
 export default function App() {
+  const [isAdminRoute, setIsAdminRoute] = useState(() => window.location.hash === '#admin');
+
+  useEffect(() => {
+    const onHashChange = () => setIsAdminRoute(window.location.hash === '#admin');
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -168,6 +177,10 @@ export default function App() {
     window.addEventListener('scroll', handleScrollSpy);
     return () => window.removeEventListener('scroll', handleScrollSpy);
   }, []);
+
+  if (isAdminRoute) {
+    return <AdminApp />;
+  }
 
   return (
     <div className="bg-white text-gray-700 font-sans antialiased overflow-x-hidden min-h-screen flex flex-col justify-between" id="app-root">
