@@ -3,8 +3,6 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { User, Lock, LogIn, Eye, EyeOff, ArrowLeft, ShieldCheck } from 'lucide-react';
 import { auth } from '../../lib/firebase.ts';
 
-const ADMIN_EMAIL = 'emediaeventerode@gmail.com';
-
 interface FieldErrors {
   username?: string;
   password?: string;
@@ -32,15 +30,9 @@ export default function AdminLogin() {
     setFieldErrors(nextFieldErrors);
     if (Object.keys(nextFieldErrors).length > 0) return;
 
-    if (username.trim().toLowerCase() !== ADMIN_EMAIL) {
-      setErrorMsg('Invalid username or password.');
-      return;
-    }
-
     setIsSubmitting(true);
     try {
-      console.log({ email: ADMIN_EMAIL, passwordLength: password.length });
-      await signInWithEmailAndPassword(auth, ADMIN_EMAIL, password);
+      await signInWithEmailAndPassword(auth, username.trim(), password);
     } catch (err) {
       const code = (err as { code?: string })?.code;
       const message = (err as { message?: string })?.message;
@@ -50,7 +42,7 @@ export default function AdminLogin() {
       if (code === 'auth/operation-not-allowed' || code === 'auth/configuration-not-found') {
         setErrorMsg('Email/Password sign-in is not enabled yet in Firebase. Enable it under Authentication → Sign-in method.');
       } else if (code === 'auth/user-not-found' || code === 'auth/invalid-credential') {
-        setErrorMsg(`Admin account not found or password incorrect. Create it in Firebase Console → Authentication → Users with email "${ADMIN_EMAIL}".`);
+        setErrorMsg('Admin account not found or password incorrect.');
       } else if (code === 'auth/too-many-requests') {
         setErrorMsg('Too many failed attempts. Please wait a moment and try again.');
       } else {
