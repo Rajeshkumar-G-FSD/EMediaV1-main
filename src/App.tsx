@@ -7,7 +7,7 @@ import ServiceGrid from './components/ServiceGrid.tsx';
 import ProductSlider from './components/ProductSlider.tsx';
 import BudgetEstimator from './components/BudgetEstimator.tsx';
 import InquiryForm from './components/InquiryForm.tsx';
-import BookingList from './components/BookingList.tsx';
+import ContactMapPanel from './components/ContactMapPanel.tsx';
 import Footer from './components/Footer.tsx';
 import SocialSidebar from './components/SocialSidebar.tsx';
 import Modal from './components/Modal.tsx';
@@ -15,14 +15,25 @@ import TextRevealObserver from './components/TextRevealObserver.tsx';
 import PageLoader from './components/PageLoader.tsx';
 import GoogleReviews from './components/GoogleReviews.tsx';
 import AdminApp from './components/admin/AdminApp.tsx';
+import ShowcaseDetail from './components/ShowcaseDetail.tsx';
 import { Customer, Service, Product, ConsultationRequest } from './types.ts';
+import { CUSTOMERS_DATA } from './data.ts';
 import { PhoneCall, MailOpen, Compass } from 'lucide-react';
+
+const getShowcaseIdFromHash = () => {
+  const match = window.location.hash.match(/^#showcase-(.+)$/);
+  return match ? match[1] : null;
+};
 
 export default function App() {
   const [isAdminRoute, setIsAdminRoute] = useState(() => window.location.hash === '#admin');
+  const [showcaseId, setShowcaseId] = useState<string | null>(() => getShowcaseIdFromHash());
 
   useEffect(() => {
-    const onHashChange = () => setIsAdminRoute(window.location.hash === '#admin');
+    const onHashChange = () => {
+      setIsAdminRoute(window.location.hash === '#admin');
+      setShowcaseId(getShowcaseIdFromHash());
+    };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
@@ -80,21 +91,6 @@ export default function App() {
     }, 400);
   };
 
-  const handleDeleteInquiry = (id: string) => {
-    if (confirm('Are you sure you want to delete this consultation request from this browser?')) {
-      const updated = inquiries.filter(x => x.id !== id);
-      setInquiries(updated);
-      localStorage.setItem('nhuy_consultations', JSON.stringify(updated));
-    }
-  };
-
-  const handleClearAllInquiries = () => {
-    if (confirm('Are you sure you want to clear all consultation history on this computer?')) {
-      localStorage.removeItem('nhuy_consultations');
-      setInquiries([]);
-    }
-  };
-
   // Triggered when client creates a dynamic budget estimate quote
   const handleQuoteSubmit = (quoteDetails: string, selectedServiceId: string) => {
     setPreselectedServiceId(selectedServiceId);
@@ -124,10 +120,37 @@ export default function App() {
     }
   };
 
+  // Showcase detail page navigation
+  const handleSelectShowcase = (id: string) => {
+    window.location.hash = `showcase-${id}`;
+  };
+
+  const handleBackFromShowcase = () => {
+    window.location.hash = '';
+  };
+
+  const handleShowcaseBookNow = () => {
+    setPreselectedServiceId('other');
+    window.location.hash = '';
+    setTimeout(() => {
+      document.getElementById('inquiry-form-container')?.scrollIntoView({ behavior: 'smooth' });
+    }, 80);
+  };
+
   // Scroll mapping
   const handleNavClick = (sectionId: string) => {
+    // Leaving the full-page showcase view: clear the route first, then retry
+    // once the homepage sections have re-mounted so refs are populated.
+    // (Checked against the live hash, not React state, to avoid a stale closure
+    // in the recursive setTimeout call below.)
+    if (getShowcaseIdFromHash()) {
+      window.location.hash = '';
+      setTimeout(() => handleNavClick(sectionId), 80);
+      return;
+    }
+
     setActiveSection(sectionId);
-    
+
     if (sectionId === 'hero') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -177,6 +200,33 @@ export default function App() {
     return <AdminApp />;
   }
 
+  const showcaseItem = showcaseId ? CUSTOMERS_DATA.find((c) => c.id === showcaseId) : null;
+
+  if (showcaseItem) {
+    return (
+      <div className="bg-white text-gray-700 font-sans antialiased overflow-x-hidden min-h-screen flex flex-col justify-between" id="app-root">
+        <PageLoader />
+
+        <Header
+          onNavClick={handleNavClick}
+          activeSection={activeSection}
+          hasInquiries={inquiries.length > 0}
+        />
+
+        <SocialSidebar onQuickActionClick={handleQuickSidebarAction} />
+
+        <ShowcaseDetail
+          item={showcaseItem}
+          onBack={handleBackFromShowcase}
+          onBookNow={handleShowcaseBookNow}
+          onSelectItem={handleSelectShowcase}
+        />
+
+        <Footer onNavClick={handleNavClick} />
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white text-gray-700 font-sans antialiased overflow-x-hidden min-h-screen flex flex-col justify-between" id="app-root">
       <PageLoader />
@@ -197,7 +247,7 @@ export default function App() {
 
       {/* 4. 3D Portfolio Carousel */}
       <div ref={customersRef} className="scroll-mt-24" id="section-customers">
-        <PortfolioCarousel />
+        <PortfolioCarousel onItemSelect={handleSelectShowcase} />
       </div>
 
       {/* 5. Elegant Single-Screen Grid Layout Content */}
@@ -271,13 +321,9 @@ export default function App() {
             />
           </div>
 
-          {/* Persistent listings tracker - col span 7 */}
+          {/* Visit us / contact + map - col span 7 */}
           <div className="lg:col-span-7">
-            <BookingList
-              inquiries={inquiries}
-              onDeleteInquiry={handleDeleteInquiry}
-              onClearAll={handleClearAllInquiries}
-            />
+            <ContactMapPanel />
           </div>
         </div>
 

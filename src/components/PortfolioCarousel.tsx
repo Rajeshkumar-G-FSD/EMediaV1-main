@@ -1,11 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ChevronLeft, ChevronRight, Camera, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Camera, Sparkles, Eye } from 'lucide-react';
 import { motion } from 'motion/react';
 import { CUSTOMERS_DATA } from '../data.ts';
 import BlurText from './BlurText.tsx';
 import ScrollReveal from './ScrollReveal.tsx';
 
-export default function PortfolioCarousel() {
+interface PortfolioCarouselProps {
+  onItemSelect: (id: string) => void;
+}
+
+export default function PortfolioCarousel({ onItemSelect }: PortfolioCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -119,11 +123,23 @@ export default function PortfolioCarousel() {
                   className="absolute left-1/2 top-1/2 w-[280px] sm:w-[320px] -translate-x-1/2 -translate-y-1/2"
                   style={{ transformStyle: 'preserve-3d' }}
                 >
-                  <div className="rounded-[28px] overflow-hidden border border-white/60 bg-white shadow-[0_30px_60px_rgba(15,23,42,0.18)]" style={{ transformStyle: 'preserve-3d' }}>
+                  <button
+                    type="button"
+                    onClick={() => onItemSelect(item.id)}
+                    className="group block w-full text-left cursor-pointer rounded-[28px] overflow-hidden border border-white/60 bg-white shadow-[0_30px_60px_rgba(15,23,42,0.18)]"
+                    style={{ transformStyle: 'preserve-3d' }}
+                    aria-label={`View ${item.title} gallery`}
+                  >
                     <div className="relative h-[380px] sm:h-[430px]">
                       <img alt={item.title} className="absolute inset-0 h-full w-full object-cover" src={item.image} />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/20 to-transparent" />
                       <div className="absolute inset-0 border border-white/20 rounded-[28px]" />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="flex items-center gap-2 text-white text-[11px] font-bold uppercase tracking-[0.2em] bg-white/15 border border-white/30 px-4 py-2 rounded-full backdrop-blur-sm">
+                          <Eye className="w-3.5 h-3.5" />
+                          View Gallery
+                        </span>
+                      </div>
                       <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
                         <div className="flex items-center justify-between gap-3 mb-2">
                           <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#EAF1F1]">{item.category}</span>
@@ -135,7 +151,7 @@ export default function PortfolioCarousel() {
                         <p className="text-xs sm:text-sm text-white/85 leading-relaxed line-clamp-3">{item.description}</p>
                       </div>
                     </div>
-                  </div>
+                  </button>
                 </motion.article>
               );
             })}

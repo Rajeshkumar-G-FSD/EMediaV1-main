@@ -7,6 +7,14 @@ export interface Customer {
   image: string;
 }
 
+export interface ShowcaseContent {
+  tagline: string;
+  heroSubtitle: string;
+  intro: string[];
+  highlights: string[];
+  gallery: string[];
+}
+
 export interface Service {
   id: string;
   title: string;

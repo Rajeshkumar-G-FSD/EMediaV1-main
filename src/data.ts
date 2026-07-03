@@ -1,4 +1,4 @@
-import { Customer, Service, Product, BlogPost } from './types.ts';
+import { Customer, Service, Product, BlogPost, ShowcaseContent } from './types.ts';
 
 export const EVENT_IMAGES = {
   heroDecor: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1800&q=80',
@@ -63,13 +63,152 @@ export const CUSTOMERS_DATA: Customer[] = [
   },
   {
     id: 'c8',
-    title: 'Flex banner decoration',
+    title: 'Flex banner',
     category: 'Flex decor',
     date: '05/07/2026',
     description: 'A vibrant flex banner setup with sharp branding, durable printing, and eye-catching placement for events and promotions.',
     image: '/images/emedia_flex.png'
   }
 ];
+
+// Detail-page SEO content and gallery images shown when a Decoration 3D Showcase
+// card is opened. Some gallery entries are EMedia's own event photos; the rest
+// are sample/inspiration images used as placeholder style references.
+export const SHOWCASE_CONTENT: Record<string, ShowcaseContent> = {
+  c1: {
+    tagline: 'Erode’s Favourite Balloon Decorators',
+    heroSubtitle: 'Birthday Balloon Decoration in Erode',
+    intro: [
+      'EMedia Event & Promotions is one of the most sought-after names for birthday balloon decoration in Erode, known for colourful balloon arches, personalised name and age banners, and photo-ready backdrops that turn any birthday into a celebration to remember.',
+      'From kids’ theme parties to milestone birthdays and surprise celebrations, our Erode-based team designs balloon columns, ceiling clusters, and table centrepieces using premium latex and foil balloons — set up on time and matched to the colours and theme you choose.',
+    ],
+    highlights: [
+      'Custom name & age balloon backdrops',
+      'Balloon arches, columns and ceiling clusters',
+      'Theme-based colour palettes for kids & adults',
+      'Same-day setup available across Erode',
+      'Add-ons: table skirting, LED lighting, photo props',
+    ],
+    gallery: [
+      '/images/birtthday_decorations.png',
+      'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop&q=60',
+    ],
+  },
+  c4: {
+    tagline: 'Traditional Ceremony Decoration, Erode',
+    heroSubtitle: 'Naming Ceremony, Baptism & Family Function Decor',
+    intro: [
+      'EMedia designs graceful traditional ceremony decorations across Erode for naming ceremonies, baptisms, puberty functions, and other family milestones — blending floral welcome arches, elegant drapery, and warm ambient lighting.',
+      'Every ceremony setup is planned around your family’s traditions and the venue layout, with comfortable seating, a well-lit stage for photos, and coordinated styling from entrance to backdrop.',
+    ],
+    highlights: [
+      'Floral welcome arches & ring/cradle decor',
+      'Traditional drape backdrops with fairy lighting',
+      'Stage & mandapam styling for family functions',
+      'Photo-friendly layout for guests and priests',
+      'On-site coordination on the day of the event',
+    ],
+    gallery: [
+      '/images/baby_ceremony_decorations.png',
+      '/images/Emediaevnt_stage_ring_decoration.png',
+      '/images/Emediaevnt_stage_wedding_decorations.png',
+      'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&auto=format&fit=crop&q=60',
+    ],
+  },
+  c5: {
+    tagline: 'Corporate Gala & Launch Event Decoration',
+    heroSubtitle: 'Brand Activations, Launches & Gala Stages in Erode',
+    intro: [
+      'EMedia builds high-energy corporate gala environments in Erode — branded stage backdrops, guest-flow layouts, and lighting designed for product launches, TV/media shoots, and company celebrations.',
+      'We work closely with brand and event teams to translate sponsor logos, colour palettes, and campaign themes into a polished, photograph-ready stage that holds up for a full day of filming or guest activity.',
+    ],
+    highlights: [
+      'Branded stage backdrops for launches & shoots',
+      'Sponsor-wall and step-and-repeat styling',
+      'Ambient and accent stage lighting',
+      'Guest-flow layout for large-scale events',
+      'On-ground coordination with brand teams',
+    ],
+    gallery: [
+      '/images/cooking_event_decoration.png',
+      '/images/Emediaevnt_cooking_decoration.png',
+      'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&auto=format&fit=crop&q=60',
+    ],
+  },
+  c6: {
+    tagline: 'Corporate Anniversary Stage Decoration',
+    heroSubtitle: 'Company Anniversary & Milestone Celebrations in Erode',
+    intro: [
+      'For company anniversaries and milestone celebrations, EMedia designs a polished corporate stage with brand-aligned backdrops, ambient lighting, and a clean, professional finish for speeches, awards, and group photos.',
+      'Our Erode team handles everything from stage backdrop and seating layout to lighting and finishing touches, so your team can focus on the celebration.',
+    ],
+    highlights: [
+      'Brand-aligned stage backdrops',
+      'Ambient and spotlight stage lighting',
+      'Award-ceremony and speech-ready staging',
+      'Seating and guest layout planning',
+      'Coordinated setup and breakdown',
+    ],
+    gallery: [
+      '/images/cooking_event_stage_decor.png',
+      '/images/Emediaevnt_stag_decoration.png',
+      'https://images.unsplash.com/photo-1478146059778-26028b07395a?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&auto=format&fit=crop&q=60',
+    ],
+  },
+  c7: {
+    tagline: 'Erode’s Trusted Wedding Decorators',
+    heroSubtitle: 'Wedding Stage, Mandap & Reception Decoration in Erode',
+    intro: [
+      'EMedia Event & Promotions is one of Erode’s most sought-after wedding decoration teams, crafting layered floral stages, grand entrance backdrops, and reception styling designed around your wedding colours and venue.',
+      'From the welcome arch to the mandap and reception tables, every element is planned to photograph beautifully and hold up through a full day of ceremonies and celebration.',
+    ],
+    highlights: [
+      'Floral mandap & stage backdrop design',
+      'Grand entrance and welcome arch styling',
+      'Reception table and centrepiece decor',
+      'Colour-matched drapery and ambient lighting',
+      'Full-day on-site setup and coordination',
+    ],
+    gallery: [
+      '/images/wedding_decoration.png',
+      '/images/Emediaevnt_stage_wedding_decoration.png',
+      '/images/Emediaevnt_stage_wedding_decorations.png',
+      '/images/Emediaevnt_wedding_decoration.png',
+      'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&auto=format&fit=crop&q=60',
+    ],
+  },
+  c8: {
+    tagline: 'Flex Banner Printing & Installation, Erode',
+    heroSubtitle: 'Durable Flex Banners for Shops, Events & Promotions',
+    intro: [
+      'EMedia offers fast, high-resolution flex banner printing and installation across Erode — for shop openings, event branding, roadside promotions, and vehicle-mounted campaign banners.',
+      'Every banner is printed on weatherproof vinyl with sharp, fade-resistant colour and can be sized and installed to match your storefront, stage backdrop, or promotional vehicle.',
+    ],
+    highlights: [
+      'High-resolution, fade-resistant printing',
+      'Weatherproof vinyl for indoor & outdoor use',
+      'Custom sizing for shops, stages & vehicles',
+      'Quick turnaround for time-sensitive promotions',
+      'Installation support across Erode',
+    ],
+    gallery: [
+      '/images/emedia_flex.png',
+      'https://images.unsplash.com/photo-1557804483-ef3ae78eca57?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=60',
+    ],
+  },
+};
 
 export const SERVICES_DATA: Service[] = [
   {
