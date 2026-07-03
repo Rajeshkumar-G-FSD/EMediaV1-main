@@ -39,10 +39,14 @@ export default function AdminLogin() {
 
     setIsSubmitting(true);
     try {
+      console.log({ email: ADMIN_EMAIL, passwordLength: password.length });
       await signInWithEmailAndPassword(auth, ADMIN_EMAIL, password);
     } catch (err) {
-      console.error('Admin sign-in failed', err);
       const code = (err as { code?: string })?.code;
+      const message = (err as { message?: string })?.message;
+      console.log(code);
+      console.log(message);
+      console.error('Admin sign-in failed', err);
       if (code === 'auth/operation-not-allowed' || code === 'auth/configuration-not-found') {
         setErrorMsg('Email/Password sign-in is not enabled yet in Firebase. Enable it under Authentication → Sign-in method.');
       } else if (code === 'auth/user-not-found' || code === 'auth/invalid-credential') {
