@@ -60,6 +60,14 @@ export const CUSTOMERS_DATA: Customer[] = [
     date: '22/06/2026',
     description: 'An elegant wedding decoration with layered florals, a grand stage backdrop, and warm lighting crafted for a timeless celebration.',
     image: '/images/wedding_decoration.png'
+  },
+  {
+    id: 'c8',
+    title: 'Flex banner decoration',
+    category: 'Flex decor',
+    date: '05/07/2026',
+    description: 'A vibrant flex banner setup with sharp branding, durable printing, and eye-catching placement for events and promotions.',
+    image: '/images/emedia_flex.png'
   }
 ];
 

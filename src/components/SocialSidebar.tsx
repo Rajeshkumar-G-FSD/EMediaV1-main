@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MessageSquare, ArrowUp, KeyRound } from 'lucide-react';
+import { Phone, Instagram, Youtube, ArrowUp, KeyRound } from 'lucide-react';
 
 interface SidebarProps {
   onQuickActionClick: (actionId: string) => void;
@@ -35,7 +35,9 @@ export default function SocialSidebar({ onQuickActionClick }: SidebarProps) {
 
       {/* Facebook Link */}
       <a
-        href="#"
+        href="https://www.facebook.com/people/E-media-Erode/100010181465284/"
+        target="_blank"
+        rel="noopener noreferrer"
         className="p-3 hover:bg-white/10 border-b border-white/20 transition flex items-center justify-center"
         title="Follow on Facebook"
         aria-label="Facebook link"
@@ -56,27 +58,29 @@ export default function SocialSidebar({ onQuickActionClick }: SidebarProps) {
         <Phone className="w-5 h-5" />
       </button>
 
-      {/* Email Consultation Form action */}
-      <button
-        onClick={() => onQuickActionClick('email')}
-        className="p-3 hover:bg-white/10 border-b border-white/20 transition flex items-center justify-center cursor-pointer"
-        title="Send a contact email"
-        id="sidebar-email-btn"
-        aria-label="Email Enquiry"
+      {/* Instagram Link */}
+      <a
+        href="https://www.instagram.com/emediaerode/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="p-3 hover:bg-white/10 border-b border-white/20 transition flex items-center justify-center"
+        title="Follow on Instagram"
+        aria-label="Instagram link"
       >
-        <Mail className="w-5 h-5" />
-      </button>
+        <Instagram className="w-5 h-5" />
+      </a>
 
-      {/* Quick Booking consultation */}
-      <button
-        onClick={() => onQuickActionClick('form')}
-        className="p-3 hover:bg-white/10 border-b border-white/20 transition flex items-center justify-center cursor-pointer animate-pulse-slow"
-        title="Open the consultation form"
-        id="sidebar-form-btn"
-        aria-label="Direct Form"
+      {/* YouTube Link */}
+      <a
+        href="https://www.youtube.com/@EmediaEvent"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="p-3 hover:bg-white/10 border-b border-white/20 transition flex items-center justify-center"
+        title="Subscribe on YouTube"
+        aria-label="YouTube link"
       >
-        <MessageSquare className="w-5 h-5" />
-      </button>
+        <Youtube className="w-5 h-5" />
+      </a>
 
       {/* Scroll to Top */}
       {showScrollTop && (
