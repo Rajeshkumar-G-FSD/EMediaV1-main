@@ -1,6 +1,6 @@
 import { Phone, Mail, MapPin, Navigation } from 'lucide-react';
 
-const ADDRESS = '6th Street Corner, Sengodampalayam Rd, Sakthi Nagar, Nalliyampalayam, Thindal, Erode, Tamil Nadu 638012';
+const ADDRESS = '6th Street Corner, Sakthi Nagar, Sengodampallam, Thindal, Erode -638 012';
 const MAP_LINK = 'https://www.google.com/maps/place/E+Media+Event+%26+Promotions/@11.3214547,77.6834364,16z/data=!3m1!4b1!4m6!3m5!1s0x3ba96fe37356773d:0xd2fadad261aaf347!8m2!3d11.3214547!4d77.6834364!16s%2Fg%2F11zfs7906b?entry=ttu';
 const MAP_EMBED_SRC = 'https://www.google.com/maps?q=E+Media+Event+%26+Promotions,11.3214547,77.6834364&z=16&output=embed';
 
