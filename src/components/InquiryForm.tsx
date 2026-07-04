@@ -356,6 +356,7 @@ Notes: ${notes || 'None'}`;
                 </span>
                 <input
                   type="date"
+                  min={new Date().toISOString().split('T')[0]}
                   className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded text-sm focus:border-primary focus:outline-none"
                   value={weddingDate}
                   onChange={(e) => setWeddingDate(e.target.value)}

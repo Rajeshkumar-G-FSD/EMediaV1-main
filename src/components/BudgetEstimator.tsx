@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Calculator, Check, ChevronRight, ClipboardList, User, Phone, MessageCircle } from 'lucide-react';
+import { Calculator, Check, ChevronRight, ClipboardList, User, Phone, MessageCircle, Calendar } from 'lucide-react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../lib/firebase.ts';
 import { EVENT_TYPES, ADDONS } from '../data.ts';
@@ -17,8 +17,11 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
   const [budget, setBudget] = useState(50000);
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
+  const [eventDate, setEventDate] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [submittedQuote, setSubmittedQuote] = useState(false);
+
+  const todayStr = new Date().toISOString().split('T')[0];
 
   const formatCurrency = (num: number) => {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(num);
@@ -47,6 +50,14 @@ export default function BudgetEstimator({ onQuoteSubmit }: EstimatorProps) {
       setErrorMsg('Please enter a valid contact phone number.');
       return;
     }
+    if (!eventDate) {
+      setErrorMsg('Please select your event date.');
+      return;
+    }
+    if (eventDate < todayStr) {
+      setErrorMsg('Event date cannot be in the past.');
+      return;
+    }
 
     const addonLines = selectedAddons.length
       ? selectedAddons.map((a) => `- ${a.label}: ${formatCurrency(a.price)}`).join('\n')
@@ -61,6 +72,7 @@ ${addonLines}
 Approximate Budget: ${formatCurrency(budget)}
 Estimated Total: ${formatCurrency(grandTotal)}
 
+Event Date: ${eventDate}
 Name: ${contactName.trim()}
 Phone: ${contactPhone.trim()}`;
 
@@ -78,6 +90,7 @@ Phone: ${contactPhone.trim()}`;
         paymentStatus: 'unpaid',
         customerName: contactName.trim(),
         customerPhone: contactPhone.trim(),
+        eventDate,
         createdAt: Date.now(),
       });
     } catch (err) {
@@ -196,6 +209,20 @@ Phone: ${contactPhone.trim()}`;
                   value={contactPhone}
                   onChange={(e) => setContactPhone(e.target.value)}
                   id="estimator-contact-phone"
+                />
+              </div>
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                  <Calendar className="h-4 w-4" />
+                </span>
+                <input
+                  type="date"
+                  placeholder="Your event date..."
+                  min={todayStr}
+                  className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded text-sm focus:border-primary focus:outline-none"
+                  value={eventDate}
+                  onChange={(e) => setEventDate(e.target.value)}
+                  id="estimator-event-date"
                 />
               </div>
             </div>
