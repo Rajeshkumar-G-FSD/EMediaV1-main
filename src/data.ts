@@ -290,7 +290,7 @@ export const SERVICES_DATA: Service[] = [
     description: 'Decor for the family altar and living area. Flexible color palettes and refined styling create a sacred and radiant atmosphere for engagement and wedding traditions.',
     detailedDescription: 'Như Ý’s premium ancestral ceremony decor brings warmth and sophistication to the moment both families come together. Packages range from traditional to modern and include floral entrances, ceremonial backdrops, detailed dragon-phoenix altar styling, artistic gift trays, and elegant seating for both families.',
     priceRange: '8.000.000 - 25.000.000 VNĐ',
-    image: EVENT_IMAGES.ceremonyDecor
+    image: '/images/Emediaevnt_stage_ring_decoration.png'
   },
   {
     id: 's2',
@@ -298,7 +298,7 @@ export const SERVICES_DATA: Service[] = [
     description: 'Design and production for reception halls, floral aisles, gallery tables, and the main stage. We shape your venue into a romantic space that reflects your story.',
     detailedDescription: 'Creative wedding venue styling tailored to each couple’s theme. Full-service packages include a standout stage backdrop, a romantic flower-lined aisle, a charming gallery table for memories, and refined table florals. Như Ý turns your vision into a real setting.',
     priceRange: '15.000.000 - 60.000.000 VNĐ',
-    image: EVENT_IMAGES.weddingDecor
+    image: '/images/wedding_decoration.png'
   },
   {
     id: 's3',
@@ -306,7 +306,7 @@ export const SERVICES_DATA: Service[] = [
     description: 'Consulting and setup for tented, beach, and garden events. Fresh flowers and warm string lights create a polished evening atmosphere.',
     detailedDescription: 'We specialize in styling and coordinating outdoor weddings at beaches and romantic gardens. Our complete solution includes professional sound and lighting, weather-ready structures, artful flower combinations, and thoughtful event flow planning.',
     priceRange: '20.000.000 - 80.000.000 VNĐ',
-    image: EVENT_IMAGES.banquetDecor
+    image: '/images/EMedia_wedding_garden_flower_decors.jpg'
   },
   {
     id: 's4',
@@ -314,7 +314,7 @@ export const SERVICES_DATA: Service[] = [
     description: 'Balloon walls, themed tables, lighting accents, and playful stage styling for birthdays and family celebrations.',
     detailedDescription: 'Our birthday decoration packages include balloon styling, dessert table setup, theme props, backdrop design, entry decor, and photo-ready lighting so every celebration feels bright and personal.',
     priceRange: '7.000.000 - 18.000.000 VNĐ',
-    image: EVENT_IMAGES.birthdayDecor
+    image: '/images/birtthday_decorations.png'
   }
 ];
 
@@ -326,7 +326,7 @@ export const PRODUCTS_DATA: Product[] = [
     description: 'A refined canopy made with soft white and fresh green silk that creates a cool, elegant shelter for outdoor weddings and receptions.',
     detailedDescription: 'A premium modular tent system from Như Ý. The white and fresh green silk fabric creates a light, airy feel while the steel frame keeps the structure safe and sturdy.',
     price: '4.500.000 VNĐ / Bộ',
-    image: EVENT_IMAGES.banquetDecor
+    image: '/images/Emedia_flx_banner_cook_event_stage.jpg'
   },
   {
     id: 'p2',
@@ -335,7 +335,7 @@ export const PRODUCTS_DATA: Product[] = [
     description: 'A graceful arched entrance combining red chiffon drapery with French roses and white peonies for a striking guest welcome.',
     detailedDescription: 'An artistic wedding arch that pairs romantic red chiffon with rich rose and peony arrangements. Ideal for formal guest entrances at homes, halls, or restaurants.',
     price: '3.200.000 VNĐ / Chiếc',
-    image: EVENT_IMAGES.floralArch
+    image: '/images/EMedia_weddin_arch_flower_decors.jpg'
   },
   {
     id: 'p3',
@@ -344,7 +344,7 @@ export const PRODUCTS_DATA: Product[] = [
     description: 'A classic pair of dragon and phoenix forms handcrafted from fragrant leaves, fresh areca fruit, and marigolds to symbolize harmony.',
     detailedDescription: 'A traditional handcrafted set shaped into intricate dragon and phoenix symbols using fragrant leaves, chili peppers, areca fruit, and fresh marigolds. It represents lasting harmony and a respectful Vietnamese wedding tradition.',
     price: '6.000.000 VNĐ / Bộ hai linh vật',
-    image: EVENT_IMAGES.ceremonyDecor
+    image: '/images/IMG20251117195232.jpg.jpeg'
   },
   {
     id: 'p4',
@@ -353,7 +353,7 @@ export const PRODUCTS_DATA: Product[] = [
     description: 'An engagement tray set with ornate dragon and phoenix details, designed to present offerings to the ancestors with elegance.',
     detailedDescription: 'A premium handcrafted tray set from Như Ý. Each dragon and phoenix form is assembled from uniform areca fruit, red chilies, sculpted young coconut leaves, and fresh imported fruit.',
     price: '4.800.000 VNĐ / Bộ',
-    image: EVENT_IMAGES.tableDecor
+    image: '/images/Emediaevnt_stage_ring_decoration.png'
   }
 ];
 
