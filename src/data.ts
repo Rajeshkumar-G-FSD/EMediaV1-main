@@ -39,18 +39,18 @@ export const CUSTOMERS_DATA: Customer[] = [
   },
   {
     id: 'c5',
-    title: 'Corporate gala decoration',
-    category: 'Event decor',
+    title: 'Cooking Event Decoration',
+    category: 'Cooking Event',
     date: '12/12/2026',
-    description: 'A high-energy event environment with lighting, stage presence, and guest-flow details for launches and company celebrations.',
+    description: 'A vibrant cooking show and culinary event stage with branded backdrops, sponsor styling, and lighting designed for TV shoots and brand activations.',
     image: '/images/cooking_event_decoration.png'
   },
   {
     id: 'c6',
-    title: 'Corporate anniversary decoration',
+    title: 'Corporate Event Decoration',
     category: 'Corporate event',
     date: '18/03/2026',
-    description: 'A professionally styled corporate anniversary stage with brand-aligned backdrops, ambient lighting, and a polished celebration setup.',
+    description: 'A professionally styled corporate event stage with brand-aligned backdrops, ambient lighting, and a polished celebration setup.',
     image: '/images/cooking_event_stage_decor.png'
   },
   {
@@ -131,18 +131,18 @@ export const SHOWCASE_CONTENT: Record<string, ShowcaseContent> = {
     ],
   },
   c5: {
-    tagline: 'Corporate Gala & Launch Event Decoration',
-    heroSubtitle: 'Brand Activations, Launches & Gala Stages in Erode',
+    tagline: 'Cooking Show & Culinary Event Decoration',
+    heroSubtitle: 'TV Cooking Show & Culinary Event Stages in Erode',
     intro: [
-      'EMedia builds high-energy corporate gala environments in Erode — branded stage backdrops, guest-flow layouts, and lighting designed for product launches, TV/media shoots, and company celebrations.',
-      'We work closely with brand and event teams to translate sponsor logos, colour palettes, and campaign themes into a polished, photograph-ready stage that holds up for a full day of filming or guest activity.',
+      'EMedia designs vibrant cooking event and culinary show decorations in Erode — branded stage backdrops, sponsor walls, and cooking-station styling built for televised competitions, brand activations, and food-focused celebrations.',
+      'From TV cooking show sets to corporate culinary launches, our team handles sponsor logo placement, cooking-station layout, lighting, and a photograph-ready stage that holds up through a full day of filming and live audience energy.',
     ],
     highlights: [
-      'Branded stage backdrops for launches & shoots',
-      'Sponsor-wall and step-and-repeat styling',
-      'Ambient and accent stage lighting',
-      'Guest-flow layout for large-scale events',
-      'On-ground coordination with brand teams',
+      'Branded cooking show stage backdrops',
+      'Sponsor-wall and multi-brand logo styling',
+      'Cooking-station and workstation layout design',
+      'Studio and event lighting for filming',
+      'On-ground coordination with brand & production teams',
     ],
     gallery: [
       '/images/cooking_event_decoration.png',
@@ -158,10 +158,10 @@ export const SHOWCASE_CONTENT: Record<string, ShowcaseContent> = {
     ],
   },
   c6: {
-    tagline: 'Corporate Anniversary Stage Decoration',
-    heroSubtitle: 'Company Anniversary & Milestone Celebrations in Erode',
+    tagline: 'Corporate Event Stage Decoration',
+    heroSubtitle: 'Company Anniversaries & Corporate Milestone Celebrations in Erode',
     intro: [
-      'For company anniversaries and milestone celebrations, EMedia designs a polished corporate stage with brand-aligned backdrops, ambient lighting, and a clean, professional finish for speeches, awards, and group photos.',
+      'For company anniversaries, milestone celebrations, and other corporate events, EMedia designs a polished stage with brand-aligned backdrops, ambient lighting, and a clean, professional finish for speeches, awards, and group photos.',
       'Our Erode team handles everything from stage backdrop and seating layout to lighting and finishing touches, so your team can focus on the celebration.',
     ],
     highlights: [
@@ -511,6 +511,7 @@ export const EVENT_TYPES = [
   { id: 'wedding-shoot', label: 'Wedding Shoot', price: 20000 },
   { id: 'kids-photography', label: 'Kids Photography', price: 8000 },
   { id: 'traditional-ceremony', label: 'Traditional Ceremony Events', price: 18000 },
+  { id: 'flex-banner', label: 'Flex Banner', price: 5000 },
 ];
 
 export const ADDONS = [

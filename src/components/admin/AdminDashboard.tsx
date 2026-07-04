@@ -4,12 +4,104 @@ import { signOut } from 'firebase/auth';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   LogOut, Wallet, PiggyBank, ClipboardList, Phone, Calendar,
-  MessageCircle, IndianRupee,
+  MessageCircle, IndianRupee, Mail, FileText,
 } from 'lucide-react';
 import { auth, db } from '../../lib/firebase.ts';
 import { EVENT_TYPES } from '../../data.ts';
-import { BookingRecord } from '../../types.ts';
+import { BookingRecord, QuoteEnquiry } from '../../types.ts';
 import ReceiptModal from './ReceiptModal.tsx';
+
+const QUOTE_STATUS_STYLES: Record<QuoteEnquiry['status'], string> = {
+  pending: 'bg-amber-50 text-amber-600 border-amber-100',
+  confirmed: 'bg-emerald-50 text-emerald-700 border-emerald-100',
+  canceled: 'bg-red-50 text-red-600 border-red-100',
+};
+
+interface QuoteEnquiryCardProps {
+  enquiry: QuoteEnquiry;
+}
+
+function QuoteEnquiryCard({ enquiry }: QuoteEnquiryCardProps) {
+  const handleStatusChange = async (status: QuoteEnquiry['status']) => {
+    await updateDoc(doc(db, 'quoteEnquiries', enquiry.id), { status });
+  };
+
+  const handleReplyWhatsApp = () => {
+    const digits = enquiry.phone.replace(/\D/g, '');
+    const message = `Hi ${enquiry.fullName}, thank you for your enquiry with EMedia Event & Promotions about ${enquiry.serviceType}. We'd love to help plan your event!`;
+    window.open(`https://wa.me/${digits}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.25 }}
+      className="p-5 border border-gray-100 rounded-md hover:border-primary/15 hover:shadow-xs transition bg-light flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
+      id={`admin-quote-enquiry-${enquiry.id}`}
+    >
+      <div className="space-y-2 flex-1">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <span className="font-bold text-gray-800 text-sm md:text-base">{enquiry.fullName}</span>
+          <span className="text-[10px] bg-primary/10 text-primary font-bold px-2.5 py-0.5 uppercase tracking-wider">
+            {enquiry.serviceType}
+          </span>
+          <span className="text-[10px] bg-secondary/10 text-secondary font-bold px-2.5 py-0.5 uppercase tracking-wider">
+            {enquiry.category}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-1 gap-x-4 text-xs text-gray-500">
+          <div className="flex items-center gap-1.5">
+            <Phone className="w-3.5 h-3.5 text-gray-400" />
+            <span>Phone: <span className="font-semibold text-gray-700">{enquiry.phone}</span></span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <Mail className="w-3.5 h-3.5 text-gray-400" />
+            <span>Email: <span className="text-gray-700">{enquiry.email}</span></span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <Calendar className="w-3.5 h-3.5 text-gray-400" />
+            <span>Event date: <span className="font-semibold text-gray-700">{enquiry.weddingDate}</span></span>
+          </div>
+        </div>
+
+        {enquiry.notes && (
+          <div className="text-xs italic text-gray-500 bg-white p-2 border border-gray-100 rounded max-w-2xl leading-relaxed">
+            <span className="font-bold not-italic text-gray-400 mr-1.5">Request notes:</span>
+            {enquiry.notes}
+          </div>
+        )}
+
+        <p className="text-[10px] text-gray-400 font-mono">
+          Submitted {new Date(enquiry.createdAt).toLocaleString('en-IN')}
+        </p>
+      </div>
+
+      <div className="flex items-center gap-2 flex-shrink-0">
+        <select
+          value={enquiry.status}
+          onChange={(e) => handleStatusChange(e.target.value as QuoteEnquiry['status'])}
+          className={`px-2 py-1.5 border rounded text-[10px] font-bold uppercase tracking-wider focus:outline-none cursor-pointer ${QUOTE_STATUS_STYLES[enquiry.status]}`}
+          id={`admin-quote-status-${enquiry.id}`}
+        >
+          <option value="pending">Pending</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="canceled">Canceled</option>
+        </select>
+        <button
+          onClick={handleReplyWhatsApp}
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary text-white rounded text-[10px] font-bold uppercase cursor-pointer whitespace-nowrap"
+          id={`admin-quote-reply-${enquiry.id}`}
+        >
+          <MessageCircle className="w-3.5 h-3.5" />
+          Reply
+        </button>
+      </div>
+    </motion.div>
+  );
+}
 
 const formatCurrency = (num: number) =>
   new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(num);
@@ -179,6 +271,7 @@ interface AdminDashboardProps {
 
 export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
   const [bookings, setBookings] = useState<BookingRecord[]>([]);
+  const [quoteEnquiries, setQuoteEnquiries] = useState<QuoteEnquiry[]>([]);
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
@@ -188,6 +281,16 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setBookings(
         snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as BookingRecord))
+      );
+    });
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const q = query(collection(db, 'quoteEnquiries'), orderBy('createdAt', 'desc'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setQuoteEnquiries(
+        snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as QuoteEnquiry))
       );
     });
     return () => unsubscribe();
@@ -326,6 +429,40 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
                 <AnimatePresence mode="popLayout">
                   {filteredBookings.map((booking) => (
                     <BookingCard key={booking.id} booking={booking} />
+                  ))}
+                </AnimatePresence>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Quotes Enquiry list */}
+        <div className="bg-white rounded-lg border border-primary/20 overflow-hidden shadow-md">
+          <div className="bg-primary/5 border-b border-primary/10 p-5 flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <h3 className="font-elegant text-xl font-bold text-primary flex items-center gap-2">
+                <FileText className="w-5 h-5" />
+                Quotes Enquiry
+              </h3>
+              <p className="text-xs text-gray-500 mt-1">"Get a quote now" submissions from the consultation form, synced live from Firebase.</p>
+            </div>
+            <span className="text-[10px] bg-primary/10 text-primary font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+              {quoteEnquiries.length} total
+            </span>
+          </div>
+          <div className="p-6">
+            {quoteEnquiries.length === 0 ? (
+              <div className="text-center py-12 text-gray-400" id="admin-no-quote-enquiries">
+                <div className="w-12 h-12 bg-gray-50 text-gray-300 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <FileText className="w-6 h-6" />
+                </div>
+                <p className="text-sm">No quote enquiries yet.</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <AnimatePresence mode="popLayout">
+                  {quoteEnquiries.map((enquiry) => (
+                    <QuoteEnquiryCard key={enquiry.id} enquiry={enquiry} />
                   ))}
                 </AnimatePresence>
               </div>

@@ -56,6 +56,19 @@ export interface ConsultationRequest {
   createdAt: string;
 }
 
+export interface QuoteEnquiry {
+  id: string;
+  fullName: string;
+  phone: string;
+  email: string;
+  weddingDate: string;
+  serviceType: string;
+  notes: string;
+  status: 'pending' | 'confirmed' | 'canceled';
+  category: string;
+  createdAt: number;
+}
+
 export interface QuoteAddon {
   id: string;
   label: string;
