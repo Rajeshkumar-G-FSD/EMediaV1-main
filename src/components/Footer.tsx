@@ -32,7 +32,7 @@ const SOCIAL = [
 ];
 
 export default function Footer({ onNavClick }: FooterProps) {
-  const address = 'No. 183, Near Parimalam Mahal, 5th Street, 3rd Cross Sakthi Nager, Thindal, Erode-638012, Tamil Nadu';
+  const address = '6th Street Corner, Sengodampalayam Rd, Sakthi Nagar, Nalliyampalayam, Thindal, Erode, Tamil Nadu 638012';
   const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
   const [copied, setCopied] = useState(false);
 
@@ -192,9 +192,9 @@ export default function Footer({ onNavClick }: FooterProps) {
                   <div>
                     <p className="text-[10px] text-white/25 uppercase tracking-wider font-bold mb-0.5">Address</p>
                     <p className="text-xs text-white/50 leading-relaxed">
-                      No. 183, 5th Street, 3rd Cross<br />
-                      Sakthi Nager, Thindal<br />
-                      Erode – 638012, Tamil Nadu
+                      6th Street Corner, Sengodampalayam Rd<br />
+                      Sakthi Nagar, Nalliyampalayam, Thindal<br />
+                      Erode, Tamil Nadu 638012
                     </p>
                     <div className="flex items-center gap-3 mt-2">
                       <a

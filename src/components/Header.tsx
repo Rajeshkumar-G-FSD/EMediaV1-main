@@ -103,7 +103,7 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
                 <div className="relative">
 <div className="w-20 h-20 rounded-full border-[3px] border-primary overflow-hidden bg-white shadow-lg group-hover:scale-105 transition-transform duration-300">
                     <img
-                      src="/images/emediaevents_logo.png"
+                      src="/images/emedia_round.png"
                       alt="EMedia"
                       className="h-full w-full object-contain"
                     />
@@ -166,7 +166,7 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
               aria-label="Home"
             >
               <div className="w-14 h-14 rounded-full border-2 border-primary overflow-hidden shadow-sm">
-                <img src="/images/emediaevents_logo.png" alt="EMedia" className="h-full w-full object-contain" />
+                <img src="/images/emedia_round.png" alt="EMedia" className="h-full w-full object-contain" />
               </div>
               <div className="flex flex-col leading-none">
                 <span className="font-elegant text-base font-bold text-primary">EMedia</span>
