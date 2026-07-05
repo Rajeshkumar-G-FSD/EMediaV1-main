@@ -76,6 +76,38 @@ export const CUSTOMERS_DATA: Customer[] = [
     date: '10/09/2026',
     description: 'Colourful balloon wall, arch, and themed installations with festive color palettes for birthdays, corporate launches, and every celebration in between.',
     image: '/images/Emedia_ballon_decoration_carnish_park.jpg'
+  },
+  {
+    id: 'c10',
+    title: 'Wedding Photography',
+    category: 'Wedding Photography',
+    date: '14/02/2026',
+    description: 'Candid and traditional wedding photography capturing couple portraits, ritual close-ups, and every colourful detail of the ceremony.',
+    image: '/images/EMedia_wedding_photography_couple.JPG'
+  },
+  {
+    id: 'c11',
+    title: 'School Event Decoration',
+    category: 'School Event',
+    date: '20/01/2026',
+    description: 'Fun, organised decoration and prop styling for school functions, annual days, and student events across Erode.',
+    image: '/images/E_media_schoolevent_toy.jpg'
+  },
+  {
+    id: 'c12',
+    title: 'Event Album Design',
+    category: 'Album',
+    date: '02/04/2026',
+    description: 'Beautifully composed photo albums covering housewarming, earring ceremonies, temple weddings, and receptions.',
+    image: '/images/E_media_album_reception.jpg'
+  },
+  {
+    id: 'c13',
+    title: 'Stage & Entrance Decoration',
+    category: 'Stage Decor',
+    date: '15/05/2026',
+    description: 'Elegant stage backdrops, floral entrance arches, and themed panthal decoration for weddings and family functions.',
+    image: '/images/EMedia_hero_stage_decor_whire_red.jpg'
   }
 ];
 
@@ -114,6 +146,7 @@ export const SHOWCASE_CONTENT: Record<string, ShowcaseContent> = {
       '/images/Emedia_birthday_yellow_pink_ballon_decorations_theme.jpg',
       '/images/Emedia_kids-birthday_ballon_decorations_theme.jpg',
       '/images/Emedia_birthday_balloon_toy_decoration.jpg',
+      '/images/E_media_corporate_happy_birthday_stage_decorations.jpg',
     ],
   },
   c4: {
@@ -139,6 +172,12 @@ export const SHOWCASE_CONTENT: Record<string, ShowcaseContent> = {
       '/images/Emedia_babyshower_red-flower_decorations.jpg',
       '/images/Emedia_babyshower_decorations.jpg',
       '/images/Emedia_dinner_decorations.jpg',
+      '/images/E_media_babyshower_flower.jpg',
+      '/images/E_media_babyshower_ring_decoration.jpg',
+      '/images/E_media_tamil_traditional.jpg',
+      '/images/E_media_babyshower_completeset.jpg',
+      '/images/E_media_babyshower_stagedecorations.jpg',
+      '/images/E_media_babyshower_cycle_decoration.jpg',
     ],
   },
   c5: {
@@ -192,6 +231,13 @@ export const SHOWCASE_CONTENT: Record<string, ShowcaseContent> = {
       '/images/EMedia_cookevent_stage_flex.jpeg',
       '/images/EMedia_cook_aval_vikadan_event.jpeg',
       '/images/Emedia_ballon_corporate_decoration_jktye.jpg',
+      '/images/E_media_corporate_enterance_ballon_decoration.jpg',
+      '/images/E_media_corporate_nippon_ballon_decoration.jpg',
+      '/images/E_media_corporate_nippon_blue_ballon_decoration.jpg',
+      '/images/E_media_corporate_traditional_lamp.jpg',
+      '/images/E_media_corporate_sandamelam.jpg',
+      '/images/E_media_corporate_lamp.jpg',
+      '/images/E_media_corporate_green_yellow_decorations.jpg',
     ],
   },
   c7: {
@@ -242,6 +288,10 @@ export const SHOWCASE_CONTENT: Record<string, ShowcaseContent> = {
       '/images/Emedia_flx_banner_cook_roadside_flexevents.jpg',
       '/images/Emedia_flx_banner_cook_roadside_flexevent.jpeg',
       '/images/Emedia_flx_banner_cook_event_street_program.jpg',
+      '/images/E_media_corporate_cookingevent_item.jpeg',
+      '/images/E_media_corporate_cookingevent_items.jpeg',
+      '/images/E_media_corporate_flex_govt_dce.jpg',
+      '/images/E_media_corporate_famous_jigarthanda.jpg',
     ],
   },
   c9: {
@@ -276,6 +326,102 @@ export const SHOWCASE_CONTENT: Record<string, ShowcaseContent> = {
       '/images/Emedia_birthday_golden_colorful_ballon_decoration_theme.jpg',
       '/images/Emedia_golden_ballon_silver_reddecorations_themes.jpg',
       '/images/Emedia_golden_birthday_ballon_red_blackdecorations_themes.jpg.jpg',
+    ],
+  },
+  c10: {
+    tagline: 'Erode’s Trusted Wedding Photography Team',
+    heroSubtitle: 'Candid & Traditional Wedding Photography in Erode',
+    intro: [
+      'EMedia Event & Promotions captures wedding days in Erode with a mix of candid couple portraits and traditional ritual photography — from the golden turmeric ceremony to the mandap and the reception stage.',
+      'Our photographers work alongside our decoration team, so every frame shows off the florals, lighting, and stage design at their best, along with warm, natural moments between the couple and their families.',
+    ],
+    highlights: [
+      'Candid couple and family portraits',
+      'Traditional ritual and ceremony coverage',
+      'Reception stage and plate-decor detail shots',
+      'Coordinated shoots that match our decoration styling',
+      'Full-day wedding photography packages',
+    ],
+    gallery: [
+      '/images/EMedia_wedding_photography_couple.JPG',
+      '/images/EMedia_wedding_photography_couple_nature.JPG',
+      '/images/EMedia_wedding_photography_traditional.JPG',
+      '/images/EMedia_wedding_photography_Peacock_traditional.JPG',
+      '/images/EMedia_wedding_photography_Plate_decor.JPG',
+      '/images/EMedia_wedding_photography_all_Plate_decor.JPG',
+      '/images/EMedia_wedding_photography_single_Plate_decor.JPG',
+      '/images/EMedia_wedding_photography_single_Plate_turmeric_decor.JPG',
+      '/images/EMedia_wedding_photography_.jpg',
+    ],
+  },
+  c11: {
+    tagline: 'School & Student Event Decoration, Erode',
+    heroSubtitle: 'Annual Day, Sports Day & School Function Decoration',
+    intro: [
+      'EMedia designs cheerful, organised decoration for school events across Erode — annual day stages, sports day entrances, and prize-distribution functions with props and colours that keep students engaged.',
+      'From toy and theme props to organiser and certificate-distribution backdrops, our team plans a layout that works for large student crowds while staying easy for teachers and staff to coordinate on the day.',
+    ],
+    highlights: [
+      'Theme-based prop and toy decoration',
+      'Stage backdrops for annual day & prize distribution',
+      'Safe, large-crowd friendly layouts',
+      'Colourful, student-friendly styling',
+      'Coordination with school staff and organisers',
+    ],
+    gallery: [
+      '/images/E_media_schoolevent_toy.jpg',
+      '/images/E_media_schoolevent_organizer_degree.jpg',
+    ],
+  },
+  c12: {
+    tagline: 'Erode’s Trusted Event Album Design',
+    heroSubtitle: 'Housewarming, Ceremony & Reception Photo Albums',
+    intro: [
+      'EMedia designs curated photo albums covering housewarming functions, earring ceremonies, temple weddings, and receptions — arranging each event\'s best moments into a keepsake you\'ll want to revisit for years.',
+      'Every album is laid out to follow the flow of the function, from arrival and rituals to the final family portraits, printed on quality album paper that holds colour and detail.',
+    ],
+    highlights: [
+      'Housewarming & earring ceremony albums',
+      'Temple wedding and reception coverage',
+      'Story-flow layout from arrival to portraits',
+      'Quality print and finishing',
+      'Custom album sizes available',
+    ],
+    gallery: [
+      '/images/E_media_album_reception.jpg',
+      '/images/E_media_album_housewarming.jpg',
+      '/images/E_media_album_earring_cermoney.jpg',
+      '/images/E_media_album_housewarming_.jpg',
+      '/images/E_media_album_temple_marriage_function.jpg',
+    ],
+  },
+  c13: {
+    tagline: 'Elegant Stage & Entrance Decoration, Erode',
+    heroSubtitle: 'Stage Backdrops, Panthal & Entrance Decoration',
+    intro: [
+      'EMedia designs elegant stage backdrops, floral entrance arches, and panthal decoration for weddings and family functions across Erode — pairing rich colour themes with clean, photograph-ready layouts.',
+      'From a warm wood-toned stage to bright floral arrangements and full panthal frontage styling, our team builds the setting that welcomes guests and anchors every event photo.',
+    ],
+    highlights: [
+      'Stage backdrop design in varied colour themes',
+      'Panthal and entrance frontage styling',
+      'Floral arch and chair decoration',
+      'Arabic and traditional theme options',
+      'Full setup and on-site coordination',
+    ],
+    gallery: [
+      '/images/EMedia_hero_stage_decor_whire_red.jpg',
+      '/images/E_media_stage_decor_wood.JPG',
+      '/images/EMedia_hero_stage_decor_chair_decor.jpg',
+      '/images/E_media_stage_decor_wood_.jpg',
+      '/images/E_media_stage_decor_yellow_flowers.jpg',
+      '/images/E_media_stage_decor_yellow_pink.jpg',
+      '/images/EMedia_background_flowewr_theme.jpg',
+      '/images/EMedia_fontside+panthal.jpg',
+      '/images/EMedia_hero_stage_decor_decoration_arabic_floweers_theme.jpg',
+      '/images/EMedia_hero_stage_decorente_ance.jpg',
+      '/images/EMedia_hero_stage_decorente_ance_sidewall.jpg',
+      '/images/EMedia_hero_stage_decoration_.jpg',
     ],
   },
 };
