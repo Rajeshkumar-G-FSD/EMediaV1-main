@@ -78,14 +78,14 @@ export default function AboutPage({ onBookNow }: AboutPageProps) {
     <>
       {/* Hero banner */}
       <section
-        className="relative w-full h-[420px] sm:h-[480px] md:h-[600px] bg-gray-200 overflow-hidden"
+        className="relative w-full h-[560px] sm:h-[640px] md:h-[760px] lg:h-[840px] bg-gray-200 overflow-hidden"
         id="about-hero"
         aria-label="About E Media Event & Decoration"
       >
         <img
           src="/images/Emedia_event_Erode_about.png"
           alt="E Media Event & Decoration founding team in Erode"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-top"
           id="about-hero-image"
         />
 
