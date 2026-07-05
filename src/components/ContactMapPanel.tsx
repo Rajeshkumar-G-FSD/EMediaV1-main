@@ -28,13 +28,13 @@ export default function ContactMapPanel() {
             </div>
           </a>
 
-          <a href="mailto:emediaerode@gmail.com" className="group flex items-start gap-3">
+          <a href="mailto:emediaeventerode@gmail.com" className="group flex items-start gap-3 sm:col-span-2">
             <span className="w-9 h-9 rounded-lg bg-primary/5 border border-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
               <Mail className="w-4 h-4 text-primary" />
             </span>
             <div>
               <p className="text-[10px] text-gray-400 uppercase tracking-wider font-bold mb-0.5">Email</p>
-              <p className="text-sm text-gray-700 group-hover:text-primary transition-colors font-semibold break-all">emediaerode@gmail.com</p>
+              <p className="text-sm text-gray-700 group-hover:text-primary transition-colors font-semibold whitespace-nowrap">emediaeventerode@gmail.com</p>
             </div>
           </a>
         </div>

@@ -54,7 +54,7 @@ export default function PageLoader() {
               <p className="text-white/55 text-[10px] uppercase tracking-[0.45em] font-bold mb-0.5">
                 Event Decoration Services
               </p>
-              <h1 className="text-white text-4xl font-elegant tracking-wide">EMedia</h1>
+              <h1 className="text-white text-4xl font-elegant tracking-wide">E Media</h1>
               <p className="text-white/35 text-[10px] mt-0.5 uppercase tracking-[0.3em]">
                 Erode, Tamil Nadu
               </p>

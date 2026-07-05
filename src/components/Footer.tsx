@@ -79,7 +79,7 @@ export default function Footer({ onNavClick }: FooterProps) {
                 <img src="/images/emediaevents_footre-logo.png" alt="EMedia" className="h-full w-full object-contain" />
               </div>
               <div className="text-left">
-                <p className="font-elegant text-lg font-bold text-white leading-tight">EMedia Events</p>
+                <p className="font-elegant text-lg font-bold text-white leading-tight">E Media Events</p>
                 <p className="text-[10px] uppercase tracking-[0.22em] text-white/35 mt-0.5">Erode · Est. 2020</p>
               </div>
             </button>
@@ -173,13 +173,13 @@ export default function Footer({ onNavClick }: FooterProps) {
               </li>
 
               <li>
-                <a href="mailto:emediaerode@gmail.com" className="group flex items-start gap-3">
+                <a href="mailto:emediaeventerode@gmail.com" className="group flex items-start gap-3">
                   <span className="w-8 h-8 rounded-lg bg-white/8 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/15 transition-colors">
                     <Mail className="w-3.5 h-3.5 text-white/50" />
                   </span>
                   <div>
                     <p className="text-[10px] text-white/25 uppercase tracking-wider font-bold mb-0.5">Email</p>
-                    <p className="text-sm text-white/70 group-hover:text-white transition-colors font-semibold break-all">emediaerode@gmail.com</p>
+                    <p className="text-sm text-white/70 group-hover:text-white transition-colors font-semibold whitespace-nowrap">emediaeventerode@gmail.com</p>
                   </div>
                 </a>
               </li>

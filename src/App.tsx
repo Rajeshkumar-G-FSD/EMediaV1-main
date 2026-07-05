@@ -513,14 +513,14 @@ export default function App() {
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
               <MailOpen className="w-8 h-8" />
             </div>
-            <h4 className="font-mono text-lg font-bold text-primary">emediaerode@gmail.com</h4>
+            <h4 className="font-mono text-lg font-bold text-primary">emediaeventerode@gmail.com</h4>
             <div className="space-y-2 text-sm text-gray-500 max-w-sm mx-auto leading-relaxed">
               <p>For contract questions, bulk pricing, or 3D design files, please email the sales address above.</p>
               <p className="text-xs text-gray-400">Messages are reviewed and replied to with attachments within 12 business hours.</p>
             </div>
             <div className="pt-4 flex justify-center">
               <a
-                href="mailto:emediaerode@gmail.com"
+                href="mailto:emediaeventerode@gmail.com"
                 className="px-6 py-2 bg-primary hover:bg-opacity-95 text-white font-bold uppercase text-xs tracking-wider"
               >
                 Send email

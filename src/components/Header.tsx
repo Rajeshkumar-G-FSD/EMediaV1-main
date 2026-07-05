@@ -110,7 +110,7 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
                   </div>
                 </div>
                 <span className="font-elegant text-[10px] font-bold text-primary tracking-[0.2em] uppercase leading-none">
-                  EMedia
+                  E Media
                 </span>
               </button>
             </div>
@@ -169,7 +169,7 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
                 <img src="/images/emediaevents_logo.png" alt="EMedia" className="h-full w-full object-contain" />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="font-elegant text-base font-bold text-primary">EMedia</span>
+                <span className="font-elegant text-base font-bold text-primary">E Media</span>
                 <span className="text-[8px] uppercase tracking-widest text-gray-400">Event Decor</span>
               </div>
             </button>
