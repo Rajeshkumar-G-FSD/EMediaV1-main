@@ -16,6 +16,7 @@ import PageLoader from './components/PageLoader.tsx';
 import GoogleReviews from './components/GoogleReviews.tsx';
 import AdminApp from './components/admin/AdminApp.tsx';
 import ShowcaseDetail from './components/ShowcaseDetail.tsx';
+import AboutPage from './components/AboutPage.tsx';
 import { Customer, Service, Product, ConsultationRequest } from './types.ts';
 import { CUSTOMERS_DATA } from './data.ts';
 import { PhoneCall, MailOpen, Compass } from 'lucide-react';
@@ -28,11 +29,13 @@ const getShowcaseIdFromHash = () => {
 export default function App() {
   const [isAdminRoute, setIsAdminRoute] = useState(() => window.location.hash === '#admin');
   const [showcaseId, setShowcaseId] = useState<string | null>(() => getShowcaseIdFromHash());
+  const [isAboutRoute, setIsAboutRoute] = useState(() => window.location.hash === '#about');
 
   useEffect(() => {
     const onHashChange = () => {
       setIsAdminRoute(window.location.hash === '#admin');
       setShowcaseId(getShowcaseIdFromHash());
+      setIsAboutRoute(window.location.hash === '#about');
     };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
@@ -139,11 +142,18 @@ export default function App() {
 
   // Scroll mapping
   const handleNavClick = (sectionId: string) => {
-    // Leaving the full-page showcase view: clear the route first, then retry
-    // once the homepage sections have re-mounted so refs are populated.
+    if (sectionId === 'about') {
+      setActiveSection('about');
+      window.location.hash = 'about';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Leaving the full-page showcase or about view: clear the route first, then
+    // retry once the homepage sections have re-mounted so refs are populated.
     // (Checked against the live hash, not React state, to avoid a stale closure
     // in the recursive setTimeout call below.)
-    if (getShowcaseIdFromHash()) {
+    if (getShowcaseIdFromHash() || window.location.hash === '#about') {
       window.location.hash = '';
       setTimeout(() => handleNavClick(sectionId), 80);
       return;
@@ -198,6 +208,26 @@ export default function App() {
 
   if (isAdminRoute) {
     return <AdminApp />;
+  }
+
+  if (isAboutRoute) {
+    return (
+      <div className="bg-white text-gray-700 font-sans antialiased overflow-x-hidden min-h-screen flex flex-col justify-between" id="app-root">
+        <PageLoader />
+
+        <Header
+          onNavClick={handleNavClick}
+          activeSection={activeSection}
+          hasInquiries={inquiries.length > 0}
+        />
+
+        <SocialSidebar onQuickActionClick={handleQuickSidebarAction} />
+
+        <AboutPage onBookNow={() => handleNavClick('appointments')} />
+
+        <Footer onNavClick={handleNavClick} />
+      </div>
+    );
   }
 
   const showcaseItem = showcaseId ? CUSTOMERS_DATA.find((c) => c.id === showcaseId) : null;

@@ -89,26 +89,27 @@ const BlurText = ({
   const Tag = tag as React.ElementType;
 
   return (
-    <Tag ref={ref} className={`blur-text flex flex-wrap ${className}`}>
+    <Tag ref={ref} className={`blur-text ${className}`}>
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
         return (
-          <motion.span
-            className="inline-block will-change-[transform,filter,opacity]"
-            key={index}
-            initial={fromSnapshot}
-            animate={inView ? animateKeyframes : fromSnapshot}
-            transition={{
-              duration: totalDuration,
-              times,
-              delay: (index * delay) / 1000,
-              ease: easing,
-            }}
-            onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
-          >
-            {segment === ' ' ? ' ' : segment}
-            {animateBy === 'words' && index < elements.length - 1 && ' '}
-          </motion.span>
+          <React.Fragment key={index}>
+            <motion.span
+              className="inline-block will-change-[transform,filter,opacity]"
+              initial={fromSnapshot}
+              animate={inView ? animateKeyframes : fromSnapshot}
+              transition={{
+                duration: totalDuration,
+                times,
+                delay: (index * delay) / 1000,
+                ease: easing,
+              }}
+              onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
+            >
+              {segment}
+            </motion.span>
+            {animateBy === 'words' && index < elements.length - 1 ? ' ' : null}
+          </React.Fragment>
         );
       })}
     </Tag>

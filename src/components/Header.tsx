@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, Calendar, Star, Heart, Sparkles, Tag, Camera, Calculator, Phone } from 'lucide-react';
+import { Menu, X, Calendar, Star, Heart, Sparkles, Tag, Camera, Calculator, Phone, Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface HeaderProps {
@@ -16,6 +16,7 @@ const LEFT_NAV = [
 
 const RIGHT_NAV = [
   { id: 'customers',  label: 'Gallery',       icon: Camera },
+  { id: 'about',      label: 'About Us',      icon: Info },
   { id: 'calculator', label: 'Decor Quote',   icon: Calculator },
 ];
 
