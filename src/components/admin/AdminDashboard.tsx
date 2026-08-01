@@ -10,6 +10,7 @@ import { auth, db } from '../../lib/firebase.ts';
 import { EVENT_TYPES } from '../../data.ts';
 import { BookingRecord, QuoteEnquiry } from '../../types.ts';
 import ReceiptModal from './ReceiptModal.tsx';
+import CompetitionAdminSection from './CompetitionAdminSection.tsx';
 
 const QUOTE_STATUS_STYLES: Record<QuoteEnquiry['status'], string> = {
   pending: 'bg-amber-50 text-amber-600 border-amber-100',
@@ -469,6 +470,9 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
             )}
           </div>
         </div>
+
+        {/* Competition Registrations ("போட்டி பதிவு") */}
+        <CompetitionAdminSection />
       </div>
     </div>
   );

@@ -89,3 +89,55 @@ export interface BookingRecord {
   customerPhone: string;
   createdAt: number;
 }
+
+// ─── Competition Registration ("போட்டி பதிவு") ──────────────────────────
+
+export type ParticipantType = 'school' | 'college' | 'public';
+
+export interface CompetitionCategory {
+  id: string;
+  label: string;
+}
+
+export interface CompetitionDefinition {
+  id: string;
+  nameTamil: string;
+  nameEnglish: string;
+  timing: string;
+  description: string;
+  categories: CompetitionCategory[];
+}
+
+export type ParticipantRegistrationPaymentStatus = 'pending_payment' | 'payment_submitted';
+export type VerificationStatus = 'pending' | 'verified' | 'rejected';
+
+export interface ParticipantRegistration {
+  id: string;
+  registrationNumber: string;
+  fullName: string;
+  parentName: string;
+  parentContactNumber: string;
+  mobile: string;
+  whatsapp: string;
+  email: string;
+  gender: string;
+  dob: string;
+  age: number;
+  address: string;
+  district: string;
+  pincode: string;
+  participantType: ParticipantType;
+  proofDocumentURL: string;
+  competitionId: string;
+  competitionName: string;
+  categoryId: string;
+  categoryLabel: string;
+  entryFee: number;
+  transactionId: string;
+  paymentScreenshotURL: string;
+  paymentStatus: ParticipantRegistrationPaymentStatus;
+  verificationStatus: VerificationStatus;
+  remarks: string;
+  createdAt: number;
+  updatedAt: number;
+}

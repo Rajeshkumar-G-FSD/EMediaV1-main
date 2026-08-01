@@ -17,6 +17,8 @@ import GoogleReviews from './components/GoogleReviews.tsx';
 import AdminApp from './components/admin/AdminApp.tsx';
 import ShowcaseDetail from './components/ShowcaseDetail.tsx';
 import AboutPage from './components/AboutPage.tsx';
+import CompetitionApp from './components/competition/CompetitionApp.tsx';
+import CompetitionFloatingButton from './components/CompetitionFloatingButton.tsx';
 import { Customer, Service, Product, ConsultationRequest } from './types.ts';
 import { CUSTOMERS_DATA } from './data.ts';
 import { PhoneCall, MailOpen, Compass } from 'lucide-react';
@@ -30,12 +32,14 @@ export default function App() {
   const [isAdminRoute, setIsAdminRoute] = useState(() => window.location.hash === '#admin');
   const [showcaseId, setShowcaseId] = useState<string | null>(() => getShowcaseIdFromHash());
   const [isAboutRoute, setIsAboutRoute] = useState(() => window.location.hash === '#about');
+  const [isCompetitionRoute, setIsCompetitionRoute] = useState(() => window.location.hash === '#competition-registration');
 
   useEffect(() => {
     const onHashChange = () => {
       setIsAdminRoute(window.location.hash === '#admin');
       setShowcaseId(getShowcaseIdFromHash());
       setIsAboutRoute(window.location.hash === '#about');
+      setIsCompetitionRoute(window.location.hash === '#competition-registration');
     };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
@@ -210,6 +214,10 @@ export default function App() {
     return <AdminApp />;
   }
 
+  if (isCompetitionRoute) {
+    return <CompetitionApp />;
+  }
+
   if (isAboutRoute) {
     return (
       <div className="bg-white text-gray-700 font-sans antialiased overflow-x-hidden min-h-screen flex flex-col justify-between" id="app-root">
@@ -222,6 +230,8 @@ export default function App() {
         />
 
         <SocialSidebar onQuickActionClick={handleQuickSidebarAction} />
+
+        <CompetitionFloatingButton />
 
         <AboutPage onBookNow={() => handleNavClick('appointments')} />
 
@@ -244,6 +254,8 @@ export default function App() {
         />
 
         <SocialSidebar onQuickActionClick={handleQuickSidebarAction} />
+
+        <CompetitionFloatingButton />
 
         <ShowcaseDetail
           item={showcaseItem}
@@ -271,6 +283,9 @@ export default function App() {
 
       {/* 2. Right Floating Sidebar */}
       <SocialSidebar onQuickActionClick={handleQuickSidebarAction} />
+
+      {/* Left Floating Competition Registration Button */}
+      <CompetitionFloatingButton />
 
       {/* 3. Immersive Hero Presentation */}
       <Hero onActionClick={() => handleNavClick('services')} />

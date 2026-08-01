@@ -1,4 +1,4 @@
-import { Customer, Service, Product, BlogPost, ShowcaseContent } from './types.ts';
+import { Customer, Service, Product, BlogPost, ShowcaseContent, CompetitionDefinition, ParticipantType } from './types.ts';
 
 export const EVENT_IMAGES = {
   heroDecor: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1800&q=80',
@@ -699,6 +699,114 @@ export const EVENT_TYPES = [
   { id: 'traditional-ceremony', label: 'Traditional Ceremony Events', price: 18000 },
   { id: 'flex-banner', label: 'Flex Banner', price: 5000 },
 ];
+
+// ─── Competition Registration ("போட்டி பதிவு") ──────────────────────────
+
+export const COMPETITIONS_DATA: CompetitionDefinition[] = [
+  {
+    id: 'drawing',
+    nameTamil: 'ஓவிய போட்டி',
+    nameEnglish: 'Drawing Competition',
+    timing: '9:00 AM - 11:00 AM',
+    description: 'A creative drawing competition for children and adults across age groups, judged on creativity, colour use, and neatness.',
+    categories: [
+      { id: '1-5', label: '1-5 Years' },
+      { id: '6-8', label: '6-8 Years' },
+      { id: '9-12', label: '9-12 Years' },
+    ],
+  },
+  {
+    id: 'kolam',
+    nameTamil: 'கோலம் போட்டி',
+    nameEnglish: 'Kolam Competition',
+    timing: '7:00 AM - 9:00 AM',
+    description: 'A traditional kolam design competition open to all ages, celebrating pattern, symmetry, and colour.',
+    categories: [
+      { id: 'open', label: 'Open' },
+    ],
+  },
+  {
+    id: 'dance',
+    nameTamil: 'நடன போட்டி',
+    nameEnglish: 'Dance Competition',
+    timing: '2:00 PM - 5:00 PM',
+    description: 'Solo and group dance performances across age groups, judged on choreography, expression, and stage presence.',
+    categories: [
+      { id: '1-5', label: '1-5 Years' },
+      { id: '6-8', label: '6-8 Years' },
+      { id: '9-12', label: '9-12 Years' },
+      { id: 'individual', label: 'Individual' },
+      { id: 'group', label: 'Group' },
+    ],
+  },
+  {
+    id: 'singing',
+    nameTamil: 'பாடல் போட்டி',
+    nameEnglish: 'Singing Competition',
+    timing: '11:30 AM - 1:30 PM',
+    description: 'A singing competition open to all participants, judged on voice, rhythm, and stage confidence.',
+    categories: [
+      { id: 'open', label: 'Open' },
+    ],
+  },
+  {
+    id: 'running',
+    nameTamil: 'ஓட்டப்பந்தயம்',
+    nameEnglish: 'Running Competition',
+    timing: '6:30 AM - 8:00 AM',
+    description: 'Age-wise running races on a marked track, with distances suited to each age group.',
+    categories: [
+      { id: '5-8-100m', label: '5-8 Years (100 Meter)' },
+      { id: '9-11-100m', label: '9-11 Years (100 Meter)' },
+      { id: '12-15-200m', label: '12-15 Years (200 Meter)' },
+      { id: '16-18-400m', label: '16-18 Years (400 Meter)' },
+    ],
+  },
+  {
+    id: 'poetry',
+    nameTamil: 'கவிதை போட்டி',
+    nameEnglish: 'Poetry Competition',
+    timing: '1:30 PM - 2:30 PM',
+    description: 'An open poetry recitation competition celebrating original and classic Tamil verse.',
+    categories: [
+      { id: 'open', label: 'Open' },
+    ],
+  },
+  {
+    id: 'reels',
+    nameTamil: 'ரீல்ஸ் போட்டி',
+    nameEnglish: 'Reels Competition',
+    timing: 'Submit online before the event day',
+    description: 'A short-form video (reels) competition judged on creativity, editing, and engagement.',
+    categories: [
+      { id: 'open', label: 'Open' },
+    ],
+  },
+];
+
+export const PARTICIPANT_ENTRY_FEE: Record<ParticipantType, number> = {
+  school: 50,
+  college: 50,
+  public: 100,
+};
+
+export const PARTICIPANT_TYPE_LABELS: Record<ParticipantType, string> = {
+  school: 'School Student',
+  college: 'College Student',
+  public: 'Public',
+};
+
+export const TAMIL_NADU_DISTRICTS = [
+  'Erode', 'Coimbatore', 'Salem', 'Namakkal', 'Tiruppur', 'Karur', 'Chennai',
+  'Madurai', 'Trichy', 'Dindigul', 'Nilgiris', 'Other',
+];
+
+// Payment collection details for the competition registration payment page.
+export const COMPETITION_PAYMENT_INFO = {
+  upiId: 'palani2691-1@oksbi',
+  accountHolderName: 'Palani Samy',
+  organizerWhatsAppNumber: '919566894134',
+};
 
 export const ADDONS = [
   { id: 'photography', label: 'Photography', price: 8000 },

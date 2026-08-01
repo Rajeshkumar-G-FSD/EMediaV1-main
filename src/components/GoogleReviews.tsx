@@ -110,7 +110,7 @@ export default function GoogleReviews() {
       {/* Write a review CTA */}
       <ScrollReveal direction="up" delay={0.2} className="mt-8 flex justify-center">
         <a
-          href="https://search.google.com/local/writereview?placeid=ChIJ_EMediaErode"
+          href="https://g.page/r/CUfzqmHS2vrSEBM/review"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-2.5 bg-white border-2 border-gray-200 hover:border-primary/40 rounded-full px-6 py-3 text-sm font-bold text-gray-700 hover:text-primary transition shadow-sm hover:shadow-md"

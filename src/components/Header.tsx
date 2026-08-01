@@ -50,7 +50,7 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
             <span className="hidden sm:inline">Open 24 Hrs, all days</span>
           </div>
           <a
-            href="https://search.google.com/local/writereview?placeid=ChIJ_EMediaErode"
+            href="https://g.page/r/CUfzqmHS2vrSEBM/review"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-1.5 text-[11px] text-white/90 font-bold hover:text-white transition"
@@ -243,7 +243,7 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
 
               <div className="pt-2 border-t border-gray-100 mt-1">
                 <a
-                  href="https://search.google.com/local/writereview?placeid=ChIJ_EMediaErode"
+                  href="https://g.page/r/CUfzqmHS2vrSEBM/review"
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-gray-500 hover:text-primary"
