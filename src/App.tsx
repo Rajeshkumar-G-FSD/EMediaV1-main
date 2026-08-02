@@ -45,6 +45,16 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
+  // Auto-open the competition registration page 5s after landing, unless already there.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (window.location.hash !== '#competition-registration') {
+        window.location.hash = 'competition-registration';
+      }
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);

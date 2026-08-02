@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, Calendar, Star, Heart, Sparkles, Tag, Camera, Calculator, Phone, Info } from 'lucide-react';
+import { Menu, X, Calendar, Star, Heart, Sparkles, Tag, Camera, Calculator, Phone, Info, Trophy } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface HeaderProps {
@@ -27,6 +27,11 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
 
   const handleItemClick = (id: string) => {
     onNavClick(id);
+    setIsOpen(false);
+  };
+
+  const handleCompetitionClick = () => {
+    window.location.hash = 'competition-registration';
     setIsOpen(false);
   };
 
@@ -138,6 +143,23 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
                 </li>
               ))}
 
+              {/* Competition menu item */}
+              <li>
+                <button
+                  onClick={handleCompetitionClick}
+                  className="relative flex items-center gap-1.5 px-3 py-2 rounded-lg text-[10.5px] uppercase font-bold tracking-wide transition-all duration-200 cursor-pointer whitespace-nowrap text-gray-500 hover:text-primary hover:bg-primary/5"
+                  id="nav-item-competition"
+                  title="நம்ம ஊரு சாம்பியன் - 2026 (Competition Registration)"
+                >
+                  <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+                  </span>
+                  <Trophy className="w-3.5 h-3.5 flex-shrink-0" />
+                  <span>சாம்பியன் 2026</span>
+                </button>
+              </li>
+
               {/* Book Event CTA */}
               <li className="ml-2">
                 <button
@@ -227,6 +249,19 @@ export default function Header({ onNavClick, activeSection, hasInquiries }: Head
                   {label}
                 </button>
               ))}
+
+              <button
+                onClick={handleCompetitionClick}
+                className="relative flex items-center gap-3 w-full text-left py-3 px-4 rounded-xl transition-colors cursor-pointer text-sm font-bold uppercase tracking-wide text-gray-600 hover:bg-gray-50 hover:text-primary"
+                id="mob-nav-item-competition"
+              >
+                <Trophy className="w-4 h-4 flex-shrink-0" />
+                நம்ம ஊரு சாம்பியன் - 2026
+                <span className="ml-auto flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+                </span>
+              </button>
 
               <button
                 onClick={() => handleItemClick('calculator')}
