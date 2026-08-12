@@ -97,3 +97,28 @@ function ensureHeaderRow_(sheet) {
     sheet.appendRow(SHEET_HEADERS);
   }
 }
+
+// Manual cleanup utility — NOT called by doPost, run it yourself from the
+// Apps Script editor (select "clearTestRegistrations" in the function
+// dropdown, then click Run) whenever curl/manual testing has left junk rows
+// in the sheet. It only removes rows whose Registration No or Transaction ID
+// looks like test data (CURL-TEST / TEST / CURLTXN prefixes) — real
+// registrations are left untouched. Re-runnable any time.
+function clearTestRegistrations() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return; // header only, nothing to clear
+
+  const REG_NO_COL = 2;   // "Registration No"
+  const TXN_ID_COL = 19;  // "Transaction ID"
+  const isTestValue = (value) => /^(CURL-TEST|TEST|CURLTXN)/i.test(String(value || '').trim());
+
+  const values = sheet.getRange(2, 1, lastRow - 1, sheet.getLastColumn()).getValues();
+  // Delete bottom-up so row indices don't shift while removing.
+  for (let i = values.length - 1; i >= 0; i--) {
+    const row = values[i];
+    if (isTestValue(row[REG_NO_COL - 1]) || isTestValue(row[TXN_ID_COL - 1])) {
+      sheet.deleteRow(i + 2); // +2: 1-indexed rows, offset past header
+    }
+  }
+}
